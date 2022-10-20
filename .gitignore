@@ -1,0 +1,11 @@
+.DS_store
+.vs_code
+*.o
+*.a
+.*.sw*
+*.dSYM
+*.tar.gz
+*.tgz
+a.out
+
+cub3d
