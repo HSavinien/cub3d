@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:25:40 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/21 19:15:18 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:32:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 //parsing
 # define ERR_EXTENTION	//map name is not in .ber
-# define ERR_SHORT_NAME //map name is less than 4 char, so nothing before '.cub'
+# define ERR_SHORT_NAME //map name is less than 4 char, so it's just '.cub'
+# define ERR_FILE_PATERN	//a line in the .cub file doesn't make sens.
 
 //system
 # define ERR_MALLOC	//a malloc call failed to allocate memory

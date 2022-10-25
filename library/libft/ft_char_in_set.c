@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_char_in_set.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 16:23:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/25 19:25:37 by tmongell         ###   ########.fr       */
+/*   Created: 2022/10/25 19:19:44 by tmongell          #+#    #+#             */
+/*   Updated: 2022/10/25 20:07:39 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isspace(int c)
+//function that check if char c is in string set.
+int	char_in_set(char c, char *set)
 {
-	return (c == ' '
-		|| c == '\t'
-		|| c == '\n'
-		|| c == '\v'
-		|| c == '\f'
-		|| c == '\r'
-		|| c == '\0');
+	int	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i ++])
+			return (1);
+	}
+	return (0);
 }

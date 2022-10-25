@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/21 17:08:59 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:55:57 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 //project sublibrary
 #include <key_code.h>
 #include <mlx_event.h>
+#include <libft/libft.h>
 
 /*macros----------------------------------------------------------------macros*/
 
@@ -54,9 +55,21 @@ typedef struct s_map {
 	int		start_x;
 	int		start_y;
 	int		start_dir;
-	
 }	t_map;
 
-/*prototypes--------------------------------------------------------prototypes*/
 
+/*prototypes--------------------------------------------------------prototypes*/
+//parsing
+t_map	parsing(char	*map_file);
+void	read_cub_file(int fd, t_map map);
+//parsing utils
+char	*get_next_filed_line(int fd, int *line);//-------------------------------todo
+
+
+//general utils
+
+//error
+void	ft_error(char *msg, int ret);
+void	err_mapfile(int line, char *content, char *msg, int code);
+void	err_map_form(int line, int column, char **map, char *msg, int code);
 #endif

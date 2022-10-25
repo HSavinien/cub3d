@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:38:12 by tmongell          #+#    #+#             */
-/*   Updated: 2022/05/14 19:00:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:22:11 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
 char	*ft_strndup(const char *s1, size_t n);
 void	*ft_reset_ptr(void	*ptr);
-int		ft_isspace(char c);
+int		ft_isspace(int c);
+int		ft_isupcase(int c);
+int		ft_islowcase(int c);
 char	**ft_split_word(char const *s);
 void	*ft_memdup(const void *mem);
+int		char_in_set(char c, char *set);
 #endif

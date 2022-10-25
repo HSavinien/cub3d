@@ -41,11 +41,14 @@ SRCS	=	ft_isdigit.c \
 			ft_lstdelone.c \
 			ft_reset_ptr.c \
 			ft_isspace.c \
+			ft_isupcase.c \
+			ft_islowcase.c \
 			ft_split_word.c \
 			ft_memdup.c \
 			get_next_line.c \
 			get_next_line_utils.c \
 			get_next_line_bonus.c \
+			ft_char_in_set.c \
 
 OBJS	= ${SRCS:.c=.o}
 
