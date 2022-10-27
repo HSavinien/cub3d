@@ -1,4 +1,5 @@
-SRCS	=	main.c
+SRCS	=	main.c \
+			error.c
 
 OBJS	=	${SRCS:%.c=%.o}
 
@@ -6,11 +7,11 @@ CC		=	gcc
 
 MLXREP	=	library/mlx_macos
 
-MLXCOMP	=	 -I ${MLXREP}	#42doc say it's a CFLAG, test say it's useless
+MLXCOMP	=	 -I ${MLXREP}
 
-MLXLNK	=	-L ${MLXREP} -lmlx -framework OpenGL -framework AppKit
+MLXLNK	=	${MLXCOMP} -L ${MLXREP} -lmlx -framework OpenGL -framework AppKit -MMD
 
-CFLAGS	=	-Wall -Wextra -Werror -Ilibrary
+CFLAGS	=	-Wall -Wextra -Werror -Ilibrary ${MLXCOMP} -fsanitize=address -g
 
 LIB		=	-L./library/libft -lft ${MLXLNK}
 

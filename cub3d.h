@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/25 19:55:57 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:09:19 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@
 #include <key_code.h>
 #include <mlx_event.h>
 #include <libft/libft.h>
+#include <list/list.h>
 
 /*macros----------------------------------------------------------------macros*/
+
+#define MAP_CHAR_OK "10NSEW \t\n\v\f\r" //char allowed to define the map
 
 /*structure---------------------------------------------------------structures*/
 
@@ -56,7 +59,6 @@ typedef struct s_map {
 	int		start_y;
 	int		start_dir;
 }	t_map;
-
 
 /*prototypes--------------------------------------------------------prototypes*/
 //parsing

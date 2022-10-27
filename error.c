@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/25 20:16:45 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:50:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,6 @@ void	err_mapfile(int line, char *content, char *msg, int code)
 	printf("\033[4,91m%s\033[0m\n", content);
 	exit(code);
 }
-/*
-static void	print_map_line(char *line, int err_column)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (line[i])
-	{
-		j = 0;
-		while (line[i][j])
-		{
-			if (i == line && j == column)
-				printf("\033[0;7;31m%c\033[0m", map[i][j]);
-			else if (line[i][j] == '1')
-				printf("\033[0;7m%c\033[0m", map[i][j]);
-			else if (line[i][j] == '1')
-				printf("\033[0;7m%c\033[0m", map[i][j]);
-			else if (char_is_set(line[i][j], "NSWE"))
-				printf("\033[0;44m%c\033[0m", map[i][j]);
-			else 
-				printf("\033[0m%c\033[0m", map[i][j]);
-			j ++;
-		}
-		i ++;
-	}
-}
-*/
-
 /* used to give detailled error message when map is incorectly formated.
  * line is the line from the start of the line, not the start of the file;
  * column is the column where the problem take place
