@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/27 19:09:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/01 19:52:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,22 @@
 #include <key_code.h>
 #include <mlx_event.h>
 #include <libft/libft.h>
-#include <list/list.h>
 
 /*macros----------------------------------------------------------------macros*/
 
-#define MAP_CHAR_OK "10NSEW \t\n\v\f\r" //char allowed to define the map
+#define MAP_CHAR_OK "10NSEW \n" //char allowed to define the map
+
+//value for map :
+#define	WALL 1
+#define FLOOR 2
+#define SPAWN FLOOR
+#define DOOR 4
+#define OUTSIDE 255
 
 /*structure---------------------------------------------------------structures*/
+
+typedef unsigned char t_uchar;
+typedef unsigned int t_uint;
 
 typedef struct s_map {
 	//display info
@@ -49,15 +58,17 @@ typedef struct s_map {
 	void	*south_img;
 	void	*east_img;
 	void	*west_img;
-	int		floor_color;
-	int		roof_color;
+	t_uint	floor_color;
+	t_uint	roof_color;
 	//the map itself
 	char	**raw_map;
-	int		**parsed_map;	//put it there, but I'm not sure it's usefull
+	t_uchar	**parsed_map;
+	int		nb_line;
+	int		nb_column;		//the len of the longest line.
 	//player info
-	int		start_x;
-	int		start_y;
-	int		start_dir;
+	int		start_line;
+	int		start_column;
+	char	start_dir;
 }	t_map;
 
 /*prototypes--------------------------------------------------------prototypes*/

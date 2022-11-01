@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:25:40 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/27 17:27:58 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:06:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@
 # define ERROR_CODE_H
 
 //parsing
-# define ERR_EXTENTION	//map name is not in .cub
-# define ERR_SHORT_NAME //map name is less than 4 char, so it's just '.cub'
-# define ERR_FILE_PATERN	//a line in the .cub file doesn't make sens.
-# define ERR_FILE_NB_TOKEN	//a line in the file isn't in "ID space DATA" form.
-# define ERR_FILE_WRONG_ID	//a line ID in file does not match any known ID
+# define ERR_EXTENTION 1	//map name is not in .cub
+# define ERR_SHORT_NAME 1	//map name is less than 4 char, so it's just '.cub'
+# define ERR_FILE_PATERN 1	//a line in the .cub file doesn't make sens.
+# define ERR_FILE_NB_TOKEN 1	//a data line isn't in "ID space DATA" form.
+# define ERR_FILE_WRONG_ID 1	//a line ID in file does not match any known ID
+# define ERR_MULTIPLAYER 1	//a second player start was found in the map
+# define ERR_MAP_CHAR 1		//a forbiden char has been found in the map
+# define ERR_COLORCODE 1	//a color code is not a valid rgb or hexa code
+#define ERR_MISSING_DATA 1	//not all mandatory data have been specified in file
 
 //system
 # define ERR_MALLOC	//a malloc call failed to allocate memory

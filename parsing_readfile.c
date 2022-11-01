@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/27 20:29:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:14:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb);
 	else if (strcmp(tokenised_line[0], "EA"))
 		*map_struct->east_path = ft_strdup(tokenised_line[1]);
 	else if (strcmp(tokenised_line[0], "F"))
-		*map_struct->floor_color = ft_atoi(tokenised_line[1]);
+		*map_struct->floor_color = read_color(tokenised_line[1], line, line_nb);
 	else if (strcmp(tokenised_line[0], "C"))
-		*map_struct->roof_color = ft_atoi(tokenised_line[1]);
+		*map_struct->roof_color = read_color(tokenised_line[1], line, line_nb);
 	else
 		err_mapfile(line_nb, line, ERR_WRONG_ID_MSG, ERR_FILE_WRONG_ID);
 	destroy_array(tokenised_line);
@@ -102,18 +102,22 @@ void	read_map(char *first_line, int fd, t_map *map_struct, int *line_nb)
 	char		*line;
 	char		*singlestr_map;
 	char		*new_singlestr_map;
-	char		**map;
+	int			line_len;
 
 	line = first_line;
 	singlestr_map = NULL;
 	while (!is_line_empty(line) && line)
 	{
+		line_len = ft_strlen(line);
+		if (line_len > map_struct->nb_column)
+			map_struct->nb_column = line_len;
 		free(line);
 		line = get_next_line(fd);
 		new_singlestr_map = ft_strjoin(singlestr_map, line);
 		free (singlestr_map);
 		singlestr_map = new_singlestr_map;
 		*line_nb ++;
+		map_struct->nb_line ++;
 	}
-	map = ft_split(singlestr_map, '\n');
+	map_struct->raw_map = ft_split(singlestr_map, '\n');
 }
