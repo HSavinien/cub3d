@@ -1,5 +1,10 @@
-SRCS	=	main.c \
-			error.c
+SRCS	=	error.c \
+			main.c \
+			parsing.c \
+			parsing_missing_data.c \
+			parsing_read_color.c \
+			parsing_readfile.c \
+
 
 OBJS	=	${SRCS:%.c=%.o}
 

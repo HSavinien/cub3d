@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:38:12 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/25 19:22:11 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:27:02 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int		ft_isupcase(int c);
 int		ft_islowcase(int c);
 char	**ft_split_word(char const *s);
 void	*ft_memdup(const void *mem);
+int		ft_strcmp(const char *s1, const char *s2);
 int		char_in_set(char c, char *set);
 #endif

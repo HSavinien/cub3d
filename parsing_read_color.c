@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/02 12:57:16 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:25:27 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	all_char_in_set(char *search, char *set)
 unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 {
 	char	**rgb_array;
-	int		**rgb_values;
+	int		rgb_values[3];
 	int		i;
 
 	i = 0;
@@ -89,10 +89,11 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 	return (rgb_values[2] + rgb_values[1] * 256 + rgb_values[0] * 256 * 256);
 }
 
-unsigned int	read_colors(char *color_code, char *full_line, int line_nb)
+unsigned int	read_color(char *color_code, char *full_line, int line_nb)
 {
 	int	i;
 
+	i = 0;
 	while (color_code[i])
 		ft_toupper(color_code[i++]);
 	if (char_in_set(',', color_code))
@@ -103,4 +104,5 @@ unsigned int	read_colors(char *color_code, char *full_line, int line_nb)
 		return (ft_atoi_base(color_code, HEX_BASE));
 	else
 		err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
+	return (0);
 }

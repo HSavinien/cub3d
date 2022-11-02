@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/01 19:52:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:28:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 
 //minilibX
 #include <mlx.h>
-
-//project sublibrary
 #include <key_code.h>
 #include <mlx_event.h>
+
+//project sublibrary
+#include <error_code.h>
 #include <libft/libft.h>
 
 /*macros----------------------------------------------------------------macros*/
@@ -73,13 +74,16 @@ typedef struct s_map {
 
 /*prototypes--------------------------------------------------------prototypes*/
 //parsing
-t_map	parsing(char	*map_file);
-void	read_cub_file(int fd, t_map map);
+t_map	*parsing(char	*map_file);
+void	read_cub_file(int fd, t_map *map);
+void	check_missing_data(t_map *map);
+t_uint	read_color(char *color_code, char *full_line, int line_nb);
 //parsing utils
-char	*get_next_filed_line(int fd, int *line);//-------------------------------todo
+char	*get_next_filed_line(int fd, int *line);
 
 
 //general utils
+void	*destroy_array(char **array); //currently in error.c
 
 //error
 void	ft_error(char *msg, int ret);

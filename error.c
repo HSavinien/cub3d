@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/02 13:23:36 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:03:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	err_map_form(int line, int column, char **map, char *msg, int code)
 	int	j;
 
 	printf("Error %d : %s\n", code, msg);
-	printf("error is on line %d, column %d\n", line, column);
+	printf("error found on line %d, column %d\n", line, column);
 	i = 0;
 	while (map[i])
 	{
@@ -54,8 +54,6 @@ void	err_map_form(int line, int column, char **map, char *msg, int code)
 		{
 			if (i == line && j == column)
 				printf("\033[0;7;31m%c\033[0m", map[i][j]);
-			else if (map[i][j] == '1')
-				printf("\033[0;7m%c\033[0m", map[i][j]);
 			else if (map[i][j] == '1')
 				printf("\033[0;7m%c\033[0m", map[i][j]);
 			else if (map[i][j] == '0')
@@ -72,14 +70,15 @@ void	err_map_form(int line, int column, char **map, char *msg, int code)
 	exit(code);
 }
 
-void	destroy_array(char **array)
+void	*destroy_array(char **array)
 {
 	int	i;
 
 	if (!array)
-		return ;
+		return (NULL);
 	i = 0;
 	while (array[i])
 		free(array[i++]);
 	free(array);
+	return (NULL);
 }

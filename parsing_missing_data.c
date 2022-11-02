@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:26:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/02 12:48:36 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:22:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,18 @@ void	check_player_info(t_map *map)
 
 void	check_missing_data(t_map *map)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	dprintf(2, "north wall : %s\n", map->north_path);//DEBUG
+	dprintf(2, "south wall : %s\n", map->south_path);//DEBUG
+	dprintf(2, "east wall : %s\n", map->east_path);//DEBUG
+	dprintf(2, "west wall : %s\n", map->west_path);//DEBUG
+	dprintf(2, "floor color : #%X\n", map->floor_color);//DEBUG
+	dprintf(2, "ceiling color : #%X\n", map->roof_color);//DEBUG
 	check_display_info(map);
-	if (!raw_map)
+	dprintf(2, "\033[32mdisplay info OK\033[0m\n");//DEBUG
+	if (!map->raw_map)
 		ft_error(NMAP, ERR_MISSING_DATA);
+	dprintf(2, "\033[32mmap info OK\033[0m\n");//DEBUG
 	check_player_info(map);
+	dprintf(2, "\033[32mplayer info OK\033[0m\n");//DEBUG
 }
