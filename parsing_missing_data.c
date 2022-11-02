@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:26:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/01 22:26:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:48:36 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	check_display_info(t_map *map)
 		ft_error("missing color for ceiling", ERR_MISSING_DATA);
 }
 
-
-void check_player_info(t_map *map)
+void	check_player_info(t_map *map)
 {
 	if (!map->start_dir)
 		ft_error("there is no player start point. please add it to the map",

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/01 22:10:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:47:33 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 void	check_file_name(char *name)
 {
-	char    *cut_name;
+	char	*cut_name;
 
-    cut_name = ft_strrchr(name, '/') + 1;
+	cut_name = ft_strrchr(name, '/') + 1;
 	if (!cut_name)
 		cut_name = name;
 	if (ft_strcmp(cut_name + ft_strlen(cut_name) - 4, ".cub"))
@@ -44,8 +44,8 @@ unsigned char	check_border(int line, int column, char **map)
 		j = 0;
 		while (j < 3)
 		{
-		if (!charinset(map[line + i - 1][column + i - 1], "10NSEW"))
-			err_map_form(line, column, map, ERR_OPEN_MAP_MSG, ERR_OPEN_MAP);
+			if (!charinset(map[line + i - 1][column + i - 1], "10NSEW"))
+				err_map_form(line, column, map, ERR_OPEN_MAP_MSG, ERR_OPEN_MAP);
 		}
 	}
 	return (FLOOR);
@@ -53,8 +53,8 @@ unsigned char	check_border(int line, int column, char **map)
 
 int	check_map_char(char **raw_map, int i, int j, t_map *map_struct)
 {
-	static int nb_player = 0;
-	//if it's the player start, init player info and put a ground in base map.
+	static int	nb_player = 0;
+	/*if it's the player start, init player info and put a ground in base map.*/
 	if (char_in_set(raw_map[i][j], "NSEW"))
 	{
 		if (nb_player ++)
@@ -76,7 +76,7 @@ void	parse_map_data(t_map *map_struct)
 {
 	char			**raw_map;
 	unsigned char	**parsed_map;
-	int 			i;
+	int				i;
 	int				j;
 
 	raw_map = map_struct->raw_map;
@@ -90,7 +90,7 @@ void	parse_map_data(t_map *map_struct)
 		j = 0;
 		while (raw_map[i][j])
 			j ++;
-		parsed_map[i] = ft_calloc(sizeof(unsigned char, j + 1));
+		parsed_map[i] = ft_calloc(sizeof(unsigned char), j + 1);
 		j = 0;
 		while (raw_map[i][j])
 			parsed_map[i][j] = check_map_char(raw_map, i, j ++, map_struct);
@@ -103,7 +103,7 @@ t_map	*parsing(char	*map_file)
 {
 	int		map_fd;
 	t_map	*map_struct;
-	
+
 	check_map_name(map_file);
 	map_fd = open(map_file, O_RDONLY);
 	if (map_fd < 0)

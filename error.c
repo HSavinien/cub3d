@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/10/26 17:50:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:23:36 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	err_mapfile(int line, char *content, char *msg, int code)
 	printf("\033[4,91m%s\033[0m\n", content);
 	exit(code);
 }
+
 /* used to give detailled error message when map is incorectly formated.
  * line is the line from the start of the line, not the start of the file;
  * column is the column where the problem take place
@@ -43,7 +44,7 @@ void	err_map_form(int line, int column, char **map, char *msg, int code)
 	int	i;
 	int	j;
 
-	printf("Error %d : %s\n",code, msg);
+	printf("Error %d : %s\n", code, msg);
 	printf("error is on line %d, column %d\n", line, column);
 	i = 0;
 	while (map[i])
@@ -61,7 +62,7 @@ void	err_map_form(int line, int column, char **map, char *msg, int code)
 				printf("\033[0;7;90m%c\033[0m", map[i][j]);
 			else if (char_in_set(map[i][j], "NSWE"))
 				printf("\033[0;7;34m%c\033[0m", map[i][j]);
-			else if (ft_isspace(map[i][j])) 
+			else if (ft_isspace(map[i][j]))
 				printf("\033[0m%c\033[0m", map[i][j]);
 			j ++;
 		}
@@ -69,4 +70,16 @@ void	err_map_form(int line, int column, char **map, char *msg, int code)
 		i ++;
 	}
 	exit(code);
+}
+
+void	destroy_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }

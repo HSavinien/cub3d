@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/01 21:55:32 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:57:16 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 unsigned int	ft_atoi_base(char *str, char *base_str)
 {
 	int	i;
-	int j;
+	int	j;
 	int	nb;
-	int base;
+	int	base;
 
 	nb = 0;
 	if (!str || !base_str || ft_strlen(base_str) < 2)
@@ -56,7 +56,7 @@ int	all_char_in_set(char *search, char *set)
 	while (search[i])
 	{
 		if (!char_in_set(search[i], set))
-			return 0;
+			return (0);
 		i ++;
 	}
 	return (1);
@@ -67,7 +67,7 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 	char	**rgb_array;
 	int		**rgb_values;
 	int		i;
-	
+
 	i = 0;
 	while (str[i])
 	{
@@ -84,17 +84,18 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 		rgb_values[i] = ft_atoi(rgb_array[i]);
 		if (rgb_values[i] < 0 || rgb_values[i] > 255)
 			err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
-		i ++
+		i ++;
 	}
 	return (rgb_values[2] + rgb_values[1] * 256 + rgb_values[0] * 256 * 256);
 }
 
 unsigned int	read_colors(char *color_code, char *full_line, int line_nb)
 {
-	int i;
+	int	i;
+
 	while (color_code[i])
 		ft_toupper(color_code[i++]);
-	if (char_in_set(','; color_code))
+	if (char_in_set(',', color_code))
 		return (read_rgb_color(color_code, full_line, line_nb));
 	if (color_code[0] == '#')
 		color_code ++;

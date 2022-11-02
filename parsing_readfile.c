@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/01 21:14:40 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:15:59 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_next_filed_line(int fd, int *line_num)
 	}
 	if (line_num)
 		line_num += nb_line;
-	return (line)
+	return (line);
 }
 
 void	read_cub_file(int fd, t_map *map_struct)
@@ -54,28 +54,29 @@ void	read_cub_file(int fd, t_map *map_struct)
 	int		i;
 	int		line_num;
 
-	do while (line)
+	line = (char *) 1;
+	while (line)
 	{
 		line = get_next_filled_line(fd, &line_num);
+		i = 0;
 		while (ft_isspace(line[i]))
 			i ++;
 		if (ft_isupcase(line[i]))
 			read_format_line(line, map_struct, line_num);
 		else if (ft_isdigit(line[i]))
 			read_map(line, fd, map_struct, &line_num);
-		else if line[i] == '#'
-			continue;
+		else if (line[i] == '#')
+			continue ;
 		else
 			error_mapfile(line_num, line, ERR_LINE_MSG, ERR_FILE_PATERN);
 		free(line);
 	}
 }
 
-
-void	read_format_line(char *line, t_map *map_struct, int line_nb);
+void	read_format_line(char *line, t_map *map_struct, int line_nb)
 {
 	char	**tokenised_line;
-	
+
 	tokenised_line = ft_split_word(line);
 	//expected format : {"ID", "DATA", NULL}
 	if (!tokenised_line[0] || !tokenised_line[1] || tokenised_line[2])
