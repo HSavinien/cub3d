@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:26:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 23:39:38 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 23:44:45 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,22 @@ void	check_player_info(t_map *map)
 
 void	check_missing_data(t_map *map)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
-	dprintf(2, "north wall : %s\n", map->north_path);//DEBUG
-	dprintf(2, "south wall : %s\n", map->south_path);//DEBUG
-	dprintf(2, "east wall : %s\n", map->east_path);//DEBUG
-	dprintf(2, "west wall : %s\n", map->west_path);//DEBUG
-	dprintf(2, "floor color : #%X\n", map->floor_color);//DEBUG
-	dprintf(2, "ceiling color : #%X\n", map->roof_color);//DEBUG
 	check_display_info(map);
-	dprintf(2, "\033[32mdisplay info OK\033[0m\n");//DEBUG
 	if (!map->raw_map)
 		ft_error(NMAP, ERR_MISSING_DATA);
-	dprintf(2, "\033[32mmap info OK\033[0m\n");//DEBUG
 	check_player_info(map);
-	dprintf(2, "\033[32mplayer info OK\033[0m\n");//DEBUG
 }
 
 void	check_duplicate(char *id, char *line, int line_num, t_map *map_s)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (!ft_strcmp(id, "NO") && map_s->north_path)
-		err_mapfile(line_num, line, "duplicate north texture path", ERR_DUPLICATE);
+		err_mapfile(line_num, line, "duplicate north texture", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "SO") && map_s->south_path)
-		err_mapfile(line_num, line, "duplicate south texture path", ERR_DUPLICATE);
+		err_mapfile(line_num, line, "duplicate south texture", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "EA") && map_s->east_path)
-		err_mapfile(line_num, line, "duplicate east texture path", ERR_DUPLICATE);
+		err_mapfile(line_num, line, "duplicate east texture", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "WE") && map_s->west_path)
-		err_mapfile(line_num, line, "duplicate west texture path", ERR_DUPLICATE);
+		err_mapfile(line_num, line, "duplicate west texture", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "C") && map_s->roof_color)
 		err_mapfile(line_num, line, "duplicate ceiling color", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "F") && map_s->floor_color)
