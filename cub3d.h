@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/02 19:28:51 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:04:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_map {
 t_map	*parsing(char	*map_file);
 void	read_cub_file(int fd, t_map *map);
 void	check_missing_data(t_map *map);
+void	check_duplicate(char *id, char *line, int line_num, t_map *map_s);
 t_uint	read_color(char *color_code, char *full_line, int line_nb);
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);

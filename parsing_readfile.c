@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 13:48:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:20:05 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #define ERR_NB_TOKEN_MSG "wrong token number : exactly two token required"
 #define ERR_WRONG_ID_MSG "unknown ID token. Valid ID are : [NO|SO|WE|EA|F|C]"
 #define ERR_PATERN_MSG "that just don't make any sens!"
+#define MSG_DUPLI "two map found in file. each file sould contain only one map"
 
 int	is_line_empty(char *str)
 {
@@ -51,15 +52,14 @@ char	*get_next_filed_line(int fd, int *line_num)
 
 void	read_format_line(char *line, t_map *map_struct, int line_nb)
 {
-//	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
-//	dprintf(2, "reading line %d : %s\n", line_nb, line);//DEBUG
 	char	**tokenised_line;
 
 	tokenised_line = ft_split_word(line);
 	//expected format : {"ID", "DATA", NULL}
 	if (!tokenised_line[0] || !tokenised_line[1] || tokenised_line[2])
 		err_mapfile(line_nb, line, ERR_NB_TOKEN_MSG, ERR_FILE_NB_TOKEN);
-	else if (strcmp(tokenised_line[0], "NO"))
+	check_duplicate(tokenised_line[0], line, line_nb, map_struct);
+	if (strcmp(tokenised_line[0], "NO"))
 		map_struct->north_path = ft_strdup(tokenised_line[1]);
 	else if (strcmp(tokenised_line[0], "SO"))
 		map_struct->south_path = ft_strdup(tokenised_line[1]);
@@ -77,32 +77,31 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb)
 	free (line);
 }
 
-void	read_map(char *first_line, int fd, t_map *map_struct, int *line_nb)
-{
-	char		*line;
-	char		*singlestr_map;
-	char		*new_singlestr_map;
-	int			line_len;
+//read the full map info in file, from the first line (in param) 
+//to the first empty line after that one. store the result in map struct
+//at the same time, count the number of lines.
 
-	line = first_line;
-	singlestr_map = ft_strdup(line);
-	while (!is_line_empty(line) && line)
+void	read_map(char *line, int fd, t_map *map_s, int *line_nb)
+{	
+	char	*new_map;
+	char	*old_map;
+
+	new_map = ft_strdup("");
+	while (line)
 	{
-		line_len = ft_strlen(line);
-		if (line_len > map_struct->nb_column)
-			map_struct->nb_column = line_len;
+		old_map = new_map;
+		new_map = ft_strjoin(new_map, line);
+		free(old_map);
 		free(line);
 		line = get_next_line(fd);
-		if (line)
-		{
-			new_singlestr_map = ft_strjoin(singlestr_map, line);
-			free (singlestr_map);
-			singlestr_map = new_singlestr_map;
-		}
 		*line_nb += 1;
-		map_struct->nb_line ++;
+		map_s->nb_line ++;
+		if ((int) ft_strlen(line) > map_s->nb_column)
+			map_s->nb_column = ft_strlen(line);
 	}
-	map_struct->raw_map = ft_split(singlestr_map, '\n');
+	free(line);
+	map_s->raw_map = ft_split(new_map, '\n');
+	free(new_map);
 }
 
 void	read_cub_file(int fd, t_map *map_struct)
@@ -112,23 +111,21 @@ void	read_cub_file(int fd, t_map *map_struct)
 	int		line_num;
 
 	line = (char *) 1;
+	line_num = 0;
 	while (line)
 	{
 		line = get_next_filed_line(fd, &line_num);
+		line_num ++;
 		i = 0;
 		while (line && ft_isspace(line[i]))
 			i ++;
-		if (!line)
-			break ;
+		if (!line || line[i] == '#')
+			free (line);
 		else if (ft_isupcase(line[i]))
 			read_format_line(line, map_struct, line_num);
 		else if (ft_isdigit(line[i]))
 			read_map(line, fd, map_struct, &line_num);
-
-		else if (line[i] == '#')
-			continue ;
 		else
 			err_mapfile(line_num, line, ERR_PATERN_MSG, ERR_FILE_PATERN);
 	}
 }
-
