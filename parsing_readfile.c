@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 20:32:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 23:34:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*get_next_filed_line(int fd, int *line_num)
 void	read_format_line(char *line, t_map *map_struct, int line_nb)
 {
 	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	dprintf(2, "\n\nline %d : %s\n", line_nb, line);//DEBUG
 	char	**tokenised_line;
 
 	tokenised_line = ft_split_word(line);
@@ -60,17 +61,17 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb)
 	if (!tokenised_line[0] || !tokenised_line[1] || tokenised_line[2])
 		err_mapfile(line_nb, line, ERR_NB_TOKEN_MSG, ERR_FILE_NB_TOKEN);
 	check_duplicate(tokenised_line[0], line, line_nb, map_struct);
-	if (strcmp(tokenised_line[0], "NO"))
+	if (!strcmp(tokenised_line[0], "NO"))
 		map_struct->north_path = ft_strdup(tokenised_line[1]);
-	else if (strcmp(tokenised_line[0], "SO"))
+	else if (!strcmp(tokenised_line[0], "SO"))
 		map_struct->south_path = ft_strdup(tokenised_line[1]);
-	else if (strcmp(tokenised_line[0], "WE"))
+	else if (!strcmp(tokenised_line[0], "WE"))
 		map_struct->west_path = ft_strdup(tokenised_line[1]);
-	else if (strcmp(tokenised_line[0], "EA"))
+	else if (!strcmp(tokenised_line[0], "EA"))
 		map_struct->east_path = ft_strdup(tokenised_line[1]);
-	else if (strcmp(tokenised_line[0], "F"))
+	else if (!strcmp(tokenised_line[0], "F"))
 		map_struct->floor_color = read_color(tokenised_line[1], line, line_nb);
-	else if (strcmp(tokenised_line[0], "C"))
+	else if (!strcmp(tokenised_line[0], "C"))
 		map_struct->roof_color = read_color(tokenised_line[1], line, line_nb);
 	else
 		err_mapfile(line_nb, line, ERR_WRONG_ID_MSG, ERR_FILE_WRONG_ID);

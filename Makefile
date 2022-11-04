@@ -4,6 +4,7 @@ SRCS	=	error.c \
 			parsing_missing_data.c \
 			parsing_read_color.c \
 			parsing_readfile.c \
+			debug.c \
 
 
 OBJS	=	${SRCS:%.c=%.o}

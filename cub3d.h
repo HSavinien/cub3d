@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 21:42:42 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 23:28:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,7 @@ void	*destroy_array(char **array); //currently in error.c
 void	ft_error(char *msg, int ret);
 void	err_mapfile(int line, char *content, char *msg, int code);
 void	err_map_form(int pos[2], char **map, char *msg, int code);
+
+//debug
+void	show_struct(t_map *map_s);
 #endif

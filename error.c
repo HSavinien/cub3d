@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 21:42:25 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 23:00:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	ft_error(char *msg, int ret)
  */
 void	err_mapfile(int line, char *content, char *msg, int code)
 {
-	printf("Error %d : unrecognized data patern in .cub file, line %d\n"
-		"%s\n", code, line, msg);
-	printf("\033[4,91m%s\033[0m\n", content);
+	printf("Error %d : unrecognized data patern in file:\n\t%s\n\n", code, msg);
+	printf("on line (%d):\033[4;91m%s\033[0m\n", line, content);
 	exit(code);
 }
 //function used by err_map_form to put the map on screen
