@@ -6,19 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 18:36:52 by tmongell          #+#    #+#             */
-/*   Updated: 2021/11/16 17:51:26 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:59:41 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_min(int nb1, int nb2)
-{
-	if (nb1 < nb2)
-		return (nb1);
-	else
-		return (nb2);
-}
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {

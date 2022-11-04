@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_min_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 12:18:23 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/11/03 19:00:06 by tmongell         ###   ########.fr       */
+/*   Created: 2022/11/03 18:34:10 by tmongell          #+#    #+#             */
+/*   Updated: 2022/11/03 18:44:32 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_min(int nbo, int nbt)
 {
-	return (ft_strncmp(s1, s2, ft_min(ft_strlen(s1), ft_strlen(s2)) + 1));
+	if (nbo > nbt)
+		return (nbt);
+	return (nbo);
+}
+
+int	ft_max(int nbo, int nbt)
+{
+	if (nbo > nbt)
+		return (nbo);
+	return (nbt);
 }

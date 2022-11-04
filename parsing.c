@@ -6,16 +6,16 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/02 23:14:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:10:18 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define ERR_FILE_OPEN_MSG " could not be oppened. Check the file name and rights"
-#define ERR_LINE_MSG "the line don't match any known patern"
+#define MSG_FILE_OPEN " could not be oppened. Check the file name and rights"
+#define MSG_LINE "the line don't match any known patern"
 #define MSG_OMAP "the map is open. Please close the map."
-#define ERR_MLTPLR_MSG "multiple player spawn detected"
-#define ERR_MAP_CHAR_MSG "ilegal character found in map token"
+#define MSG_MLTPLR "multiple player spawn detected"
+#define MSG_MAP_CHAR "ilegal character found in map token"
 
 void	check_file_name(char *name)
 {
@@ -33,27 +33,23 @@ void	check_file_name(char *name)
 }
 
 //initialy called check_border, renamed because norm de ses mort
-unsigned char	chkbrdr(int line, int col, int nb_line, char **map)
+unsigned char	chkbrdr(int line, int col, int nbln, char **map)
 {
-	int	i;
-	int	j;
+	int	len;
 
-	if (!line || line == nb_line || !col ||
-		col == (int) ft_strlen(map[line]))
+	len = ft_strlen(map[line]) - 1;
+	nbln --;
+	if (col > ft_min(ft_strlen(map[line - 1]), ft_strlen(map[line + 1])))
 		err_map_form(line, col, map, MSG_OMAP, ERR_OPEN_MAP);
-	i = -1;
-	while (i < 2)
-	{
-		j = -1;
-		while (j < 2)
-		{
-			if (char_in_set(map[line + i][col + j], " \n"))
-				err_map_form(line, col, map, MSG_OMAP, ERR_OPEN_MAP);
-			j ++;
-		}
-		i ++;
-	}
-	return (FLOOR);
+	if (line <= 0 || char_in_set(map[line - 1][col], " \t\n")) //top check
+		err_map_form(ft_max(line - 1, 0), col, map, MSG_OMAP, ERR_OPEN_MAP);
+	if (line >= nbln || char_in_set(map[line + 1][col], " \t\n")) //botom check
+		err_map_form(ft_min(line + 1, nbln), col, map, MSG_OMAP, ERR_OPEN_MAP);
+	if (col <= 0 || char_in_set(map[line][col - 1], " \t\n")) //left check
+		err_map_form(line, ft_max(col - 1, 0), map, MSG_OMAP, ERR_OPEN_MAP);
+	if (col >= len || char_in_set(map[line][col + 1], " \t\n")) //right check
+		err_map_form(line, ft_min(col + 1, len), map, MSG_OMAP, ERR_OPEN_MAP);
+	return (map[line][col]);
 }
 
 void	check_map_char(char **raw_map, int i, int j, t_map *map_s)
@@ -63,18 +59,18 @@ void	check_map_char(char **raw_map, int i, int j, t_map *map_s)
 	if (char_in_set(raw_map[i][j], "NSEW"))
 	{
 		if (nb_player ++)
-			err_map_form(i, j, map_s->raw_map, ERR_MLTPLR_MSG, ERR_MULTIPLAYER);
+			err_map_form(i, j, map_s->raw_map, MSG_MLTPLR, ERR_MULTIPLAYER);
 		map_s->start_line = i;
 		map_s->start_column = j;
 		map_s->start_dir = raw_map[i][j];
-		raw_map[i][j] = '0';
+		map_s->parsed_map[i][j] = chkbrdr(i, j, map_s->nb_line, map_s->raw_map);
 	}
-	if (char_in_set(raw_map[i][j], "1 \n"))
+	else if (char_in_set(raw_map[i][j], "1 \n"))
 		map_s->parsed_map[i][j] = (t_uchar) WALL;
 	else if (raw_map[i][j] == '0')
 		map_s->parsed_map[i][j] = chkbrdr(i, j, map_s->nb_line, map_s->raw_map);
 	else
-		err_map_form(i, j, map_s->raw_map, ERR_MAP_CHAR_MSG, ERR_MAP_CHAR);
+		err_map_form(i, j, map_s->raw_map, MSG_MAP_CHAR, ERR_MAP_CHAR);
 }
 
 void	parse_map_data(t_map *map_s)
@@ -97,11 +93,11 @@ void	parse_map_data(t_map *map_s)
 		map_s->parsed_map[i] = ft_calloc(sizeof(unsigned char), j + 1);
 		j = 0;
 		while (raw_map[i][j])
-		{
 			check_map_char(raw_map, i, j ++, map_s);
-		}
 		i ++;
 	}
+	if (map_s->start_line)
+		raw_map[map_s->start_line][map_s->start_column] = '0';
 }
 
 t_map	*parsing(char	*map_file)
@@ -112,7 +108,7 @@ t_map	*parsing(char	*map_file)
 	check_file_name(map_file);
 	map_fd = open(map_file, O_RDONLY);
 	if (map_fd < 0)
-		ft_error(ft_strjoin(map_file, ERR_FILE_OPEN_MSG), ERR_OPEN);
+		ft_error(ft_strjoin(map_file, MSG_FILE_OPEN), ERR_OPEN);
 	map_s = ft_calloc(sizeof(t_map), 1);
 	if (!map_s)
 		ft_error("unexpected malloc error in parsing", ERR_MALLOC);
