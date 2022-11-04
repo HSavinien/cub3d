@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 20:20:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:32:50 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*get_next_filed_line(int fd, int *line_num)
 
 void	read_format_line(char *line, t_map *map_struct, int line_nb)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	char	**tokenised_line;
 
 	tokenised_line = ft_split_word(line);

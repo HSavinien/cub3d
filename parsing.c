@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 17:10:18 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:28:08 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,51 @@ void	check_file_name(char *name)
 }
 
 //initialy called check_border, renamed because norm de ses mort
-unsigned char	chkbrdr(int line, int col, int nbln, char **map)
+unsigned char	chkbrdr(int ln, int col, int nbln, char **map)
 {
 	int	len;
+	int	pos[2];
 
-	len = ft_strlen(map[line]) - 1;
+	len = ft_strlen(map[ln]) - 1;
+	pos[0] = ln;
+	pos[1] = col;
 	nbln --;
-	if (col > ft_min(ft_strlen(map[line - 1]), ft_strlen(map[line + 1])))
-		err_map_form(line, col, map, MSG_OMAP, ERR_OPEN_MAP);
-	if (line <= 0 || char_in_set(map[line - 1][col], " \t\n")) //top check
-		err_map_form(ft_max(line - 1, 0), col, map, MSG_OMAP, ERR_OPEN_MAP);
-	if (line >= nbln || char_in_set(map[line + 1][col], " \t\n")) //botom check
-		err_map_form(ft_min(line + 1, nbln), col, map, MSG_OMAP, ERR_OPEN_MAP);
-	if (col <= 0 || char_in_set(map[line][col - 1], " \t\n")) //left check
-		err_map_form(line, ft_max(col - 1, 0), map, MSG_OMAP, ERR_OPEN_MAP);
-	if (col >= len || char_in_set(map[line][col + 1], " \t\n")) //right check
-		err_map_form(line, ft_min(col + 1, len), map, MSG_OMAP, ERR_OPEN_MAP);
-	return (map[line][col]);
+//check if char is on the border
+	if (ln <= 0 || ln >= nbln || col <= 0 || col >= (int) ft_strlen(map[ln]) -1)
+		err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
+//check special case for outside char
+	if (col > ft_min(ft_strlen(map[ln - 1]), ft_strlen(map[ln + 1])))
+		err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
+//check top char
+	else if (ln <= 0 || char_in_set(map[ln - 1][col], " \t\n"))
+		pos[0] = ft_max(ln -1, 0);
+//check botom
+	else if (ln >= nbln || char_in_set(map[ln + 1][col], " \t\n"))
+		pos[0] = ft_min(ln +1, nbln);
+//check left
+	else if (col <= 0 || (char_in_set(map[ln][col - 1], " \t\n")))
+		pos[1] = ft_max(col -1, 0);
+//check right
+	else if (col >= len || char_in_set(map[ln][col + 1], " \t\n"))
+		pos[1] = ft_min(col +1, len);
+//if no error was found
+	else
+		return (map[ln][col]);
+	err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
+	return (0);
 }
 
 void	check_map_char(char **raw_map, int i, int j, t_map *map_s)
 {
 	static int	nb_player = 0;
+	int			pos[2];
 
+	pos[0] = i;
+	pos[1] = j;
 	if (char_in_set(raw_map[i][j], "NSEW"))
 	{
 		if (nb_player ++)
-			err_map_form(i, j, map_s->raw_map, MSG_MLTPLR, ERR_MULTIPLAYER);
+			err_map_form(pos, map_s->raw_map, MSG_MLTPLR, ERR_MULTIPLAYER);
 		map_s->start_line = i;
 		map_s->start_column = j;
 		map_s->start_dir = raw_map[i][j];
@@ -70,7 +88,7 @@ void	check_map_char(char **raw_map, int i, int j, t_map *map_s)
 	else if (raw_map[i][j] == '0')
 		map_s->parsed_map[i][j] = chkbrdr(i, j, map_s->nb_line, map_s->raw_map);
 	else
-		err_map_form(i, j, map_s->raw_map, MSG_MAP_CHAR, ERR_MAP_CHAR);
+		err_map_form(pos, map_s->raw_map, MSG_MAP_CHAR, ERR_MAP_CHAR);
 }
 
 void	parse_map_data(t_map *map_s)

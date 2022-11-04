@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 17:06:37 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:42:25 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,19 @@ static void	print_map_char(char c)
  * line is the line from the start of the line, not the start of the file;
  * column is the column where the problem take place
  */
-void	err_map_form(int line, int column, char **map, char *msg, int code)
+void	err_map_form(int pos[2], char **map, char *msg, int code)
 {
 	int	i;
 	int	j;
 
-	printf("Error %d : %s\n", code, msg);
-	printf("error found on line %d, column %d\n", line, column);
+	printf("Error %d at [%d;%d]: %s\n", code, pos[0], pos[1], msg);
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (i == line && j == column)
+			if (i == pos[0] && j == pos[1])
 				printf("\033[0;7;31m%c\033[0m", map[i][j]);
 			else
 				print_map_char(map[i][j]);
