@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 22:28:08 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:40:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ unsigned char	chkbrdr(int ln, int col, int nbln, char **map)
 		pos[1] = ft_min(col +1, len);
 //if no error was found
 	else
-		return (map[ln][col]);
+		return ('0');
 	err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
 	return (0);
 }

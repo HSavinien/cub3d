@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/05 01:19:10 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:37:02 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ unsigned int	read_color(char *color_code, char *full_line, int line_nb)
 {
 	int	i;
 
-	i = 0;
-	while (color_code[i])
-		ft_toupper(color_code[i++]);
+	i = -1;
+	while (color_code[++ i])
+		color_code[i] = ft_toupper(color_code[i]);
 	if (char_in_set(',', color_code))
 		return (read_rgb_color(color_code, full_line, line_nb));
 	if (color_code[0] == '#')

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 23:28:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:43:59 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 //value for map :
 #define	WALL 1
 #define FLOOR 2
-#define SPAWN FLOOR
 #define DOOR 4
 #define OUTSIDE 255
 
