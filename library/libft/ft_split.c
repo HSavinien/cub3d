@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 12:54:11 by tmongell          #+#    #+#             */
-/*   Updated: 2022/04/29 19:15:41 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:17:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static int	ft_count_str(char const *s, char c)
 }
 
 // function that give a pointer one the first char of the num^th substr of s.
-static char	*ft_find_substr(char const *s, char sep, int num)
+static int	ft_find_substr(char const *s, char sep, int num)
 {
 	int		i;
 	int		curent_str;
 
 	if (num > ft_count_str(s, sep))
-		return (NULL);
+		return (-1);
 	i = 0;
 	curent_str = 1;
 	while (curent_str < num + 1)
@@ -51,19 +51,22 @@ static char	*ft_find_substr(char const *s, char sep, int num)
 	}
 	while (s[i] == sep)
 		i ++;
-	return ((char *)(s + i));
+	return (i);
 }
 
 static char	*ft_get_substr(char const *s, char sep, int num)
 {
 	char	*str;
-	int		i;
+	int		start;
+	int		stop;
 
-	str = ft_find_substr(s, sep, num);
-	i = 0;
-	while (str[i] != sep)
-		i ++;
-	str = ft_strndup(str, i);
+	start = ft_find_substr(s, sep, num);
+	if (start < 0)
+		return (NULL);
+	stop = start + 1;
+	while (s[stop] && s[stop] != sep)
+		stop ++;
+	str = ft_substr(s, start, stop);
 	return (str);
 }
 

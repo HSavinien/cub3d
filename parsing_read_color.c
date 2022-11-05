@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/02 19:25:27 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:19:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i] && !ft_isspace(str[i]) && str[i] != ','))
+		if (!ft_isdigit(str[i]) && !ft_isspace(str[i]) && str[i] != ','){
 			err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
+		}
 		i ++;
 	}
 	rgb_array = ft_split(str, ',');

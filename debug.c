@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:18:53 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 23:27:00 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/04 23:48:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 inline void	show_struct(t_map *map_s)
 {
-	dprintf(2, "NO : %s[%p]\n"
+	printf("NO : %s[%p]\n"
 			"SO : %s[%p]\n"
 			"EA : %s[%p]\n"
 			"WE : %s[%p]\n"
@@ -25,5 +25,5 @@ inline void	show_struct(t_map *map_s)
 			map_s->east_path, map_s->east_path,
 			map_s->west_path, map_s->west_path,
 			map_s->roof_color, &map_s->roof_color,
-			map_s->floor_color, &map_s->floor_color);//DEBUG
+			map_s->floor_color, &map_s->floor_color);
 }
