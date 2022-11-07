@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 23:00:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:10:58 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	err_map_form(int pos[2], char **map, char *msg, int code)
 	int	i;
 	int	j;
 
-	printf("Error %d at [%d;%d]: %s\n", code, pos[0], pos[1], msg);
+	printf("Error %d at [%d;%d]: %s\n\n", code, pos[0], pos[1], msg);
 	i = 0;
 	while (map[i])
 	{

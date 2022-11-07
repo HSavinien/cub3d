@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 23:46:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:12:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define ERR_WRONG_ID_MSG "unknown ID token. Valid ID are : [NO|SO|WE|EA|F|C]"
 #define ERR_PATERN_MSG "that just don't make any sens!"
 #define MSG_DUPLI "two map found in file. each file sould contain only one map"
+#define	MSG_MAP_LAST "no data can follow the map. Blame the subject, not me"
 
 int	is_line_empty(char *str)
 {
@@ -112,7 +113,7 @@ void	read_cub_file(int fd, t_map *map_struct)
 
 	line = (char *) 1;
 	line_num = 0;
-	while (line)
+	while (line && !map_struct->raw_map)//
 	{
 		line = get_next_filed_line(fd, &line_num);
 		line_num ++;
@@ -128,4 +129,8 @@ void	read_cub_file(int fd, t_map *map_struct)
 		else
 			err_mapfile(line_num, line, ERR_PATERN_MSG, ERR_FILE_PATERN);
 	}
+	//to refuse any data comming after the map.
+	line = get_next_filed_line(fd, &line_num);
+	if (line)
+		ft_error(MSG_MAP_LAST, ERR_MAP_LAST);
 }

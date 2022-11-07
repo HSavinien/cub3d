@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 18:33:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:12:31 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@
 # define ERR_MISSING_DATA 9	//not all mandatory data have been specified in file
 # define ERR_OPEN_MAP 10		//the map array is not closed
 # define ERR_DUPLICATE 11	//the file contain twice the same data (eg two maps)
+# define ERR_MAP_LAST 12	//map is not the last element of the file.
 
 //system
-# define ERR_MALLOC 12	//a malloc call failed to allocate memory
-# define ERR_OPEN 13		//could not open a file, probably the map
+# define ERR_MALLOC 13	//a malloc call failed to allocate memory
+# define ERR_OPEN 14		//could not open a file, probably the map
 
 //mlx
-# define ERR_SPRITE 14	//a sprite file cannot be opened.
+# define ERR_SPRITE 15	//a sprite file cannot be opened.
 
 #endif
