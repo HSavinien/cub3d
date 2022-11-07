@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/05 01:43:59 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:11:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ typedef struct s_map {
 	void	*south_img;
 	void	*east_img;
 	void	*west_img;
-	t_uint	floor_color;
-	t_uint	roof_color;
+	long	floor_color;
+	long	roof_color;
 	//the map itself
 	char	**raw_map;
 	t_uchar	**parsed_map;

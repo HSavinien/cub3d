@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:26:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/04 23:44:45 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:33:45 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	check_display_info(t_map *map)
 		ft_error("missing texture path for east wall", ERR_MISSING_DATA);
 	if (!map->west_path)
 		ft_error("missing texture path for west wall", ERR_MISSING_DATA);
-	if (!map->floor_color)
+	if (map->floor_color < 0)
 		ft_error("missing color for floor", ERR_MISSING_DATA);
-	if (!map->roof_color)
+	if (map->roof_color < 0)
 		ft_error("missing color for ceiling", ERR_MISSING_DATA);
 }
 
@@ -56,8 +56,8 @@ void	check_duplicate(char *id, char *line, int line_num, t_map *map_s)
 		err_mapfile(line_num, line, "duplicate east texture", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "WE") && map_s->west_path)
 		err_mapfile(line_num, line, "duplicate west texture", ERR_DUPLICATE);
-	if (!ft_strcmp(id, "C") && map_s->roof_color)
+	if (!ft_strcmp(id, "C") && map_s->roof_color >= 0)
 		err_mapfile(line_num, line, "duplicate ceiling color", ERR_DUPLICATE);
-	if (!ft_strcmp(id, "F") && map_s->floor_color)
+	if (!ft_strcmp(id, "F") && map_s->floor_color >= 0)
 		err_mapfile(line_num, line, "duplicate floor color", ERR_DUPLICATE);
 }

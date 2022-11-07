@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/05 01:40:40 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:44:09 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ unsigned char	chkbrdr(int ln, int col, int nbln, char **map)
 		pos[1] = ft_min(col +1, len);
 //if no error was found
 	else
-		return ('0');
+		return (FLOOR);
 	err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
 	return (0);
 }
@@ -108,7 +108,7 @@ void	parse_map_data(t_map *map_s)
 		j = 0;
 		while (raw_map[i][j])
 			j ++;
-		map_s->parsed_map[i] = ft_calloc(sizeof(unsigned char), j + 1);
+		map_s->parsed_map[i] = ft_calloc(sizeof(unsigned char), j + 10);
 		j = 0;
 		while (raw_map[i][j])
 			check_map_char(raw_map, i, j ++, map_s);
@@ -130,6 +130,8 @@ t_map	*parsing(char	*map_file)
 	map_s = ft_calloc(sizeof(t_map), 1);
 	if (!map_s)
 		ft_error("unexpected malloc error in parsing", ERR_MALLOC);
+	map_s->floor_color = -1;
+	map_s->roof_color = -1;
 	read_cub_file(map_fd, map_s);
 	parse_map_data(map_s);
 	check_missing_data(map_s);
