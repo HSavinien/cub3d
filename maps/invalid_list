@@ -46,6 +46,9 @@
 			rgb code with 0, >255, 0
 			rgb code with 0, >255, >255
 			rgb code with >255, >255, >255
+			rgb code with severals consecutives comas
+			rgb code with coma before code
+			rgb code with coma after code
 			hexa code > rgb max
 			#hexa code > rgb max
 			hexa code negatif
