@@ -6,16 +6,17 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/07 14:44:09 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/14 21:53:22 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define MSG_FILE_OPEN " could not be oppened. Check the file name and rights"
-#define MSG_LINE "the line don't match any known patern"
+#define MSG_FILE_OPEN " could not be oppened. Check the file name and rights."
+#define MSG_LINE "the line don't match any known patern."
 #define MSG_OMAP "the map is open. Please close the map."
-#define MSG_MLTPLR "multiple player spawn detected"
-#define MSG_MAP_CHAR "ilegal character found in map token"
+#define MSG_MLTPLR "multiple player spawn detected."
+#define MSG_MAP_CHAR "ilegal character found in map token."
+#define MSG_FILE_DIR "map should be a file, not a directory. change your file."
 
 void	check_file_name(char *name)
 {
@@ -99,11 +100,11 @@ void	parse_map_data(t_map *map_s)
 
 	raw_map = map_s->raw_map;
 	i = 0;
-	while (raw_map[i])
+	while (raw_map && raw_map[i])
 		i ++;
 	map_s->parsed_map = ft_calloc(sizeof(unsigned char *), i + 1);
 	i = 0;
-	while (raw_map[i])
+	while (raw_map && raw_map[i])
 	{
 		j = 0;
 		while (raw_map[i][j])
@@ -135,5 +136,6 @@ t_map	*parsing(char	*map_file)
 	read_cub_file(map_fd, map_s);
 	parse_map_data(map_s);
 	check_missing_data(map_s);
+	close(map_fd);
 	return (map_s);
 }

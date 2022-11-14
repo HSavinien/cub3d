@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/07 14:11:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:24:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	err_map_form(int pos[2], char **map, char *msg, int code);
 
 //debug
 void	show_struct(t_map *map_s);
+void	show_map(char **map);//use for, bad for the norm========================NORM
 #endif

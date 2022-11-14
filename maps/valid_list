@@ -1,5 +1,3 @@
-#===================================MANDATORY==================================#
-
 //data
 	//order
 		color before textures
@@ -45,11 +43,3 @@
 	lone wall (no floor) separated, right of main
 	valid map inside a square of wall
 	map with no floor but the player
-	
-
-#===================================OPTIONAL===================================#
-
-	//comment
-		start with comment
-		data - comment - data without empty line
-		comment with space before

@@ -51,6 +51,7 @@ SRCS	=	ft_isdigit.c \
 			ft_char_in_set.c \
 			ft_strcmp.c \
 			ft_min_max.c \
+			ft_atoi_base.c \
 
 OBJS	= ${SRCS:.c=.o}
 

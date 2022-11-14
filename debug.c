@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 23:18:53 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/07 14:14:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:28:05 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,14 @@ inline void	show_struct(t_map *map_s)
 			map_s->west_path, map_s->west_path,
 			map_s->roof_color, &map_s->roof_color,
 			map_s->floor_color, &map_s->floor_color);
+}
+
+void	show_map(char **map)
+{
+	printf("map at %p\n", map);
+	if (map)
+	{
+		for(int i=0 ; map[i] ; i ++)
+			printf("%s\n", map[i]);
+	}
 }

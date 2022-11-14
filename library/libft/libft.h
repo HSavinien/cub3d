@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:38:12 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/03 18:45:24 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:02:47 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "get_next_line.h"
 
 //structs :
+
+typedef unsigned int t_uint;
+
 typedef struct s_list
 {
 	void			*content;
@@ -83,4 +86,5 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		char_in_set(char c, char *set);
 int		ft_min(int nbo, int nbt);
 int		ft_max(int nbo, int nbt);
+t_uint	ft_atoi_base(char *str, char *base_str);
 #endif

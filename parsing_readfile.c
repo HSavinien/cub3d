@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/07 23:12:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/14 21:50:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	read_map(char *line, int fd, t_map *map_s, int *line_nb)
 	char	*old_map;
 
 	new_map = ft_strdup("");
-	while (line)
+	while (line && !is_line_empty(line))
 	{
 		old_map = new_map;
 		new_map = ft_strjoin(new_map, line);
@@ -113,7 +113,7 @@ void	read_cub_file(int fd, t_map *map_struct)
 
 	line = (char *) 1;
 	line_num = 0;
-	while (line && !map_struct->raw_map)//
+	while (line && !map_struct->raw_map)//second part to refuse data after map
 	{
 		line = get_next_filed_line(fd, &line_num);
 		line_num ++;
@@ -124,7 +124,7 @@ void	read_cub_file(int fd, t_map *map_struct)
 			free (line);
 		else if (ft_isupcase(line[i]))
 			read_format_line(line, map_struct, line_num);
-		else if (ft_isdigit(line[i]))
+		else if (char_in_set(line[i], MAP_CHAR_OK))
 			read_map(line, fd, map_struct, &line_num);
 		else
 			err_mapfile(line_num, line, ERR_PATERN_MSG, ERR_FILE_PATERN);
