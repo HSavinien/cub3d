@@ -6,47 +6,15 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/05 01:37:02 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/14 22:30:19 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define ERR_COLORCODE_MSG "unrecognized color code. try hexa or RGB instead"
+#define MSG_COLORCODE "unrecognized color code. try hexa or RGB instead"
+#define MSG_RGB_COMMA "misplaced comma in rgb code"
 #define HEX_BASE "0123456789ABCDEF"
-
-/* function that convert a string into an int, using the base in parameter.
- * this function include limited security concerning the base, as it should
- * not be up to the user to determine what base to converte from.
- * dev, if you fuck up and put random stuff (duplicate char...), that's on you.
- */
-unsigned int	ft_atoi_base(char *str, char *base_str)
-{
-	int	i;
-	int	j;
-	int	nb;
-	int	base;
-
-	nb = 0;
-	if (!str || !base_str || ft_strlen(base_str) < 2)
-		return (0);
-	base = ft_strlen(base_str);
-	i = 0;
-	while (ft_isspace(str[i]))
-		i ++;
-	while (char_in_set(str[i], base_str))
-	{
-		nb *= base;
-		j = 0;
-		while (base_str[j] && str[i] != base_str[j])
-			j ++;
-		if (!base_str[j])
-			return (nb);
-		nb += j;
-		i ++;
-	}
-	return (nb);
-}
 
 int	all_char_in_set(char *search, char *set)
 {
@@ -62,31 +30,40 @@ int	all_char_in_set(char *search, char *set)
 	return (1);
 }
 
+void	check_valid_rgb(char *code, int line_nb, char *full_line)
+{
+	int i;
+
+	if (code[0] == ',')
+			err_mapfile(line_nb, full_line, MSG_RGB_COMMA, ERR_COLORCODE);
+	i = -1;
+	while (code[++ i])
+	{
+		if (!ft_isdigit(code[i]) && !ft_isspace(code[i]) && code[i] != ',')
+			err_mapfile(line_nb, full_line, MSG_COLORCODE, ERR_COLORCODE);
+		if (code[i] == ',' && (code[i + 1] == ',' || !code[i + 1]))
+			err_mapfile(line_nb, full_line, MSG_RGB_COMMA, ERR_COLORCODE);
+	}
+}
+
 unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 {
 	char	**rgb_array;
 	int		rgb_values[3];
 	int		i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && !ft_isspace(str[i]) && str[i] != ','){
-			err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
-		}
-		i ++;
-	}
+	check_valid_rgb(str, line_nb, full_line);
 	rgb_array = ft_split(str, ',');
 	if (!rgb_array[0] || !rgb_array[1] || !rgb_array[2] || rgb_array[3])
-		err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
-	i = 0;
-	while (i < 3)
+		err_mapfile(line_nb, full_line, MSG_COLORCODE, ERR_COLORCODE);
+	i = -1;
+	while (++ i < 3)
 	{
 		rgb_values[i] = ft_atoi(rgb_array[i]);
 		if (rgb_values[i] < 0 || rgb_values[i] > 255)
-			err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
-		i ++;
+			err_mapfile(line_nb, full_line, MSG_COLORCODE, ERR_COLORCODE);
 	}
+	destroy_array(rgb_array);
 	return (rgb_values[2] + rgb_values[1] * 256 + rgb_values[0] * 256 * 256);
 }
 
@@ -104,6 +81,6 @@ unsigned int	read_color(char *color_code, char *full_line, int line_nb)
 	if (ft_strlen(color_code) == 6 && all_char_in_set(color_code, HEX_BASE))
 		return (ft_atoi_base(color_code, HEX_BASE));
 	else
-		err_mapfile(line_nb, full_line, ERR_COLORCODE_MSG, ERR_COLORCODE);
+		err_mapfile(line_nb, full_line, MSG_COLORCODE, ERR_COLORCODE);
 	return (0);
 }

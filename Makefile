@@ -17,7 +17,7 @@ MLXCOMP	=	 -I ${MLXREP}
 
 MLXLNK	=	${MLXCOMP} -L ${MLXREP} -lmlx -framework OpenGL -framework AppKit -MMD
 
-CFLAGS	=	-Wall -Wextra -Werror -Ilibrary ${MLXCOMP} -fsanitize=address -g
+CFLAGS	=	-Wall -Wextra -Werror -Ilibrary ${MLXCOMP}
 
 LIB		=	-L./library/libft -lft ${MLXLNK}
 
