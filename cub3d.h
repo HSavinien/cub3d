@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/14 16:24:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:08:09 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@
 //value for map :
 #define	WALL 1
 #define FLOOR 2
-#define DOOR 4
+#define H_DOOR 4
+#define V_DOOR 8
 #define OUTSIDE 255
+
+//window values
+#define WIN_W 1080
+#define WIN_H 720
 
 /*structure---------------------------------------------------------structures*/
 
@@ -70,6 +75,20 @@ typedef struct s_map {
 	int		start_column;
 	char	start_dir;
 }	t_map;
+
+//struct meant to characterise any player or NPC in the game
+typedef	struct	s_entity {
+	double	pos_x;
+	double	pos_y;
+	double	direction;
+}	t_entity;
+
+typedef struct s_mlx {
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_map		*map_s;
+	t_entity	player;
+}	t_mlx;
 
 /*prototypes--------------------------------------------------------prototypes*/
 //parsing
