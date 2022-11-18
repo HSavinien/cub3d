@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/17 16:08:09 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:54:36 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_mlx {
 
 /*prototypes--------------------------------------------------------prototypes*/
 //parsing
-t_map	*parsing(char	*map_file);
+t_map	parsing(char	*map_file);
 void	read_cub_file(int fd, t_map *map);
 void	check_missing_data(t_map *map);
 void	check_duplicate(char *id, char *line, int line_num, t_map *map_s);

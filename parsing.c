@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/14 21:53:22 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:00:01 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,23 +119,21 @@ void	parse_map_data(t_map *map_s)
 		raw_map[map_s->start_line][map_s->start_column] = '0';
 }
 
-t_map	*parsing(char	*map_file)
+t_map	parsing(char	*map_file)
 {
 	int		map_fd;
-	t_map	*map_s;
+	t_map	map_s;
 
 	check_file_name(map_file);
 	map_fd = open(map_file, O_RDONLY);
 	if (map_fd < 0)
 		ft_error(ft_strjoin(map_file, MSG_FILE_OPEN), ERR_OPEN);
-	map_s = ft_calloc(sizeof(t_map), 1);
-	if (!map_s)
-		ft_error("unexpected malloc error in parsing", ERR_MALLOC);
-	map_s->floor_color = -1;
-	map_s->roof_color = -1;
-	read_cub_file(map_fd, map_s);
-	parse_map_data(map_s);
-	check_missing_data(map_s);
+	ft_bzero(&map_s, sizeof(map_s));
+	map_s.floor_color = -1;
+	map_s.roof_color = -1;
+	read_cub_file(map_fd, &map_s);
+	parse_map_data(&map_s);
+	check_missing_data(&map_s);
 	close(map_fd);
 	return (map_s);
 }
