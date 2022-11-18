@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/18 18:54:36 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:55:58 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 //window values
 #define WIN_W 1080
 #define WIN_H 720
+#define WIN_TITLE "placeholder title"
 
 /*structure---------------------------------------------------------structures*/
 
@@ -80,7 +81,7 @@ typedef struct s_map {
 typedef	struct	s_entity {
 	double	pos_x;
 	double	pos_y;
-	double	direction;
+	double	direction;	//in radient
 }	t_entity;
 
 typedef struct s_mlx {
