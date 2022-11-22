@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/22 16:49:38 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:25:23 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #define EAST_ANGLE 0
 #define WEST_ANGLE 180
 
-t_mlx	do_init(t_map *map)
+/*t_mlx	do_init(t_map *map)
 {
 	t_mlx	mlx_s;
 	
@@ -40,17 +40,17 @@ t_mlx	do_init(t_map *map)
 		mlx_s.player.direction = EAST_ANGLE;
 	if (map->direction == 'W')
 		mlx_s.player.direction = WEST_ANGLE;
-}
+}*/
 
 int	main(int ac, char **av)
 {
 	t_map	map;
-	t_mlx	mlx_s;
+	t_mlx	mlx;
 
 	if (ac != 2)
 		return(printf("error args\nusage : <%s> <file.cub>\n", av[0]));
 	map = parsing(av[1]);
-	mlx_s = do_init(&map)
+//	mlx_s = do_init(&map)
 	//open window
 	init_window_images(&mlx);
 	init_background(&mlx);
