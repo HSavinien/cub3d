@@ -1,10 +1,14 @@
 SRCS	=	error.c \
-			main.c \
+			cub3d.c \
 			parsing.c \
 			parsing_missing_data.c \
 			parsing_read_color.c \
 			parsing_readfile.c \
 			debug.c \
+			draw_minimap.c \
+			hook.c \
+			loop.c \
+			init_images.c \
 
 
 OBJS	=	${SRCS:%.c=%.o}
