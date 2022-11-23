@@ -7,6 +7,10 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_read_color.c \
 			srcs/parsing/parsing_readfile.c \
 			debug.c \
+			draw_minimap.c \
+			hook.c \
+			loop.c \
+			init_images.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 
@@ -71,7 +75,7 @@ debug:	library
 	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-debug -g
 
 sanitize:	library
-	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-sanitize -fsanitize=address
+	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-sanitize -g -fsanitize=address
 
 #others rules
 
