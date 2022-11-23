@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/22 17:25:23 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/23 09:46:32 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(int ac, char **av)
 	init_window_images(&mlx);
 	init_background(&mlx);
 	//event hook
-	mlx_hook(mlx.win, KEY_PRESS, 0, event_hook, &mlx);
-	mlx_hook(mlx.win, DESTROY, 0, close_win, &mlx);
+	mlx_hook(mlx.win_ptr, KEY_PRESS, 0, event_hook, &mlx);
+	mlx_hook(mlx.win_ptr, DESTROY, 0, close_win, &mlx);
 	mlx_loop_hook(mlx.mlx_ptr, loop, &mlx);
 
 	//mlx loop

@@ -6,11 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:46:36 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/11/22 16:50:45 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/23 09:43:00 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub33d.h"
+#include "cub3d.h"
 
 int		loop(t_mlx *mlx)
 {

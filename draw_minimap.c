@@ -79,10 +79,31 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 	tile = TILE_SMM + 4;
 	x = mlx->player.pos_x * tile + mlx->player.dir_x;
 	y = mlx->player.pos_y * tile + mlx->player.dir_y;
-	if (mlx->map_s.parsed_map[i][j] == 1)
+	if (mlx->map_s->parsed_map[i][j] == 1)
 		draw_square(&mlx->minimap, i, j, 0xFFFFFF);
-	else if (mlx->map_s.parsed_map[i][j] != 1 && i != mlx->player.pos_y && j != mlx->player.pos_x)
+	else if (mlx->map_s->parsed_map[i][j] != 1 && i != mlx->player.pos_y && j != mlx->player.pos_x)
 		draw_square(&mlx->minimap, i, j, 0);
 	draw_filledcircle(&mlx->minimap, mlx->player.pos_x, mlx->player.pos_y);
 	//draw_line(&mlx->minimap, mlx->player.pos_x * tile, mlx->player.pos_y, x, y); 
+}
+
+void	draw_minimap(t_mlx *mlx)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < (IMG_HEIGHT / TILE_SMM))
+	{
+		j = 0;
+		while (j < (IMG_WIDTH / TILE_SMM))
+		{
+			if (mlx->map_s->parsed_map[i][j] != 0)
+				draw_figures(mlx, i, j);
+			//printf("%d, %d\n",  
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->minimap.img_ptr, 20, ((WIN_HEIGHT - IMG_HEIGHT) - 20));
 }

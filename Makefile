@@ -10,7 +10,6 @@ SRCS	=	error.c \
 			loop.c \
 			init_images.c \
 
-
 OBJS	=	${SRCS:%.c=%.o}
 
 CC		=	gcc

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/22 16:49:29 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:12:53 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,13 @@ char	*get_next_filed_line(int fd, int *line);
 //general utils
 void	*destroy_array(char **array); //currently in error.c
 void	draw_figures(t_mlx *mlx, int i, int j);
+void	draw_minimap(t_mlx *mlx);
 void	init_window_images(t_mlx *mlx);
 void	init_background(t_mlx *mlx);
 void	init_minimap(t_mlx *mlx);
-void	loop(t_mlx *mlx);
+int		loop(t_mlx *mlx);
+int		close_win(t_mlx *mlx);
+int		event_hook(int key, t_mlx *mlx);
 
 //error
 void	ft_error(char *msg, int ret);
