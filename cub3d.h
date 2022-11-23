@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/18 20:55:58 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:53:33 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 #include <stdio.h>
 #include <limits.h>
 #include <errno.h>
+#include <math.h>
 
 //minilibX
 #include <mlx.h>
+#include "library/mlx_macos/mlx.h"
 #include <key_code.h>
 #include <mlx_event.h>
 
@@ -60,10 +62,6 @@ typedef struct s_map {
 	char	*south_path;
 	char	*east_path;
 	char	*west_path;
-	void	*north_img;
-	void	*south_img;
-	void	*east_img;
-	void	*west_img;
 	long	floor_color;
 	long	roof_color;
 	//the map itself
@@ -84,9 +82,25 @@ typedef	struct	s_entity {
 	double	direction;	//in radient
 }	t_entity;
 
+typedef	struct	s_imgs {
+	void	*north_img;
+	int		north_width;
+	int		north_height;
+	void	*south_img;
+	int		south_width;
+	int		south_height;
+	void	*east_img;
+	int		east_width;
+	int		east_height;
+	void	*west_img;
+	int		west_width;
+	int		west_height;
+}	t_imgs;
+
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_imgs		*images;
 	t_map		*map_s;
 	t_entity	player;
 }	t_mlx;
@@ -105,8 +119,12 @@ char	*get_next_filed_line(int fd, int *line);
 //general utils
 void	*destroy_array(char **array); //currently in error.c
 
+//mlx utils
+void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
+
+
 //error
-void	ft_error(char *msg, int ret);
+void	*ft_error(char *msg, int ret);
 void	err_mapfile(int line, char *content, char *msg, int code);
 void	err_map_form(int pos[2], char **map, char *msg, int code);
 

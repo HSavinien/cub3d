@@ -1,11 +1,12 @@
-SRCS	=	error.c \
-			main.c \
-			parsing.c \
-			parsing_missing_data.c \
-			parsing_read_color.c \
-			parsing_readfile.c \
+SRCS	=	cub3d.c \
+			srcs/utils/error.c \
+			srcs/utils/leaks_utils.c \
+			srcs/utils/mlx_images_utils.c \
+			srcs/parsing/parsing.c \
+			srcs/parsing/parsing_missing_data.c \
+			srcs/parsing/parsing_read_color.c \
+			srcs/parsing/parsing_readfile.c \
 			debug.c \
-
 
 OBJS	=	${SRCS:%.c=%.o}
 
@@ -13,48 +14,65 @@ CC		=	gcc
 
 MLXREP	=	library/mlx_macos
 
-MLXCOMP	=	 -I ${MLXREP}
+MLX		=	-L./${MLXREP} -lmlx -framework OpenGL -framework AppKit -MMD
 
-MLXLNK	=	${MLXCOMP} -L ${MLXREP} -lmlx -framework OpenGL -framework AppKit -MMD
+CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP}
 
-CFLAGS	=	-Wall -Wextra -Werror -Ilibrary ${MLXCOMP}
-
-LIB		=	-L./library/libft -lft ${MLXLNK}
+LIB		=	-L./library/libft -lft ${MLX}
 
 
 NAME	=	cub3d
 
 #rules    -------------------------------------------------------------    rules
 
+#standart rules
+
 all:		${NAME}
 
 ${NAME}: ${OBJS}
-	make library
+	@echo "\033[34mcompiling library :\033[0m"
+	@make library
+	@echo "\033[1;34mlinking files:\033[0m"
 	@${CC} ${CFLAGS} ${LIB} ${OBJS} -o ${NAME}
 	@echo "\033[1;32mcode compiled succesfully\033[0m"
 
-library:	libft
-
-libft:
-	@make -s -C ./library/libft
-	@echo "\033[1;33mlibft compiled\033[0m"
-
 clean:
-	@rm -rf ${OBJS} ${NAME}.dSYM ${BOBJS} test
 	@make -s -C ./library/libft clean
+	@echo "\033[1;31mlibft cleaned\033[0m"
+	@make -s -C ./library/mlx_macos clean
+	@echo "\033[1;31mmlx cleaned\033[0m"
+	@rm -rf ${OBJS} ${NAME}.dSYM ${BOBJS} test
 	@echo "\033[1;31mobject files removed\033[0m"
 
 fclean:		clean
-	@rm -f ${NAME} generator bonus/checker
 	@make -s -C ./library/libft fclean
+	@echo "\033[1;33mlibft.a file removed\033[0m"
+	@rm -f ${NAME}
 	@echo "\033[1;33m${NAME} file removed\033[0m"
 
 re:		fclean all
 
+#library rules
+library:	libft mlx
+
+libft:
+	@echo "\033[94mcompiling libft :\033[0m"
+	@make -s -C ./library/libft
+	@echo "\033[1;33mlibft compiled\033[0m"
+
+mlx:
+	@echo "\033[94mcompiling mlx :\033[0m"
+	@make -s -C ./library/mlx_macos
+	@echo "\033[1;33mminilibX compiled\033[0m"
+
+
+#dubug rules
 debug:	library
 	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-debug -g
 
 sanitize:	library
 	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-sanitize -fsanitize=address
+
+#others rules
 
 .PHONY:		all clean fclean re debug sanitize bonus

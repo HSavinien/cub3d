@@ -6,17 +6,17 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/16 12:18:46 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:01:19 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
 /* general error function :
  * display an error message, 
  * then exit with the given code
  */
-void	ft_error(char *msg, int ret)
+void	*ft_error(char *msg, int ret)
 {
 	printf("Error %d :\n%s\n", ret, msg);
 //	system("leaks cub3d");//DEBUG
@@ -78,17 +78,4 @@ void	err_map_form(int pos[2], char **map, char *msg, int code)
 	}
 //	system("leaks cub3d");//DEBUG
 	exit(code);
-}
-
-void	*destroy_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return (NULL);
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
-	return (NULL);
 }

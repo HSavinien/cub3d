@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/07 23:12:31 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/23 20:57:41 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@
 # define ERR_OPEN 14		//could not open a file, probably the map
 
 //mlx
-# define ERR_SPRITE 15	//a sprite file cannot be opened.
+# define ERR_IMG_OPEN 15	//a sprite file cannot be opened.
 
 #endif
