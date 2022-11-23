@@ -86,3 +86,24 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 	draw_filledcircle(&mlx->minimap, mlx->player.pos_x, mlx->player.pos_y);
 	//draw_line(&mlx->minimap, mlx->player.pos_x * tile, mlx->player.pos_y, x, y); 
 }
+
+void	draw_minimap(t_mlx *mlx)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < (IMG_HEIGHT / TILE_SMM))
+	{
+		j = 0;
+		while (j < (IMG_WIDTH / TILE_SMM))
+		{
+			if (mlx->map_s->parsed_map[i][j] != 0)
+				draw_figures(mlx, i, j);
+			//printf("%d, %d\n",  
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->minimap.img_ptr, 20, ((WIN_HEIGHT - IMG_HEIGHT) - 20));
+}
