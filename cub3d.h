@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/24 00:27:59 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/25 05:37:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@
 #define TO_COORD(X,Y) ((int)floor(Y) * IMG_WIDTH + (int)floor(X))
 
 //there is library/mlx_event.h for the following...
-#define KEY_PRESS 2
-#define KEY_RELEASE 3
-#define MOUSE_DOWN 4
-#define MOUSE_UP 5
-#define MOUSE_MOVE 6
-#define EXPOSE 12
-#define DESTROY 17
+	#define KEY_PRESS 2
+	#define KEY_RELEASE 3
+	#define MOUSE_DOWN 4
+	#define MOUSE_UP 5
+	#define MOUSE_MOVE 6
+	#define EXPOSE 12
+	#define DESTROY 17
 
 //value for map :
 #define	WALL 1
@@ -57,9 +57,8 @@
 #define OUTSIDE 255
 
 //window values
-#define WIN_W 1080
-#define WIN_H 720
 #define WIN_TITLE "placeholder title"
+#define FOV (DEG_FOV*M_PI/180)	//for more user-friendliness
 #define TSIZE 32
 #define	TILE_SMM 8
 #define WIN_WIDTH 15 * TSIZE
