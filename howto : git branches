@@ -1,0 +1,18 @@
+part 1 : create a new branch
+	option 1 :
+		git branch <branch name>
+		it create a new branche, and that's it. you can then move to it with git checout.
+	option 2 :
+		git checkout -b <branch name> create the branch if it don't exist, than take you to the branch.
+		you can also create a branch starting from another branch, with git checkout -b <new_branch> <start branch>
+
+part 2 : where the fuck am I, how the fuck do I go there?
+	git branch, with no argument, list the branch and tel you on which one you are.
+	git checkout <branch name> take you to the last comit of the branch.
+	git branch -d <branch name> will allow you to delete a branch, if this is needed
+	git log show only the commits of the current branch.
+
+part 3 : merging
+	first, checkout to the branch you want to merge into.
+	then, git merge <branch name> to merge the two branchs
+	solve the few merge error and comit if auto merge failed.
