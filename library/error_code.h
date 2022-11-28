@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/23 20:57:41 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:17:09 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #ifndef ERROR_CODE_H
 # define ERROR_CODE_H
 
+/*return values--------------------------------------------------return values*/
+
 //parsing
 # define ERR_EXTENTION 1	//map name is not in .cub
 # define ERR_SHORT_NAME 2	//map name is just '.cub'
@@ -29,15 +31,19 @@
 # define ERR_MAP_CHAR 7		//a forbiden char has been found in the map
 # define ERR_COLORCODE 8	//a color code is not a valid rgb or hexa code
 # define ERR_MISSING_DATA 9	//not all mandatory data have been specified in file
-# define ERR_OPEN_MAP 10		//the map array is not closed
+# define ERR_OPEN_MAP 10	//the map array is not closed
 # define ERR_DUPLICATE 11	//the file contain twice the same data (eg two maps)
 # define ERR_MAP_LAST 12	//map is not the last element of the file.
 
 //system
 # define ERR_MALLOC 13	//a malloc call failed to allocate memory
-# define ERR_OPEN 14		//could not open a file, probably the map
+# define ERR_OPEN 14	//could not open a file, probably the map
 
 //mlx
 # define ERR_IMG_OPEN 15	//a sprite file cannot be opened.
+
+/*messages------------------------------------------------------------messages*/
+
+# define MSG_MALLOC_FAILED "a malloc call failed to allocate memory."
 
 #endif

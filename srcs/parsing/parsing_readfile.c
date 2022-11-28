@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/14 21:50:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:08:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb)
 {
 	char	**tokenised_line;
 
-	tokenised_line = ft_split_word(line);
+	tokenised_line = get_tokenised_line(line);
 	//expected format : {"ID", "DATA", NULL}
-	if (!tokenised_line[0] || !tokenised_line[1] || tokenised_line[2])
+	if (!tokenised_line || !tokenised_line[0] || !tokenised_line[1] ||
+		tokenised_line[2])
 		err_mapfile(line_nb, line, ERR_NB_TOKEN_MSG, ERR_FILE_NB_TOKEN);
 	check_duplicate(tokenised_line[0], line, line_nb, map_struct);
 	if (!strcmp(tokenised_line[0], "NO"))

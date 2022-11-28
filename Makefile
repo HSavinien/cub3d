@@ -6,6 +6,7 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_missing_data.c \
 			srcs/parsing/parsing_read_color.c \
 			srcs/parsing/parsing_readfile.c \
+			srcs/parsing/parsing_utils.c \
 			debug.c \
 			draw_minimap.c \
 			hook.c \

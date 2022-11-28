@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/25 05:37:51 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/28 23:33:54 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 //project sublibrary
 #include <error_code.h>
 #include <libft/libft.h>
+#include <config.h>
 
 /*macros----------------------------------------------------------------macros*/
 
@@ -155,6 +156,7 @@ t_uint	read_color(char *color_code, char *full_line, int line_nb);
 
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
+char	**get_tokenised_line(char *line);
 
 
 //general utils
