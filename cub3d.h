@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/29 01:22:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:04:32 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ void	check_missing_data(t_map *map);
 void	check_duplicate(char *id, char *line, int line_num, t_map *map_s);
 t_uint	read_color(char *color_code, char *full_line, int line_nb);
 
+//display
+
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
 char	**get_tokenised_line(char *line);
@@ -160,7 +162,7 @@ int		loop(t_mlx *mlx);
 
 //mlx utils
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
-
+int		main_loop(t_mlx *mlx);
 
 //error
 void	*ft_error(char *msg, int ret);

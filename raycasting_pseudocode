@@ -1,4 +1,6 @@
 main loop function :
+	create new mlx image, same size as window
+	fill lower half with ground color; upper half with roof color
 	calculate the angle for each pixel column, store it in an array.
 	for each angle : 
 		call ray function;
@@ -14,3 +16,23 @@ claculating each angle :
 	calculate each number in this interval and store in array;
 
 ray function
+	calculate direction line equation (y = ax+b)
+	check each grid intersection until meeting a wall (add secu if out of map)
+	once wall is meet : 
+	calculate equivalent distance (trigo/pythagore) to compensate fish-eye
+	calculate apparent height
+	(optional) : adjust height depending on jump or look up/down
+	get pixel column from image (for now, just plain color)
+	(optional : calculate offset of pixel column)
+	draw column in image;
+
+
+
+useful formula : 
+	ray direction y=ax+b : a = ; b = 
+	get next ray jump :
+	compensate fish-eye correct distance before calculating height: 
+	get pixel column height :
+	#optional, would work by offsetting column on vertical axis
+	jump :
+	look up/down :

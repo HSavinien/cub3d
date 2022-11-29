@@ -7,6 +7,7 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_read_color.c \
 			srcs/parsing/parsing_readfile.c \
 			srcs/parsing/parsing_utils.c \
+			srcs/generals/main_loop.c \
 			debug.c \
 
 OBJS	=	${SRCS:%.c=%.o}

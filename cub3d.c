@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/29 01:19:00 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:05:43 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ int	main(int ac, char **av)
 	//event hook
 	
 	//mlx loop
-	//mlx_loop_hook(mlx_s.mlx_ptr, calculate_display, mlx_s);
+	mlx_loop_hook(mlx_s.mlx_ptr, main_loop, (void *)(&mlx_s));
 	mlx_loop(mlx_s.mlx_ptr);
 }
