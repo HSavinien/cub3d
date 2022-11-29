@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/28 23:33:54 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:22:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@
 
 #define MAP_CHAR_OK "10NSEW \n" //char allowed to define the map
 #define TO_COORD(X,Y) ((int)floor(Y) * IMG_WIDTH + (int)floor(X))
-
-//there is library/mlx_event.h for the following...
-	#define KEY_PRESS 2
-	#define KEY_RELEASE 3
-	#define MOUSE_DOWN 4
-	#define MOUSE_UP 5
-	#define MOUSE_MOVE 6
-	#define EXPOSE 12
-	#define DESTROY 17
 
 //value for map :
 #define	WALL 1
@@ -137,7 +128,7 @@ typedef	struct	s_imgs {
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
-	void		*win;
+	void		*win_ptr;//chloe renamed it, see to avoid merge conflict
 	t_imgs		*images;
 	t_img		minimap;
 	t_map		*map_s;

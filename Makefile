@@ -8,10 +8,6 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_readfile.c \
 			srcs/parsing/parsing_utils.c \
 			debug.c \
-			draw_minimap.c \
-			hook.c \
-			loop.c \
-			init_images.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 

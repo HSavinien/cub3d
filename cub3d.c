@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/24 00:24:06 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:19:00 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,10 @@ int	main(int ac, char **av)
 	map = parsing(av[1]);
 	mlx_s = do_init(&map);
 	//open window
-//	init_window_images(&mlx_s); //placeholder
-	mlx_s.win = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
-	init_background(&mlx_s);
+	mlx_s.win_ptr = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
 	//event hook
-//	mlx_hook(mlx_s.win, KEY_PRESS, 0, event_hook, &mlx_s);
-//	mlx_hook(mlx_s.win, DESTROY, 0, close_win, &mlx_s);
-//	mlx_loop_hook(mlx_s.mlx_ptr, loop, &mlx_s);
-
+	
 	//mlx loop
-//	mlx_loop_hook(mlx_s.mlx_ptr, calculate_display, mlx_s);
+	//mlx_loop_hook(mlx_s.mlx_ptr, calculate_display, mlx_s);
 	mlx_loop(mlx_s.mlx_ptr);
 }
