@@ -1,0 +1,16 @@
+main loop function :
+	calculate the angle for each pixel column, store it in an array.
+	for each angle : 
+		call ray function;
+	display image;
+	add other images (minimap, hud...);
+
+
+
+claculating each angle : 
+	min angle is player_dir - fov/2
+	max angle is player_dir + fov/2
+	interval between two successive number is (max - min)/fov
+	calculate each number in this interval and store in array;
+
+ray function
