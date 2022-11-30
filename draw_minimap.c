@@ -98,9 +98,9 @@ void	draw_minimap(t_mlx *mlx)
 		j = 0;
 		while (j < (IMG_WIDTH / TILE_SMM))
 		{
+			printf("x:%d, y:%d\n", j, i); 
 			if (mlx->map_s->parsed_map[i][j] != 0)
 				draw_figures(mlx, i, j);
-			//printf("%d, %d\n",  
 			j++;
 		}
 		i++;
