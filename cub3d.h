@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/28 23:33:54 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:21:06 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,13 @@
 typedef unsigned char t_uchar;
 typedef unsigned int t_uint;
 
-// ???
-typedef struct s_xpm
-{
-	void	*wall;
-	int		width;
-	int		height;
-}	t_xpm;
-
 typedef struct	s_img
 {
 	void	*img_ptr;
 	int		*data;
+	int		width;
+	int		height;
+//those three must be here, don't ask what it's for
 	int		size_l;
 	int		bpp;
 	int		endian;
@@ -118,9 +113,7 @@ typedef	struct	s_entity {
 
 }	t_entity;
 
-// name look a litle to much like the t_img from chloe. shall be renamed in 
-// t_wall_img or something...
-typedef	struct	s_imgs {
+typedef	struct	s_wall_img {
 	void	*north_img;
 	int		north_width;
 	int		north_height;
@@ -133,7 +126,7 @@ typedef	struct	s_imgs {
 	void	*west_img;
 	int		west_width;
 	int		west_height;
-}	t_imgs;
+}	t_wall_img;
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
