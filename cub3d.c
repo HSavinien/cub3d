@@ -6,11 +6,12 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/01 15:23:33 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:58:46 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
+#include "chloutils.h"
 
 //angles are in radiant. respectively 90, -90, 0, and 180 degrees.
 #define NORTH_ANGLE (M_PI/2)
@@ -25,6 +26,7 @@ t_mlx	do_init(t_map *map)
 
 	//init mlx
 	mlx_s.mlx_ptr = mlx_init();
+	mlx_s.map_s = map;
 	//create img struct
 	img = ft_calloc(1, sizeof(t_wall_img));
 	//open textures
@@ -82,15 +84,15 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return(printf("error args\nusage : <%s> <file.cub>\n", av[0]));
 	map = parsing(av[1]);
-	mlx_s = do_init(&map)
+	mlx_s = do_init(&map);
 	//open window
 	init_window_images(&mlx_s);
 	init_background(&mlx_s);
 	//event hook
-	mlx_hook(mlx.win_ptr, KEY_PRESS, 0, event_hook, &mlx_s);
-	mlx_hook(mlx.win_ptr, DESTROY, 0, close_win, &mlx_s);
-	mlx_loop_hook(mlx.mlx_ptr, loop, &mlx_s);
+	mlx_hook(mlx_s.win_ptr, EVENT_KEY_PRESS, 0, event_hook, &mlx_s);
+	mlx_hook(mlx_s.win_ptr, EVENT_WIN_CLOSE, 0, close_win, &mlx_s);
+	mlx_loop_hook(mlx_s.mlx_ptr, loop, &mlx_s);
 
 	//mlx loop
-	mlx_loop(mlx.mlx_ptr);
+	mlx_loop(mlx_s.mlx_ptr);
 }
