@@ -6,58 +6,90 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/30 17:24:42 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:23:33 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
-//all angle are in degree, but we shall converte them into radian.
-#define NORTH_ANGLE 90
-#define SOUTH_ANGLE -90
+//angles are in radiant. respectively 90, -90, 0, and 180 degrees.
+#define NORTH_ANGLE (M_PI/2)
+#define SOUTH_ANGLE (-M_PI/2)
 #define EAST_ANGLE 0
-#define WEST_ANGLE 180
+#define WEST_ANGLE (M_PI)
 
-/*t_mlx	do_init(t_map *map)
+t_mlx	do_init(t_map *map)
 {
 	t_mlx	mlx_s;
-	
+	t_wall_img	*img;
+
 	//init mlx
 	mlx_s.mlx_ptr = mlx_init();
+	//create img struct
+	img = ft_calloc(1, sizeof(t_wall_img));
 	//open textures
-	map->north_img = read_xpm_file(map->north_path, mlx_s.mlx_ptr);
-	map->south_img = read_xpm_file(map->south_path, mlx_s.mlx_ptr);
-	map->east_img = read_xpm_file(map->east_path, mlx_s.mlx_ptr);
-	map->west_img = read_xpm_file(map->west_path, mlx_s.mlx_ptr);
+	img->north_img = read_img_file(map->north_path, mlx_s.mlx_ptr,
+		&img->north_width, &img->north_height);
+	img->south_img = read_img_file(map->south_path, mlx_s.mlx_ptr,
+		&img->south_width, &img->south_height);
+	img->east_img = read_img_file(map->east_path, mlx_s.mlx_ptr,
+		&img->east_width, &img->east_height);
+	img->west_img = read_img_file(map->west_path, mlx_s.mlx_ptr,
+		&img->west_width, &img->west_height);
+	mlx_s.images = img;
 	//init player
-	mlx_s.player.pos_x = map-> mlx->img.datastart_column;
-	mlx_s.player.pos_y = map->start_line;
-	if (map->direction == 'N')
+	mlx_s.player.pos_x = map->start_column + 0.5;
+	mlx_s.player.pos_y = map->start_line + 0.5;
+	if (map->start_dir == 'N')
 		mlx_s.player.direction = NORTH_ANGLE;
-	if (map->direction == 'S')
+	else if (map->start_dir == 'S')
 		mlx_s.player.direction = SOUTH_ANGLE;
-	if (map->direction == 'E')
+	else if (map->start_dir == 'E')
 		mlx_s.player.direction = EAST_ANGLE;
-	if (map->direction == 'W')
+	else if (map->start_dir == 'W')
 		mlx_s.player.direction = WEST_ANGLE;
+	return (mlx_s);
+}
+
+/*int	main(int ac, char **av)
+{
+	t_map	map;
+	t_mlx	mlx_s;
+
+	if (ac != 2)
+		return(printf("error args\nusage : <%s> <file.cub>\n", av[0]));
+	map = parsing(av[1]);
+	mlx_s = do_init(&map);
+	//open window
+//	init_window_images(&mlx_s); //placeholder
+	mlx_s.win = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
+	init_background(&mlx_s);
+	//event hook
+	mlx_hook(mlx_s.win, KEY_PRESS, 0, event_hook, &mlx_s);
+	mlx_hook(mlx_s.win, DESTROY, 0, close_win, &mlx_s);
+	mlx_loop_hook(mlx_s.mlx_ptr, loop, &mlx_s);
+
+	//mlx loop
+//	mlx_loop_hook(mlx_s.mlx_ptr, calculate_display, mlx_s);
+	mlx_loop(mlx_s.mlx_ptr);
 }*/
 
 int	main(int ac, char **av)
 {
 	t_map	map;
-	t_mlx	mlx;
+	t_mlx	mlx_s;
 
 	if (ac != 2)
 		return(printf("error args\nusage : <%s> <file.cub>\n", av[0]));
 	map = parsing(av[1]);
-//	mlx_s = do_init(&map)
+	mlx_s = do_init(&map)
 	//open window
-	init_window_images(&mlx);
-	init_background(&mlx);
+	init_window_images(&mlx_s);
+	init_background(&mlx_s);
 	//event hook
-	mlx_hook(mlx.win_ptr, KEY_PRESS, 0, event_hook, &mlx);
-	mlx_hook(mlx.win_ptr, DESTROY, 0, close_win, &mlx);
-	mlx_loop_hook(mlx.mlx_ptr, loop, &mlx);
+	mlx_hook(mlx.win_ptr, KEY_PRESS, 0, event_hook, &mlx_s);
+	mlx_hook(mlx.win_ptr, DESTROY, 0, close_win, &mlx_s);
+	mlx_loop_hook(mlx.mlx_ptr, loop, &mlx_s);
 
 	//mlx loop
 	mlx_loop(mlx.mlx_ptr);

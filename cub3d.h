@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/30 18:21:06 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:06:43 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,11 @@
 //project sublibrary
 #include <error_code.h>
 #include <libft/libft.h>
-#include <config.h>
+#include "config.h"
 
 /*macros----------------------------------------------------------------macros*/
 
 #define MAP_CHAR_OK "10NSEW \n" //char allowed to define the map
-#define TO_COORD(X,Y) ((int)floor(Y) * IMG_WIDTH + (int)floor(X))
-
-//there is library/mlx_event.h for the following...
-	#define KEY_PRESS 2
-	#define KEY_RELEASE 3
-	#define MOUSE_DOWN 4
-	#define MOUSE_UP 5
-	#define MOUSE_MOVE 6
-	#define EXPOSE 12
-	#define DESTROY 17
 
 //value for map :
 #define	WALL 1
@@ -60,12 +50,6 @@
 //window values
 #define WIN_TITLE "placeholder title"
 #define FOV (DEG_FOV*M_PI/180)	//for more user-friendliness
-#define TSIZE 32
-#define	TILE_SMM 8
-#define WIN_WIDTH 15 * TSIZE
-#define WIN_HEIGHT 11 * TSIZE
-#define IMG_WIDTH 15 * TILE_SMM
-#define IMG_HEIGHT 11 * TILE_SMM
 
 /*structure---------------------------------------------------------structures*/
 
@@ -130,12 +114,11 @@ typedef	struct	s_wall_img {
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
-	void		*win;
-	t_imgs		*images;
+	void		*win_ptr;
+	t_wall_img	*images;
 	t_img		minimap;
 	t_map		*map_s;
 	t_img		img;
-	t_xpm		xpm;
 	t_entity	player;
 }	t_mlx;
 
@@ -154,11 +137,6 @@ char	**get_tokenised_line(char *line);
 
 //general utils
 void	*destroy_array(char **array); //currently in error.c
-void	draw_figures(t_mlx *mlx, int i, int j);
-void	init_window_images(t_mlx *mlx);
-void	init_background(t_mlx *mlx);
-void	init_minimap(t_mlx *mlx);
-int		loop(t_mlx *mlx);
 
 //mlx utils
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);

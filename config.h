@@ -6,13 +6,17 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 04:22:52 by tmongell          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2022/11/25 08:52:09 by tmongell         ###   ########.fr       */
+=======
+/*   Updated: 2022/12/01 15:17:37 by cmaroude         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONFIG_H
 # define CONFIG_H
-#include <cub3d.h>
+#include "cub3d.h"
 
 /*
  * used to store default values that the user might want to customize,
