@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/29 21:04:32 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/02 01:28:53 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,16 @@
 typedef unsigned char t_uchar;
 typedef unsigned int t_uint;
 
-// ???
-typedef struct s_xpm
-{
-	void	*wall;
-	int		width;
-	int		height;
-}	t_xpm;
-
 typedef struct	s_img
 {
 	void	*img_ptr;
 	int		*data;
-	int		size_l;
-	int		bpp;
-	int		endian;
+	int		width;
+	int		height;
+//those three must be here, don't ask what it's for
+	int		size_l;	//the number of char in a line (nb_pixel * 4)
+	int		bpp;	//bits per pixel
+	int		endian;	//order of value in each pixel (I think?)
 }	t_img;
 
 typedef struct s_map {
@@ -109,9 +104,7 @@ typedef	struct	s_entity {
 
 }	t_entity;
 
-// name look a litle to much like the t_img from chloe. shall be renamed in 
-// t_wall_img or something...
-typedef	struct	s_imgs {
+typedef	struct	s_wall_img {
 	void	*north_img;
 	int		north_width;
 	int		north_height;
@@ -124,16 +117,16 @@ typedef	struct	s_imgs {
 	void	*west_img;
 	int		west_width;
 	int		west_height;
-}	t_imgs;
+}	t_wall_img;
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;//chloe renamed it, see to avoid merge conflict
-	t_imgs		*images;
+	t_wall_img	*images;
 	t_img		minimap;
 	t_map		*map_s;
 	t_img		img;
-	t_xpm		xpm;
+//	t_xpm		xpm;
 	t_entity	player;
 }	t_mlx;
 
@@ -163,6 +156,8 @@ int		loop(t_mlx *mlx);
 //mlx utils
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
 int		main_loop(t_mlx *mlx);
+char	*img_get_pixel(t_img *img, int x, int y);
+int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 
 //error
 void	*ft_error(char *msg, int ret);

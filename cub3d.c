@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/29 21:05:43 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:49:52 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 t_mlx	do_init(t_map *map)
 {
 	t_mlx	mlx_s;
-	t_imgs	*img;
+	t_wall_img	*img;
 
 	//init mlx
 	mlx_s.mlx_ptr = mlx_init();
+	mlx_s.map_s = map;
 	//create img struct
-	img = ft_calloc(1, sizeof(t_imgs));
+	img = ft_calloc(1, sizeof(t_wall_img));
 	//open textures
 	img->north_img = read_img_file(map->north_path, mlx_s.mlx_ptr,
 		&img->north_width, &img->north_height);

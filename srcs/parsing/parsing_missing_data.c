@@ -6,14 +6,14 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:26:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/07 14:33:45 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:00:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define NMAP "your map file is missing some usefull data, like THE F**KING MAP!"
-#define MSG_DUP "data redefined. the same entry can't appear twice in one file"
+#define MSG_DUP "data redefinition. the same entry can't appear twice"
 
 void	check_display_info(t_map *map)
 {
