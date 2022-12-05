@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/28 19:17:09 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:34:27 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@
 
 /*messages------------------------------------------------------------messages*/
 
-# define MSG_MALLOC_FAILED "a malloc call failed to allocate memory."
+# define MSG_MALLOC "a malloc call failed to allocate memory."
 
 #endif

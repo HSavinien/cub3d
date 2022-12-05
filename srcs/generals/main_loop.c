@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/02 01:52:24 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:56:41 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,29 @@
 void	draw_background(t_mlx *mlx, t_img *img)
 {
 	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	dprintf(2, "img at %p, ptr at %p, data at %p\n", img, img->img_ptr, img->data);//DEBUG
 	int		x;
 	int		y;
 
-	y = 0;
-	while (y <= img->height / 2)
+	x = 0;
+	dprintf(2, "img of size %d * %d\n", img->width, img->height);//DEBUG
+	while (x < img->width)
 	{
-		dprintf(2, "loop : drawing line %d\n", y);//DEBUG
-		x = 0;
-		while (x <= img->width)
-			dprintf(2, "loop : drawing pixel %d\n", x);//DEBUG
-			img_set_pixel(img, x++, y, mlx->map_s->roof_color);
-		y ++;
+		y = 0;
+		while (y < img->height)
+		{
+//			dprintf(2, "loop loop : x=%d, y=%d\n", x, y);//DEBUG
+			if (y > img->height / 2)
+				img_set_pixel(img, x, y, 0x00FF0000);
+			else
+				img_set_pixel(img, x, y, 0x0000FF00);
+			y ++;
+		}
+		x ++;
 	}
-	dprintf(2, "ceiling drawn\n");//DEBUG
-	while (y <= img->height)
-	{
-		x = 0;
-		while (x <= img->width)
-			img_set_pixel(img, x++, y, mlx->map_s->roof_color);
-		y ++;
-	}
-	dprintf(2, "floor drawn\n");//DEBUG
+	dprintf(2, "exiting with x=%d, y=%d\n", x, y);//DEBUG
+	(void) mlx;
+	dprintf(2, "exiting %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 }
 
 /* the function called by mlx_loop_hook.
@@ -48,24 +49,23 @@ void	draw_background(t_mlx *mlx, t_img *img)
 int	main_loop(t_mlx *mlx)
 {
 	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
-	t_img	main_disp_img;
+	t_img	*main_disp_img;
 
 	//create main display image
-	main_disp_img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
-	dprintf(2, "created image\n");//DEBUG
+	main_disp_img = create_image(WIN_W, WIN_H, mlx);
+	dprintf(2, "image created\n");//DEBUG
+	if (!main_disp_img)
+		return (0);
 	//init this image with ground and ceiling color
-	draw_background(mlx, &main_disp_img);
-	dprintf(2, "generated background\n");//DEBUG
+	draw_background(mlx, main_disp_img);
+	dprintf(2, "background drawn\n");//DEBUG
 	//call raycasting function
 	//display image
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, main_disp_img.img_ptr,
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, main_disp_img->img_ptr,
 		0, 0);
-	dprintf(2, "image put on window\n");//DEBUG
-	mlx_destroy_image(mlx->mlx_ptr, main_disp_img.img_ptr);
+	dprintf(2, "image on window\n");//DEBUG
+	mlx_destroy_image(mlx->mlx_ptr, main_disp_img->img_ptr);
+	free(main_disp_img);
 	//add minimap
-	
-
-
-	exit(0);
 	return (0);
 }

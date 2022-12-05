@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/01 17:49:52 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:53:02 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int ac, char **av)
 	mlx_s = do_init(&map);
 	//open window
 	mlx_s.win_ptr = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
+//	mlx_put_image_to_window(mlx_s.mlx_ptr, mlx_s.win_ptr, mlx_s.images->north_img, 0, 0);//debug
 	//event hook
 	
 	//mlx loop

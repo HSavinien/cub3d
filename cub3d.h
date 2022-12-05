@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/02 01:28:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:13:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void	check_duplicate(char *id, char *line, int line_num, t_map *map_s);
 t_uint	read_color(char *color_code, char *full_line, int line_nb);
 
 //display
+int		main_loop(t_mlx *mlx);
 
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
@@ -146,16 +147,12 @@ char	**get_tokenised_line(char *line);
 
 
 //general utils
-void	*destroy_array(char **array); //currently in error.c
-void	draw_figures(t_mlx *mlx, int i, int j);
-void	init_window_images(t_mlx *mlx);
-void	init_background(t_mlx *mlx);
-void	init_minimap(t_mlx *mlx);
-int		loop(t_mlx *mlx);
+void	*destroy_array(char **array);
+void	init_minimap(t_mlx *mlx);//move it
 
 //mlx utils
+t_img	*create_image(int width, int height, t_mlx *mlx);
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
-int		main_loop(t_mlx *mlx);
 char	*img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 
@@ -163,9 +160,14 @@ int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 void	*ft_error(char *msg, int ret);
 void	err_mapfile(int line, char *content, char *msg, int code);
 void	err_map_form(int pos[2], char **map, char *msg, int code);
+void	*ret_free(void *ptr);
 
 //debug
 void	show_struct(t_map *map_s);
 void	show_map(char **map);//use a for loop, bad for the norm==================NORM
+void	draw_figures(t_mlx *mlx, int i, int j);
+void	init_window_images(t_mlx *mlx);
+void	init_background(t_mlx *mlx);
+int		loop(t_mlx *mlx);
 
 #endif
