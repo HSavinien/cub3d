@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/05 21:53:02 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:33:56 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@
 #define SOUTH_ANGLE (-M_PI/2)
 #define EAST_ANGLE 0
 #define WEST_ANGLE (M_PI)
+
+void	set_player_position(t_map *map, t_mlx *mlx_s)
+{
+	mlx_s->player.pos_x = map->start_column + 0.5;
+	mlx_s->player.pos_y = map->start_line + 0.5;
+	if (map->start_dir == 'N')
+		mlx_s->player.direction = NORTH_ANGLE;
+	else if (map->start_dir == 'S')
+		mlx_s->player.direction = SOUTH_ANGLE;
+	else if (map->start_dir == 'E')
+		mlx_s->player.direction = EAST_ANGLE;
+	else if (map->start_dir == 'W')
+		mlx_s->player.direction = WEST_ANGLE;
+	else
+		ft_error("entered redondant protection on player direction", ERR_WTF);
+
+}
 
 t_mlx	do_init(t_map *map)
 {
@@ -39,16 +56,7 @@ t_mlx	do_init(t_map *map)
 		&img->west_width, &img->west_height);
 	mlx_s.images = img;
 	//init player
-	mlx_s.player.pos_x = map->start_column + 0.5;
-	mlx_s.player.pos_y = map->start_line + 0.5;
-	if (map->start_dir == 'N')
-		mlx_s.player.direction = NORTH_ANGLE;
-	else if (map->start_dir == 'S')
-		mlx_s.player.direction = SOUTH_ANGLE;
-	else if (map->start_dir == 'E')
-		mlx_s.player.direction = EAST_ANGLE;
-	else if (map->start_dir == 'W')
-		mlx_s.player.direction = WEST_ANGLE;
+	set_player_position(map, &mlx_s);
 	return (mlx_s);
 }
 

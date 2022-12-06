@@ -6,14 +6,14 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/05 21:36:27 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:20:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
 #define MSG_IMG_FORMAT " is not a xpm or png file. please correct that"
-#define MSG_XPM_OPEN " could not be oppened as a XPM, check name/right/content"
+#define MSG_IMG_OPEN " could not be oppened as a XPM, check name/right/content"
 
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h)
 {
@@ -27,9 +27,8 @@ void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h)
 	else
 		ft_error(ft_strjoin(file, MSG_IMG_FORMAT), ERR_IMG_OPEN);
 
-	return (img);//debug
 	if (!img)
-		ft_error(ft_strjoin(file, MSG_XPM_OPEN), ERR_IMG_OPEN);
+		ft_error(ft_strjoin(file, MSG_IMG_OPEN), ERR_IMG_OPEN);
 	return (img);
 }
 
