@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/01 17:21:53 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/06 15:54:21 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 # define TILE_SMM 8
 # define WIN_WIDTH 15 * TSIZE
 # define WIN_HEIGHT 11 * TSIZE
-# define IMG_WIDTH 15 * TILE_SMM
-# define IMG_HEIGHT 11 * TILE_SMM
+# define IMG_WIDTH 31 * TILE_SMM
+# define IMG_HEIGHT 11.0 * TILE_SMM
 
 /* draw_minimap.c */
 void	draw_minimap(t_mlx *mlx);
+void	draw_filledcircle(t_img *map, int x, int y);
 
 /* loop.c */
 int		loop(t_mlx *mlx);
