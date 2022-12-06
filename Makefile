@@ -55,16 +55,16 @@ fclean:		clean
 re:		fclean all
 
 #library rules
-library:	libft mlx
+library:	mlx libft
 
 libft:
 	@echo "\033[94mcompiling libft :\033[0m"
-	@make -s -C ./library/libft
+	@make -C ./library/libft
 	@echo "\033[1;33mlibft compiled\033[0m"
 
 mlx:
 	@echo "\033[94mcompiling mlx :\033[0m"
-	@make -s -C ./library/mlx_macos
+	@make -C ./library/mlx_macos
 	@echo "\033[1;33mminilibX compiled\033[0m"
 
 
