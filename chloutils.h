@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/06 18:36:18 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:56:10 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,16 @@ typedef struct s_point
 	double	y;
 }	t_point;
 
+typedef struct s_vector
+{
+	t_point	pos;
+	t_point	dir;
+	t_point	len;
+}	t_vector;
+
 /* draw_minimap.c */
 void	draw_minimap(t_mlx *mlx);
-void	draw_filledcircle(t_img *map, int x, int y);
+void	draw_filledcircle(t_img *map, double x, double y);
 
 /* loop.c */
 int		loop(t_mlx *mlx);

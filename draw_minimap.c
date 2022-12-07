@@ -21,13 +21,13 @@ void	draw_square(t_img *map, int x, int y, int color)
 	}
 }
 
-void	draw_filledcircle(t_img *map, int x, int y)
+void	draw_filledcircle(t_img *map, double x, double y)
 {
 	int	i;
 	int r2;
 	int rr;
-	int tx;
-	int ty;
+	double tx;
+	double ty;
 	
 	r2 = pow((TILE_SMM / 2) , 2);
 	rr = (TILE_SMM / 2) << 1;
@@ -38,11 +38,11 @@ void	draw_filledcircle(t_img *map, int x, int y)
     	ty = (i / rr) - (TILE_SMM / 2);
 		if (tx * tx + ty * ty <= (rr + rr))
 		{	
-			if ((x * TILE_SMM + (TILE_SMM / 2)) < IMG_WIDTH &&
-				(y * TILE_SMM + (TILE_SMM / 2)) < IMG_HEIGHT)
+			if ((int)(x * TILE_SMM) < IMG_WIDTH &&
+				(int)(y * TILE_SMM) < IMG_HEIGHT)
 				{
-					map->data[TO_COORDMM((tx + (x * TILE_SMM + (TILE_SMM / 2))),
-						(ty + (y * TILE_SMM + (TILE_SMM / 2))))] = 0xFF0000;
+					map->data[TO_COORDMM((tx + (x * TILE_SMM)),
+						(ty + (y * TILE_SMM)))] = 0xFF0000;
 				}
 		}
 		i++ ;
