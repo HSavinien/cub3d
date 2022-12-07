@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/07 22:50:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/08 00:21:32 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	draw_background(t_mlx *mlx, t_img *img)
 		while (y < img->height)
 		{
 			if (y > img->height / 2)
-				img_set_pixel(img, x, y, 0xFF0000);
+				img_set_pixel(img, x, y, mlx->map_s->floor_color);
 			else
-				img_set_pixel(img, x, y, 0x00FF00);
+				img_set_pixel(img, x, y, mlx->map_s->roof_color);
 			y ++;
 		}
 		x ++;

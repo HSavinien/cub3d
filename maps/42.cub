@@ -5,8 +5,8 @@ WE	./sprites/wall/42_west.xpm
 EA	./sprites/wall/42_east.xpm
 
 #ceiling in blue, floor in white 
-F	233,239,240
-C	2b9cb5
+C	233,239,240
+F	2b9cb5
 
 #the map itself
 
