@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/09 12:50:31 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:43:23 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_mlx {
 	t_img		main_img;
 	t_entity	player;
 }	t_mlx;
+
+#include "chloutils.h"	//debug //tmp
 
 /*prototypes--------------------------------------------------------prototypes*/
 //parsing

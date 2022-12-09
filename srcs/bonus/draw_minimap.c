@@ -1,6 +1,14 @@
 #include "cub3d.h"
 #include "chloutils.h"
 
+void	init_minimap(t_mlx *mlx)
+{
+	/* image */
+	mlx->minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
+	mlx->minimap.data = (int *)mlx_get_data_addr(mlx->minimap.img_ptr,
+		&mlx->minimap.bpp, &mlx->minimap.size_l, &mlx->minimap.endian);
+}
+
 void	draw_square(t_img *map, int x, int y, int color)
 {
 	int	i;
@@ -71,8 +79,8 @@ void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 	while ((player.x < IMG_WIDTH && player.y < IMG_HEIGHT
 		&& player.x> 0.0 && player.y > 0.0))
 	{
-		if (mlx->map_s->parsed_map[(int)player.y / TILE_SMM]
-			[(int)player.x / TILE_SMM] == 1)
+		if (mlx->map_s->raw_map[(int)player.y / TILE_SMM]
+			[(int)player.x / TILE_SMM] == '1')
 			break ;
 		mlx->minimap.data[TO_COORDMM(player.x, player.y)] = 0xFF00FF;
 		// -526344 goes from white to black
@@ -89,11 +97,11 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 	dir_pt.x = (cos(mlx->player.direction)) + mlx->player.pos_x;
 	dir_pt.y = (sin(mlx->player.direction)) + mlx->player.pos_y;
 	player = (t_point){mlx->player.pos_x, mlx->player.pos_y};
-	if (mlx->map_s->parsed_map[i][j] == 1)
+	if (mlx->map_s->raw_map[i][j] == '1')
 		draw_square(&mlx->minimap, i, j, 0xFFFFFF);
-	else if (mlx->map_s->parsed_map[i][j] != 1 && i != mlx->player.pos_y &&
+	else if (mlx->map_s->raw_map[i][j] != '1' && i != mlx->player.pos_y &&
 		j != mlx->player.pos_x)
-		draw_square(&mlx->minimap, i, j, 0);
+		draw_square(&mlx->minimap, i, j, '0');
 	draw_filledcircle(&mlx->minimap, player.x, player.y);
 	do_tile_conv(&dir_pt);
 	do_tile_conv(&player);
@@ -111,8 +119,8 @@ void	draw_minimap(t_mlx *mlx)
 		j = 0;
 		while (j < (IMG_WIDTH / (TILE_SMM)))
 		{
-			if (mlx->map_s->parsed_map[i][j] == 1
-				|| mlx->map_s->parsed_map[i][j] == 0)
+			if (mlx->map_s->raw_map[i][j] == '1'
+				|| mlx->map_s->raw_map[i][j] == '0')
 				draw_figures(mlx, i, j);
 			j++;
 		}

@@ -8,7 +8,9 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_readfile.c \
 			srcs/parsing/parsing_utils.c \
 			srcs/generals/main_loop.c \
-			debug.c \
+			srcs/event/hook.c \
+			srcs/bonus/draw_minimap.c \
+			tmp/debug.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 

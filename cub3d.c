@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/09 12:48:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:32:45 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_mlx	do_init(t_map *map)
 		&img->east_width, &img->east_height);
 	img->west_img = read_img_file(map->west_path, mlx_s.mlx_ptr,
 		&img->west_width, &img->west_height);
-	mlx_s.images = img;
+	mlx_s.wall = img;
 	//init player
 	set_player_position(map, &mlx_s);
 	return (mlx_s);
@@ -71,12 +71,11 @@ int	main(int ac, char **av)
 	map = parsing(av[1]);
 	mlx_s = do_init(&map);
 	//open window
-	init_window_images(&mlx_s);
-	init_background(&mlx_s);
+	mlx_s.win_ptr = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
 	//event hook
 	mlx_hook(mlx_s.win_ptr, EVENT_KEY_PRESS, 0, event_hook, &mlx_s);
 	mlx_hook(mlx_s.win_ptr, EVENT_WIN_CLOSE, 0, close_win, &mlx_s);
-	mlx_loop_hook(mlx_s.mlx_ptr, loop, &mlx_s);
+	mlx_loop_hook(mlx_s.mlx_ptr, main_loop, (void *)(&mlx_s));
 
 	//mlx loop
 	mlx_loop(mlx_s.mlx_ptr);

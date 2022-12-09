@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/08 00:21:32 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:35:39 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,9 @@ int	main_loop(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx_ptr, main_disp_img->img_ptr);
 	free(main_disp_img);
 	//add minimap
+	init_minimap(mlx);
+	draw_minimap(mlx);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->minimap.img_ptr);
+	mlx->minimap.img_ptr = NULL;
 	return (0);
 }
