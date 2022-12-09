@@ -99,9 +99,8 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 	player = (t_point){mlx->player.pos_x, mlx->player.pos_y};
 	if (mlx->map_s->raw_map[i][j] == '1')
 		draw_square(&mlx->minimap, i, j, 0xFFFFFF);
-	else if (mlx->map_s->raw_map[i][j] != '1' && i != mlx->player.pos_y &&
-		j != mlx->player.pos_x)
-		draw_square(&mlx->minimap, i, j, '0');
+	else if (mlx->map_s->raw_map[i][j] == '0')
+		draw_square(&mlx->minimap, i, j, 0);
 	draw_filledcircle(&mlx->minimap, player.x, player.y);
 	do_tile_conv(&dir_pt);
 	do_tile_conv(&player);
@@ -110,18 +109,22 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 
 void	draw_minimap(t_mlx *mlx)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	bool	end;
 
 	i = 0;
 	while (i < (IMG_HEIGHT / (TILE_SMM)))
 	{
 		j = 0;
+		end = false;
 		while (j < (IMG_WIDTH / (TILE_SMM)))
 		{
-			if (mlx->map_s->raw_map[i][j] == '1'
-				|| mlx->map_s->raw_map[i][j] == '0')
+			draw_square(&mlx->minimap, i, j, 0xFFFFFFFF);
+			if (end == false && mlx->map_s->raw_map[i][j] != '\0')
 				draw_figures(mlx, i, j);
+			else
+				end = true;
 			j++;
 		}
 		i++;
