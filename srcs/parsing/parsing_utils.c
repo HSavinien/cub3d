@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:59:52 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/29 01:07:04 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:04:32 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**get_tokenised_line(char *line)
 		return (NULL);
 	array = ft_calloc(3, sizeof(char *));
 	if (!array)
-		return (ft_error(MSG_MALLOC_FAILED, ERR_MALLOC));
+		return (ft_error(MSG_MALLOC, ERR_MALLOC));
 	//skip spaces
 	while (ft_isspace(line[i]))
 		i ++;

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/06 14:09:42 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:50:31 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ typedef struct	s_img
 	int		width;
 	int		height;
 //those three must be here, don't ask what it's for
-	int		size_l;
-	int		bpp;
-	int		endian;
+	int		size_l;	//the number of char in a line (nb_pixel * 4)
+	int		bpp;	//bits per pixel
+	int		endian;	//order of value in each pixel (I think?)
 }	t_img;
 
 typedef struct s_map {
@@ -115,10 +115,10 @@ typedef	struct	s_wall_img {
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_wall_img	*images;
+	t_wall_img	*wall;
 	t_img		minimap;
 	t_map		*map_s;
-	t_img		img;
+	t_img		main_img;
 	t_entity	player;
 }	t_mlx;
 
@@ -130,25 +130,35 @@ void	check_missing_data(t_map *map);
 void	check_duplicate(char *id, char *line, int line_num, t_map *map_s);
 t_uint	read_color(char *color_code, char *full_line, int line_nb);
 
+//display
+int		main_loop(t_mlx *mlx);
+
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
 char	**get_tokenised_line(char *line);
 
 
 //general utils
-void	*destroy_array(char **array); //currently in error.c
+void	*destroy_array(char **array);
 
 //mlx utils
+t_img	*create_image(int width, int height, t_mlx *mlx);
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
-
+char	*img_get_pixel(t_img *img, int x, int y);
+int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 
 //error
 void	*ft_error(char *msg, int ret);
 void	err_mapfile(int line, char *content, char *msg, int code);
 void	err_map_form(int pos[2], char **map, char *msg, int code);
+void	*ret_free(void *ptr);
 
 //debug
 void	show_struct(t_map *map_s);
 void	show_map(char **map);//use a for loop, bad for the norm==================NORM
+void	draw_figures(t_mlx *mlx, int i, int j);
+void	init_window_images(t_mlx *mlx);
+void	init_background(t_mlx *mlx);
+int		loop(t_mlx *mlx);
 
 #endif

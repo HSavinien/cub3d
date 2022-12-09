@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/01 17:58:46 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:48:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@
 #define SOUTH_ANGLE (-M_PI/2)
 #define EAST_ANGLE 0
 #define WEST_ANGLE (M_PI)
+
+void	set_player_position(t_map *map, t_mlx *mlx_s)
+{
+	mlx_s->player.pos_x = map->start_column + 0.5;
+	mlx_s->player.pos_y = map->start_line + 0.5;
+	if (map->start_dir == 'N')
+		mlx_s->player.direction = NORTH_ANGLE;
+	else if (map->start_dir == 'S')
+		mlx_s->player.direction = SOUTH_ANGLE;
+	else if (map->start_dir == 'E')
+		mlx_s->player.direction = EAST_ANGLE;
+	else if (map->start_dir == 'W')
+		mlx_s->player.direction = WEST_ANGLE;
+	else
+		ft_error("entered redondant protection on player direction", ERR_WTF);
+
+}
 
 t_mlx	do_init(t_map *map)
 {
@@ -40,41 +57,9 @@ t_mlx	do_init(t_map *map)
 		&img->west_width, &img->west_height);
 	mlx_s.images = img;
 	//init player
-	mlx_s.player.pos_x = map->start_column + 0.5;
-	mlx_s.player.pos_y = map->start_line + 0.5;
-	if (map->start_dir == 'N')
-		mlx_s.player.direction = NORTH_ANGLE;
-	else if (map->start_dir == 'S')
-		mlx_s.player.direction = SOUTH_ANGLE;
-	else if (map->start_dir == 'E')
-		mlx_s.player.direction = EAST_ANGLE;
-	else if (map->start_dir == 'W')
-		mlx_s.player.direction = WEST_ANGLE;
+	set_player_position(map, &mlx_s);
 	return (mlx_s);
 }
-
-/*int	main(int ac, char **av)
-{
-	t_map	map;
-	t_mlx	mlx_s;
-
-	if (ac != 2)
-		return(printf("error args\nusage : <%s> <file.cub>\n", av[0]));
-	map = parsing(av[1]);
-	mlx_s = do_init(&map);
-	//open window
-//	init_window_images(&mlx_s); //placeholder
-	mlx_s.win = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
-	init_background(&mlx_s);
-	//event hook
-	mlx_hook(mlx_s.win, KEY_PRESS, 0, event_hook, &mlx_s);
-	mlx_hook(mlx_s.win, DESTROY, 0, close_win, &mlx_s);
-	mlx_loop_hook(mlx_s.mlx_ptr, loop, &mlx_s);
-
-	//mlx loop
-//	mlx_loop_hook(mlx_s.mlx_ptr, calculate_display, mlx_s);
-	mlx_loop(mlx_s.mlx_ptr);
-}*/
 
 int	main(int ac, char **av)
 {

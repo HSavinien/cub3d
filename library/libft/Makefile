@@ -65,7 +65,7 @@ NAME	= libft.a
 
 ${NAME}:	${OBJS}
 		ar rcs ${NAME} ${OBJS}
-		ranlib ${NAME}
+		@ranlib ${NAME}
 
 all:		${NAME}
 

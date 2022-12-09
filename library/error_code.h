@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/28 19:17:09 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:27:28 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@
 //mlx
 # define ERR_IMG_OPEN 15	//a sprite file cannot be opened.
 
+//other
+# define ERR_WTF -1		//entered a protection that should have been redundant
+
 /*messages------------------------------------------------------------messages*/
 
-# define MSG_MALLOC_FAILED "a malloc call failed to allocate memory."
+# define MSG_MALLOC "a malloc call failed to allocate memory."
 
 #endif

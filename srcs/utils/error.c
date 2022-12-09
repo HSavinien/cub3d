@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/23 21:01:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:08:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,13 @@ void	err_map_form(int pos[2], char **map, char *msg, int code)
 	}
 //	system("leaks cub3d");//DEBUG
 	exit(code);
+}
+
+/* work just like the normal free, but return a NULL pointer after freeing.
+ * usefull to gain lines in protection.
+ */
+void	*ret_free(void	*ptr)
+{
+	free(ptr);
+	return (NULL);
 }

@@ -7,11 +7,8 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_read_color.c \
 			srcs/parsing/parsing_readfile.c \
 			srcs/parsing/parsing_utils.c \
+			srcs/generals/main_loop.c \
 			debug.c \
-			draw_minimap.c \
-			hook.c \
-			loop.c \
-			init_images.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 
@@ -58,16 +55,16 @@ fclean:		clean
 re:		fclean all
 
 #library rules
-library:	libft mlx
+library:	mlx libft
 
 libft:
 	@echo "\033[94mcompiling libft :\033[0m"
-	@make -s -C ./library/libft
+	@make -C ./library/libft
 	@echo "\033[1;33mlibft compiled\033[0m"
 
 mlx:
 	@echo "\033[94mcompiling mlx :\033[0m"
-	@make -s -C ./library/mlx_macos
+	@make -C ./library/mlx_macos
 	@echo "\033[1;33mminilibX compiled\033[0m"
 
 
