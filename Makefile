@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SRCS	=	cub3d.c \
 			srcs/utils/error.c \
 			srcs/utils/leaks_utils.c \

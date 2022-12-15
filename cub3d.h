@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/14 14:22:33 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:50:55 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,14 @@ t_img	*create_image(int width, int height, t_mlx *mlx);
 void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
 char	*img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
+void	draw_figures(t_mlx *mlx, int i, int j);
+void	draw_minimap(t_mlx *mlx);
+void	init_window_images(t_mlx *mlx);
+void	init_background(t_mlx *mlx);
+void	init_minimap(t_mlx *mlx);
+int		loop(t_mlx *mlx);
+int		close_win(t_mlx *mlx);
+int		event_hook(int key, t_mlx *mlx);
 
 //error
 void	*ft_error(char *msg, int ret);
