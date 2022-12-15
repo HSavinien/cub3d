@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/09 14:43:23 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:22:33 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ typedef struct s_map {
 typedef	struct	s_entity {
 	double	pos_x;
 	double	pos_y;
-	double	dir_x;//conflict with initialisation
-	double	dir_y;//conflict with initialisation
 	double	direction;
 
 }	t_entity;

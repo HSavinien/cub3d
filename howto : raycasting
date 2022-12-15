@@ -2,7 +2,7 @@ raycasting, as we do it, naturaly include isometric 3d : the height of the wall 
 
 the idea is to cast rays (no shit), and see where they hit something. then, we can calculate the distence between the point we hit and the player, and deduce the height of the pixel column. as such, we need to cast one ray per pixel in width (if the window is 1080*720p, we'll cast 1080 ray). 
 
-For each ray, the idea is to advence step by step until we fine a wall. while the easiest way would be a regular increment. however, this methode mean we might miss anything situed between two jump. so we don't do that. 
+For each ray, the idea is to advence step by step until we find a wall. while the easiest way would be a regular increment. however, this methode mean we might miss anything situed between two jump. so we don't do that. 
 instead, we jump to the next point where our ray intersect the grid : since wall are always along a grid, we are sure to match perfectly.
 
 question :

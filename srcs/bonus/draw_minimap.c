@@ -1,5 +1,5 @@
-#include "cub3d.h"
-#include "chloutils.h"
+#include <cub3d.h>
+#include <chloutils.h>
 
 void	init_minimap(t_mlx *mlx)
 {
@@ -130,5 +130,5 @@ void	draw_minimap(t_mlx *mlx)
 		i++;
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->minimap.img_ptr,
-		20, ((WIN_HEIGHT - IMG_HEIGHT) - 20));
+		0, ((WIN_H - IMG_HEIGHT)));
 }

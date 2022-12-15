@@ -1,0 +1,29 @@
+check name
+try to open
+
+reading map file :
+while file not finished :
+	skip all empty line
+	once non-empty line found :
+	if first non-space char is digit
+		read map with apropriate function
+	trim whitspace from each end.
+		if first char is #
+			loop back;
+		if line is format info (color/texture)
+			read it with the format function
+		else
+			error
+identifie format info line :
+format is UPER_CASE WHITESPACE string
+identifie format map :
+a string starting with an int.
+
+read map : 
+read all map with get_next_line
+check there is only allowed char in each line.
+check there is only one player
+checking that map is closed :
+	for each char that's not a 1 or a space :
+		check that it is next to another char (space not included)
+

@@ -1,3 +1,18 @@
+		//cast ray
+		//use trigo/pythagore to calculate 'straight' distance (annti fish eye)
+		//calculate wall height
+		//look wall direction
+		//debug : fill pixel column with sigle colored pixel to see if it work
+		//calculate pixel column based on image, and put it in image
+		//cast ray
+		//use trigo/pythagore to calculate 'straight' distance (annti fish eye)
+		//calculate wall height
+		//look wall direction
+		//debug : fill pixel column with sigle colored pixel to see if it work
+		//calculate pixel column based on image, and put it in image
+
+
+
 main loop function :
 	create new mlx image, same size as window
 	fill lower half with ground color; upper half with roof color
