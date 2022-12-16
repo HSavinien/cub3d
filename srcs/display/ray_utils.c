@@ -31,3 +31,20 @@ int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 	data->pos=ray;
 	return (1);
 }
+
+/* function that get the next x or y on the direction line */
+void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
+{
+	//	y = slope * x + offset;
+	//	from 180 include to 360 non include
+	if (dir > 0.0 && (dir * (180.0) / M_PI) < 180.0)
+		ray->y = (int)ray->y - 1.0;
+	// from 0 include to -180 non include
+	else if (dir < 0.0 && (dir * (180.0) / M_PI) > 180.0)
+		ray->y = (int)ray->y + 1.0;
+	ray->x = (ray->y) - offset / slope;
+	if (dir == 0.0)
+		ray->x += 1;
+	 else if ((dir * (180.0) / M_PI) == 180.0)
+		ray->x -= 1;
+}
