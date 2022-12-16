@@ -6,16 +6,43 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/16 00:03:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:39:00 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-	find_wall	(double angle, t_wall_data data, t_entity *player, t_map *map)
+#define NORTH_FACE 1;
+#define SOUTH_FACE 2;
+#define EAST_FACE 3;
+#define WEST_FACE 4;
+
+int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 {
-	double	ray_x;
-	double	ray_y;
+	if (ray.x == floor(ray.x))
+	{
+		if (ray.x > 0 &&
+			map->parsed_map[(int)ray.y][(int)ray.x - 1] == WALL)//wall on left
+			return (wall_info(data, ray, EAST_FACE, player));
+		if (ray.x < ft_strlen(map->parsed_map[(int)ray.y]) &&
+			map->parsed_map[(int)ray.y][(int)ray.x + 1] == WALL)//wall on right
+			return (wall_info(data, ray, WEST_FACE, player));
+	}
+	if (ray.y == floor(ray.y))
+	{
+		if (ray.y > 0 &&
+			map->parsed_map[(int)ray.y - 1][(int)ray.x] == WALL)//wall above
+			return (wall_info(data, ray, SOUTH_FACE, player));
+		if (ray.y < map->nb_line &&
+			map->parsed_map[(int)ray.y + 1][(int)ray.x] == WALL)//wall bellow
+			return (wall_info(data, ray, NORTH_FACE, player));
+	}
+	return (0);
+}
+
+void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
+{
+	t_coord	ray;
 	double	slope;
 	double	offset;
 	//get ray_equation (form y=ax+b)
@@ -28,10 +55,10 @@
 	//while no wall found and didn't left map area
 	while (ray_x >= 0 && ray_x <= nb_column && ray_y >= 0 && ray_y <= nb_line)
 	{
-		// get the next entire x; calculate equivalent y;
-		// if entire part of new y 
-		//check if there is a wall on either side of the point
-		//if there is a wall, fill struct and return it.
+		get_next_pos(&ray, player->direction, slope, offset);
+		//if texture don't match orientation, problem is there.
+		if (check_wall(ray, map, data, player))
+			return;
 	}
 }
 

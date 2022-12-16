@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 SRCS	=	cub3d.c \
 			srcs/utils/error.c \
 			srcs/utils/leaks_utils.c \
@@ -11,6 +10,8 @@ SRCS	=	cub3d.c \
 			srcs/generals/main_loop.c \
 			srcs/event/hook.c \
 			srcs/bonus/draw_minimap.c \
+			srcs/display/raycasting_main.c \
+			srcs/display/draw_wall.c \
 			srcs/display/ray_utils.c \
 			tmp/debug.c \
 
