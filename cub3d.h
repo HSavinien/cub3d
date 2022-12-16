@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/15 19:50:55 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:54:56 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,15 @@ typedef struct s_mlx {
 	t_img		main_img;
 	t_entity	player;
 }	t_mlx;
+
+//used by raycasting function, store both the wall distance and orientation.
+typedef	struct s_wall_data {
+	double	distance;
+	int		orientation;
+	double	height;
+	int		pos_x;
+	int		pos_y;
+} t_wall_data
 
 #include "chloutils.h"	//debug //tmp
 

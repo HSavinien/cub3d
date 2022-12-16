@@ -34,7 +34,7 @@ ray function
 	calculate direction line equation (y = ax+b)
 	check each grid intersection until meeting a wall (add secu if out of map)
 	once wall is meet : 
-	calculate equivalent distance (trigo/pythagore) to compensate fish-eye
+	calculate equivalent distance (trigo/pythagore) to compensate fish-eye (relation : true len = len * sin(angle)).
 	calculate apparent height
 	(optional) : adjust height depending on jump or look up/down
 	get pixel column from image (for now, just plain color)
