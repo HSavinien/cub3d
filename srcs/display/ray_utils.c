@@ -5,6 +5,7 @@
  */
 void	get_ray_angle(t_mlx *mlx, double *angles)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	int		i;
 	double	interval;
 
@@ -25,16 +26,20 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
  */
 int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	data->distance = sqrt(pow(player->pos_x - ray.x, 2) +
 		pow(player->pos_y - ray.y, 2));
-	data->orientation = face;
+	data->side = face;
 	data->pos=ray;
 	return (1);
 }
 
-/* function that get the next x or y on the direction line */
+/* function that get the next entire x or y on the direction line */
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	dprintf(2, "ray : [%f;%f] dir : %f, slope : %f, offset : %f\n",
+		ray->x, ray->y, dir, slope, offset);//DEBUG
 	//	y = slope * x + offset;
 	//	from 180 include to 360 non include
 	if (dir > 0.0 && (dir * (180.0) / M_PI) < 180.0)

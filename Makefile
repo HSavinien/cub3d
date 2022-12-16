@@ -56,7 +56,7 @@ fclean:		clean
 	@echo "\033[1;33mlibft.a file removed\033[0m"
 	@rm -f ${NAME}
 	@echo "\033[1;33m${NAME} file removed\033[0m"
-	rm -rf cub3d-*
+	@rm -rf cub3d-*
 	@echo "\033[1;33mdebug file removed\033[0m"
 
 re:		fclean all

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/09 14:35:39 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:00:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main_loop(t_mlx *mlx)
 	//init this image with ground and ceiling color
 	draw_background(mlx, main_disp_img);
 	//call raycasting function
+	raycasting_start(mlx, main_disp_img);
 	//display image
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, main_disp_img->img_ptr,
 		0, 0);
