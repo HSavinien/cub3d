@@ -1,0 +1,44 @@
+1) calculer la distance entre le plan de la camera et du rayon de projection 
+	(qui doivent etre perpendiculaire)
+	cette distance plus plus de lisibilite sera nomme
+	dist_wall = ...;
+	https://gamedev.stackexchange.com/questions/156842/how-can-i-correct-an-unwanted-fisheye-effect-when-drawing-a-scene-with-raycastin/156853#156853
+	or
+	http://www.playfuljs.com/a-first-person-engine-in-265-lines/
+	(attention un calcul euclidien donnera un effet fish eye)
+	( si utilisation cherher la correction a apporter)
+
+2) calculer la hauteur de la ligne a dessiner pour le mur
+	line_len = (int)Wall_height / dist_wall;
+
+3) calculer les coordonees du plus haut et plus bas pixel
+	draw_begin = -line_len / 2 + Wall_height / 2;
+	draw_end = line_len / 2 + Wall_height / 2;
+
+// dessiner 
+4) dessiner la ligne avec draw_line 
+	qu'il faudra maodifier pour accomoder et choisir la couleur
+
+// texture	
+4.5) calculer la texture utiliser
+
+5) calculer exactement ou la collision avec le mur s'est produite
+	si sur cote
+	Wall_hit = pos.y + dist_wall * direction_ray.y
+	ou
+	Wall_hit = pos.x + dist_wall * direction_ray.x
+	Wall_hit -= floor(Wall_hit);
+
+6) coordonnee de la texture
+	tex.x = int(Wall_hit * double(tex_width))
+	ou si sur cote et direction_ray.x > 0
+	tex.x =  tex_width - tex.x - 1
+	ou si sur ligne et direction_ray.y < 0
+	tex.x =  tex_width - tex.x - 1
+
+7) calculer l'incrementation des coordonees de la texture par pixel
+	
+8) calculer le pt de commencement de la coordonnee  de texture
+	tex.pos = ..;
+
+9) et cast les coordonnees de texture en int
