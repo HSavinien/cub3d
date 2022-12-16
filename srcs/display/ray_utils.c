@@ -24,10 +24,14 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
 	//	y = slope * x + offset;
 	//	from 180 include to 360 non include
-	if (dir > 0 && (dir * (180.0) / M_PI) =< 180.0)
-		ray->x = ray->x - 1;
+	if (dir > 0.0 && (dir * (180.0) / M_PI) < 180.0)
+		ray->y = (int)ray->y - 1.0;
 	// from 0 include to -180 non include
-	else if (dir =< 0 && (dir * (180.0) / M_PI) > 180.0)
-		ray->x = ray->x + 1;
-	ray->y = (ray->x) - offset / slope;
+	else if (dir < 0.0 && (dir * (180.0) / M_PI) > 180.0)
+		ray->y = (int)ray->y + 1.0;
+	ray->x = (ray->y) - offset / slope;
+	if (dir == 0.0)
+		ray->x += 1;
+	 else if ((dir * (180.0) / M_PI) == 180.0)
+		ray->x -= 1;
 }
