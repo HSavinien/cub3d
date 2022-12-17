@@ -13,11 +13,13 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
 	angles[0] = mlx->player.direction - (FOV/2);
 	angles[WIN_W -1] = mlx->player.direction + (FOV/2);
 	//calculate interval between each angle (max-min + fov)
-	interval = angles[WIN_W - 1] - angles[0] + FOV;
+	interval = (angles[WIN_W - 1] - angles[0]) / WIN_W;
 	//iterate through the range and get each ray
 	i = 0;
 	while (++i < WIN_W)
+	{	
 		angles[i] = angles[i -1] + interval;
+	}
 }
 
 /* function that, once a wall is found, fill the wall data structure
@@ -53,9 +55,8 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 		step_y *= -1.0;
 	}
 	// from 0 include to -180 non include
-	if (next_x < next_y && (dir != 0.0 || (dir * (180.0) / M_PI) != 180.0))
+	if (step_x < step_y && (dir != 0.0 || (dir * (180.0) / M_PI) != 180.0))
 		ray->y = slope * round(ray->x + step_x) + offset;
-	else if (next_x > next_y && (dir != 0.0 || (dir * (180.0) / M_PI) != 180.0))
+	else if (step_x > step_y && (dir != 0.0 || (dir * (180.0) / M_PI) != 180.0))
 		ray->x = round(ray->y + step_y) - offset / slope;
-	}
 }
