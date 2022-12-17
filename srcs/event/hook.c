@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/07 17:24:54 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/17 15:11:48 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		close_win(t_mlx *mlx)
 	exit (0);
 }
 
-t_vector	init_data_plan(t_mlx *mlx)
+t_vector	init_data_dir(t_mlx *mlx)
 {
 	t_vector	vec_dir;
 	
@@ -44,7 +44,7 @@ int		do_move(int key, t_mlx *mlx)
 	t_point		vect;
 	double		dir;
 	
-	vec_dir = init_data_plan(mlx);
+	vec_dir = init_data_dir(mlx);
 	dir = dir_move(key);
 	if ((key == MOVE_LEFT) || (key == MOVE_RIGHT))
 	{
