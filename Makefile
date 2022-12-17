@@ -1,6 +1,7 @@
 SRCS	=	cub3d.c \
 			srcs/utils/error.c \
 			srcs/utils/leaks_utils.c \
+			srcs/utils/math.c \
 			srcs/utils/mlx_images_utils.c \
 			srcs/parsing/parsing.c \
 			srcs/parsing/parsing_missing_data.c \

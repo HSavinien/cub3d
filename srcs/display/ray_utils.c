@@ -5,7 +5,6 @@
  */
 void	get_ray_angle(t_mlx *mlx, double *angles)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	int		i;
 	double	interval;
 
@@ -16,10 +15,8 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
 	interval = (angles[WIN_W - 1] - angles[0]) / WIN_W;
 	//iterate through the range and get each ray
 	i = 0;
-	while (++i < WIN_W)
-	{	
+	while (++i < WIN_W - 1)
 		angles[i] = angles[i -1] + interval;
-	}
 }
 
 /* function that, once a wall is found, fill the wall data structure
@@ -28,35 +25,56 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
  */
 int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	data->distance = sqrt(pow(player->pos_x - ray.x, 2) +
 		pow(player->pos_y - ray.y, 2));
+	//little modif to avoid infinit height wall :
+//	if (data->distance < 0.1)
+//		data->distance = 0.1;
 	data->side = face;
 	data->pos=ray;
 	return (1);
 }
 
-/* function that get the next entire x or y on the direction line */
+/*exception case of get_next_pos for when a ray is parrallel to an axis.
+ */
+void	advance_parallel_ray(t_coord *ray, double dir)
+{
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	if (cos(dir) == 1)
+		ray->x = ceil(ray->x);
+	else if (cos(dir) == -1)
+		ray->x = floor(ray->x);
+	else if (sin(dir) == 1)
+		ray->y = ceil(ray->y);
+	else if (sin(dir) == -1)
+		ray->y = floor(ray->y);
+}
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
-	double		step_x;
-	double		step_y;
-	//	y = slope * x + offset;
-	//	from 180 include to 360 non include
-	if (dir == 0.0)
-		ray->x += (int)ray->x + 1;
-	else if ((dir * (180.0) / M_PI) == 180.0)
-		ray->x += (int)ray->x - 1;
-	step_x = fabs(ray->x - ceil(ray->x));
-	step_y = fabs(ray->y - ceil(ray->y));
-	if (dir > 0.0 && (dir * (180.0) / M_PI) < 180.0)
-	{	
-		step_x *= -1.0;
-		step_y *= -1.0;
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	int	x_dir;
+	int	y_dir;
+	t_coord	tmp;
+	//if cos or sin == 0, enter specific function
+	if (cos(dir) == 0 || sin(dir) == 0)
+		return (advance_parallel_ray(ray, dir));
+	//get x and y dir, (+-1, based on sin and cos);
+	x_dir = sign(cos(dir));
+	y_dir = sign(sin(dir));
+	//get tmp coord to next entire x value, and corresponding y
+	if (x_dir > 0)
+		tmp.x = ceil(ray->x);
+	else
+		tmp.x = floor(ray->x);
+	tmp.y = slope * tmp.x + offset;
+	//if entire part of tmp.y != entire part of ray.y, calculate next y
+	if ((int)tmp.y != (int)ray->y)
+	{
+		if (y_dir > 0)
+			tmp.y = ceil(ray->y);
+		else
+			tmp.y = floor(ray->y);
+		tmp.x = (tmp.y - offset) / slope;
 	}
-	// from 0 include to -180 non include
-	if (step_x < step_y && (dir != 0.0 || (dir * (180.0) / M_PI) != 180.0))
-		ray->y = slope * round(ray->x + step_x) + offset;
-	else if (step_x > step_y && (dir != 0.0 || (dir * (180.0) / M_PI) != 180.0))
-		ray->x = round(ray->y + step_y) - offset / slope;
+	*ray = tmp;
 }

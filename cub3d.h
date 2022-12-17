@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/16 21:00:55 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:26:38 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ char	**get_tokenised_line(char *line);
 
 //general utils
 void	*destroy_array(char **array);
+int		sign(double nb);
 
 //mlx utils
 t_img	*create_image(int width, int height, t_mlx *mlx);

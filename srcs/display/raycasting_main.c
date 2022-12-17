@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/17 15:06:44 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:04:13 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 #define EAST_FACE 3
 #define WEST_FACE 4
 
+/*
 int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 {
+	static int i = 0;
 	if (ray.x == floor(ray.x))
 	{
 		if (ray.x > 0 &&
@@ -37,11 +39,24 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 			map->parsed_map[(int)ray.y + 1][(int)ray.x] == WALL)//wall bellow
 			return (wall_info(data, ray, NORTH_FACE, player));
 	}
+	if (i++ >= 10)
+		return (wall_info(data, ray, NORTH_FACE, player));
 	return (0);
+}
+//*/
+
+/* function that check if the ray coordinate are against a wall.
+ * if it is against a wall, it fill the data structure and return 1.
+ * else, it return 0;
+ */
+int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
+{
+
 }
 
 void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_coord	ray;
 	double	slope;
 	double	offset;
@@ -49,29 +64,31 @@ void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 		// with a=tan(angle) ; b = player_y - a * player_x
 	slope = tan(angle);
 	offset = player->pos_y - slope * player->pos_x;
+	dprintf(2, "calculated line y = %f x + %f\n", slope, offset);//DEBUG
 	//init ray position;
 	ray.x = player->pos_x;
 	ray.y = player->pos_y;
+	dprintf(2, "inited position\n");//DEBUG
 	//while no wall found and didn't left map area
-	while (ray.x >= 0 && ray.x <= map->nb_column &&
-		ray.y >= 0 && ray.y <= map->nb_line)
-	{
+	while (!check_wall(ray, map, data, player)) {
+		dprintf(2, "loop : ray at %f;%f. advancing...\n",ray.x, ray.y);//DEBUG
 		get_next_pos(&ray, player->direction, slope, offset);
-		if (check_wall(ray, map, data, player))
-			return;
 	}
 }
 
 void	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 {
+	dprintf(2, "\033[33mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_wall_data	wall_s;
 
 	//find next wall
 	find_wall(angle, &wall_s, &mlx->player, mlx->map_s);
 	//use trigo/pythagore to calculate 'straight' distance (anti fish eye)
-	wall_s.distance = wall_s.distance * cos(angle - mlx->player.direction);
+	dprintf(2, "ray %d found wall at %f\n", ray_num, wall_s.distance);//DEBUG
+//	wall_s.distance *= cos(angle - mlx->player.direction);
 	//calculate wall height
 	wall_s.height = WALL_H / (wall_s.distance * DEPTH);
+	dprintf(2, "apparent height : %f\n", wall_s.height);//DEBUG
 	//if jump is implemented, it goes there--------------------------------------JUMP
 	//fill image with pixel column;
 	draw_wall(ray_num, wall_s, screen);

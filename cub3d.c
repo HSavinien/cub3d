@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/09 14:32:45 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:32:47 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 #define SOUTH_ANGLE (-M_PI/2)
 #define EAST_ANGLE 0
 #define WEST_ANGLE (M_PI)
+/*
+#define NORTH_ANGLE (1)
+#define SOUTH_ANGLE (2)
+#define EAST_ANGLE 3
+#define WEST_ANGLE (4)
+//*/
 
 void	set_player_position(t_map *map, t_mlx *mlx_s)
 {
