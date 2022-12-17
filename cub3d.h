@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/16 13:54:56 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:00:55 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,19 @@ typedef struct s_mlx {
 	t_entity	player;
 }	t_mlx;
 
+typedef	struct s_coord {
+	double	x;
+	double	y;
+}	t_coord;
+
 //used by raycasting function, store both the wall distance and orientation.
 typedef	struct s_wall_data {
 	double	distance;
-	int		orientation;
+	int		side;
 	double	height;
-	int		pos_x;
-	int		pos_y;
-} t_wall_data
+	t_coord	pos;
+} t_wall_data;
+
 
 #include "chloutils.h"	//debug //tmp
 
@@ -140,7 +145,12 @@ void	check_duplicate(char *id, char *line, int line_num, t_map *map_s);
 t_uint	read_color(char *color_code, char *full_line, int line_nb);
 
 //display
+void	raycasting_start(t_mlx *mlx, t_img *screen);
 int		main_loop(t_mlx *mlx);
+void	draw_wall(int ray_num, t_wall_data wall, t_img *screen);
+int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
+void	get_ray_angle(t_mlx *mlx, double *angles);
+void    get_next_pos(t_coord *ray, double dir, double slope, double offset);
 
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);

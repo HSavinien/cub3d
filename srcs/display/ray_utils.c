@@ -5,6 +5,7 @@
  */
 void	get_ray_angle(t_mlx *mlx, double *angles)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	int		i;
 	double	interval;
 
@@ -19,7 +20,21 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
 		angles[i] = angles[i -1] + interval;
 }
 
-/* function that get the next x or y on the direction line */
+/* function that, once a wall is found, fill the wall data structure
+ * the struct is passed by reference, so there is no return value.
+ * it ignore height parameter for now, as it will be filled later
+ */
+int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
+{
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	data->distance = sqrt(pow(player->pos_x - ray.x, 2) +
+		pow(player->pos_y - ray.y, 2));
+	data->side = face;
+	data->pos=ray;
+	return (1);
+}
+
+/* function that get the next entire x or y on the direction line */
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
 	double		step_x;

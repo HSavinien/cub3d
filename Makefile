@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 SRCS	=	cub3d.c \
 			srcs/utils/error.c \
 			srcs/utils/leaks_utils.c \
@@ -11,6 +10,8 @@ SRCS	=	cub3d.c \
 			srcs/generals/main_loop.c \
 			srcs/event/hook.c \
 			srcs/bonus/draw_minimap.c \
+			srcs/display/raycasting_main.c \
+			srcs/display/draw_wall.c \
 			srcs/display/ray_utils.c \
 			tmp/debug.c \
 
@@ -55,7 +56,7 @@ fclean:		clean
 	@echo "\033[1;33mlibft.a file removed\033[0m"
 	@rm -f ${NAME}
 	@echo "\033[1;33m${NAME} file removed\033[0m"
-	rm -rf cub3d-*
+	@rm -rf cub3d-*
 	@echo "\033[1;33mdebug file removed\033[0m"
 
 re:		fclean all
