@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/17 21:26:38 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:18:29 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@
 //window values
 #define WIN_TITLE "placeholder title"
 #define FOV (DEG_FOV*M_PI/180)	//for more user-friendliness
+
+//constantes
+# define EPSILON 0.00001
 
 /*structure---------------------------------------------------------structures*/
 

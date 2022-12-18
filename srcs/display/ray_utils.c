@@ -39,7 +39,7 @@ int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
  */
 void	advance_parallel_ray(t_coord *ray, double dir)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	//dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (cos(dir) == 1)
 		ray->x = ceil(ray->x);
 	else if (cos(dir) == -1)
@@ -51,30 +51,39 @@ void	advance_parallel_ray(t_coord *ray, double dir)
 }
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	//dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	//dprintf(2, "advancing ray [%f;%f] allong right y=%fx+%f, dir %f\n",//debug
+//		ray->x, ray->y, slope, offset, dir);//DEBUG
 	int	x_dir;
 	int	y_dir;
 	t_coord	tmp;
 	//if cos or sin == 0, enter specific function
 	if (cos(dir) == 0 || sin(dir) == 0)
 		return (advance_parallel_ray(ray, dir));
+	//dprintf(2, "ray is not parrallel to grid\n");//DEBUG
 	//get x and y dir, (+-1, based on sin and cos);
 	x_dir = sign(cos(dir));
 	y_dir = sign(sin(dir));
+	//dprintf(2, "got x_dir = %d, y_dir = %d\n", x_dir, y_dir);//DEBUG
 	//get tmp coord to next entire x value, and corresponding y
 	if (x_dir > 0)
 		tmp.x = ceil(ray->x);
 	else
-		tmp.x = floor(ray->x);
+		tmp.x = floor(ray->x) -1;
 	tmp.y = slope * tmp.x + offset;
+	//dprintf(2, "found tmp coord : %f, %f\n", tmp.x, tmp.y);//DEBUG
 	//if entire part of tmp.y != entire part of ray.y, calculate next y
-	if ((int)tmp.y != (int)ray->y)
+	if (floor(tmp.y) != floor(ray->y))
 	{
+		//dprintf(2, "y gone to far. recalculating tmp\n");//DEBUG
 		if (y_dir > 0)
 			tmp.y = ceil(ray->y);
 		else
-			tmp.y = floor(ray->y);
+			tmp.y = floor(ray->y) -1;
 		tmp.x = (tmp.y - offset) / slope;
+		//dprintf(2, "found new tmp coord : %f, %f\n", tmp.x, tmp.y);//DEBUG
 	}
 	*ray = tmp;
+	//dprintf(2, "updated ray : ray = [%f;%f], tmp = [%f;%f]\n",
+//		ray->x, ray->y, tmp.x, tmp.y);//DEBUG
 }
