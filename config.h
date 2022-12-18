@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 04:22:52 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 13:30:18 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:16:59 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@
 
 # define TURN_LEFT KEY_ARROW_LEFT
 # define TURN_RIGHT KEY_ARROW_RIGHT
-# define SPEED 1
+# define SPEED 0.25
 
 #endif
