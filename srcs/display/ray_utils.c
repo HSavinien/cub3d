@@ -56,7 +56,7 @@ void	advance_parallel_ray(t_coord *ray, double dir)
 	else if (sin(dir) == 1)
 	{
 		if (ray->y == floor(ray->y))
-			ray->y -= 1;
+			ray->y += 1;
 		ray->y = ceil(ray->y);
 	}
 	else if (sin(dir) == -1)
