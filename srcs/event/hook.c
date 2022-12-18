@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 16:00:17 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:07:24 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	do_move(int key, t_mlx *mlx)
 		vdir.dir.y = (sin(mlx->player.direction + M_PI_2) * SPEED + vdir.pos.y);
 	}
 	vect = (t_point){(vdir.dir.x - vdir.pos.x) * dir,
-		(vdir.dir.y - v_dir.pos.y) * dir};
+		(vdir.dir.y - vdir.pos.y) * dir};
 	pos_tmp.x = (vect.x * SPEED) + vdir.pos.x;
 	pos_tmp.y = (vect.y * SPEED) + vdir.pos.y;
 	if (mlx->map_s->parsed_map[(int)pos_tmp.y][(int)pos_tmp.x] == 1)
