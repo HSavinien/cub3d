@@ -25,7 +25,6 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
  */
 int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 {
-//	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	data->distance = sqrt(pow(player->pos_x - ray.x, 2) +
 		pow(player->pos_y - ray.y, 2));
 	//little modif to avoid infinit height wall :
@@ -40,7 +39,6 @@ int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
  */
 void	advance_parallel_ray(t_coord *ray, double dir)
 {
-	dprintf(2, "\033[33mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (cos(dir) == 1)
 		ray->x = ceil(ray->x) + 1;
 	else if (cos(dir) == -1)
@@ -50,39 +48,38 @@ void	advance_parallel_ray(t_coord *ray, double dir)
 	else if (sin(dir) == -1)
 		ray->y = ceil(ray->y) - 1;
 }
+
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
-	dprintf(2, "\033[1mentering %s (%s:%d)\n\033[0m", __FUNCTION__, __FILE__,__LINE__);//DEBUG
-	dprintf(2, "for ray curently at [%f;%f], dir %f\n", ray->x, ray->y, dir);//DEBUG
-	int	x_dir;
+	int x_dir;
 	int	y_dir;
-	t_coord	tmp;
-	//if cos or sin == 0, enter specific function
+	t_coord	next_x;
+	t_coord	next_y;
+	
+	//check case where ray is parallel to x or y axis
 	if (cos(dir) == 0 || sin(dir) == 0)
 		return (advance_parallel_ray(ray, dir));
-	//get x and y dir, (+-1, based on sin and cos);
+	//calculate next entire x
 	x_dir = sign(cos(dir));
-	y_dir = sign(sin(dir));
-	//get tmp coord to next entire x value, and corresponding y
 	if (x_dir > 0)
-		tmp.x = ceil(ray->x);
+		next_x.x = ceil(ray->x);
 	else
-		tmp.x = floor(ray->x) -1;
-	if (tmp.x == ray->x)
-		tmp.x += 1;
-	tmp.y = slope * tmp.x + offset;
-	//if entire part of tmp.y != entire part of ray.y, calculate next y
-	if (floor(tmp.y) != floor(ray->y))
-	{
+		next_x.x = floor(ray->x) -1;
+	if (next_x.x == ray->x)
+		next_x.x += x_dir;
+	next_x.y = slope * next_x.x + offset;
+	//calculate next entire y
+	y_dir = sign(sin(dir));
 		if (y_dir > 0)
-			tmp.y = ceil(ray->y);
+			next_y.y = ceil(ray->y);
 		else
-			tmp.y = floor(ray->y) -1;
-		if (tmp.y == ray->y)
-			tmp.y += 1;
-		tmp.x = (tmp.y - offset) / slope;
-	}
-	if (ray->x == tmp.x && ray->y == tmp.y)
-		exit(dprintf(2, "\033[1;31mendless loop entered\033[0m\n"));//DEBUG
-	*ray = tmp;
+			next_y.y = floor(ray->y) -1;
+		if (next_y.y == ray->y)
+			next_y.y += y_dir;
+		next_y.x = (next_y.y - offset) / slope;
+	//compare len (from ray)
+	if (get_point_dist(*ray, next_x) < get_point_dist(*ray, next_y))
+		*ray = next_x;
+	else
+		*ray = next_y;
 }

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 15:14:05 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/18 21:55:43 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	draw_minimap(t_mlx *mlx)
 		end = false;
 		while (j < (IMG_WIDTH / (TILE_SMM)))
 		{
-			draw_square(&mlx->minimap, i, j, 0xFFFFFFFF);
+			draw_square(&mlx->minimap, i, j, 0x80000000);
 			if (end == false && mlx->map_s->raw_map[i][j] != '\0')
 				draw_figures(mlx, i, j);
 			else

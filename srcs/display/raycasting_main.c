@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 18:49:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:13:00 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 
 void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_coord	ray;
 	double	slope;
 	double	offset;
@@ -55,24 +54,18 @@ void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 	//init ray position;
 	ray.x = player->pos_x;
 	ray.y = player->pos_y;
-	dprintf(2, "calculated ray : slope = %f, offset = %f, start at %f;%f\n",
-		slope, offset, ray.x,ray.y);//DEBUG
 	//while no wall found and didn't left map area
 	while (!check_wall(ray, map, data, player)) {
-		dprintf(2, "loop\n");//DEBUG
 		get_next_pos(&ray, player->direction, slope, offset);
 	}
 }
 
 void	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 {
-	dprintf(2, "\033[1;32mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
-	dprintf(2, "casting ray num %d, at angle %f\n", ray_num, angle);//DEBUG
 	t_wall_data	wall_s;
 
 	//find next wall
 	find_wall(angle, &wall_s, &mlx->player, mlx->map_s);
-	dprintf(2, "wall found at %f,%f (distance %f)\n", wall_s.pos.x, wall_s.pos.y, wall_s.distance);//DEBUG
 	//use trigo/pythagore to calculate 'straight' distance (anti fish eye)
 	wall_s.distance *= cos(angle - mlx->player.direction);
 	//calculate wall height
