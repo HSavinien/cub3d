@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 15:03:45 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:00:17 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ double	dir_move(int key)
 
 int	do_move(int key, t_mlx *mlx)
 {
-	t_vector	v_dir;
+	t_vector	vdir;
 	t_point		pos_tmp;
 	t_point		vect;
 	double		dir;
 
-	v_dir = init_data_dir(mlx);
+	vdir = init_data_dir(mlx);
 	dir = dir_move(key);
 	if ((key == MOVE_LEFT) || (key == MOVE_RIGHT))
 	{
-		v_dir.dir.x = (cos(mlx->player.direction + M_PI_2) / 2 + v_dir.pos.x);
-		v_dir.dir.y = (sin(mlx->player.direction + M_PI_2) / 2 + v_dir.pos.y);
+		vdir.dir.x = (cos(mlx->player.direction + M_PI_2) * SPEED + vdir.pos.x);
+		vdir.dir.y = (sin(mlx->player.direction + M_PI_2) * SPEED + vdir.pos.y);
 	}
-	vect = (t_point){(v_dir.dir.x - v_dir.pos.x) * dir,
-		(v_dir.dir.y - v_dir.pos.y) * dir};
-	pos_tmp.x = (vect.x * SPEED) + v_dir.pos.x;
-	pos_tmp.y = (vect.y * SPEED) + v_dir.pos.y;
+	vect = (t_point){(vdir.dir.x - vdir.pos.x) * dir,
+		(vdir.dir.y - v_dir.pos.y) * dir};
+	pos_tmp.x = (vect.x * SPEED) + vdir.pos.x;
+	pos_tmp.y = (vect.y * SPEED) + vdir.pos.y;
 	if (mlx->map_s->parsed_map[(int)pos_tmp.y][(int)pos_tmp.x] == 1)
 		return (1);
 	mlx->player.pos_x = pos_tmp.x;
