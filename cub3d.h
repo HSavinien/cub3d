@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 21:48:44 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:57:39 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int		main_loop(t_mlx *mlx);
 void	draw_wall(int ray_num, t_wall_data wall, t_img *screen);
 int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
 void	get_ray_angle(t_mlx *mlx, double *angles);
+void    get_first_pos(t_coord *ray, double dir, double slope, double offset);
 void	get_next_pos(t_coord *ray, double dir, double slope, double offset);
 
 //parsing utils
@@ -159,7 +160,8 @@ char	**get_tokenised_line(char *line);
 //general utils
 void	*destroy_array(char **array);
 int		sign(double nb);
-double get_point_dist(t_coord a, t_coord b);
+double	simplificate_angle(double angle);
+double	get_point_dist(t_coord a, t_coord b);
 
 //mlx utils
 t_img	*create_image(int width, int height, t_mlx *mlx);

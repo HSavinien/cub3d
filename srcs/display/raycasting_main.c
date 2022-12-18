@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 22:13:00 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:53:15 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 	//init ray position;
 	ray.x = player->pos_x;
 	ray.y = player->pos_y;
+	//do first jump
+	get_first_pos(&ray, player->direction, slope, offset);
 	//while no wall found and didn't left map area
 	while (!check_wall(ray, map, data, player)) {
 		get_next_pos(&ray, player->direction, slope, offset);

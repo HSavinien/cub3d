@@ -83,3 +83,30 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 	else
 		*ray = next_y;
 }
+
+void    get_first_pos(t_coord *ray, double dir, double slope, double offset)
+{
+	t_coord	tmp;
+
+	//secu : simplificate dir it's now between -pi and pi;
+	dir = simplificate_angle(dir);
+	//exception : if x or y is entire
+		//special case
+	//determine sector, set corresponding var :
+	if (dir >= -M_PI/4 && dir <= M_PI/4)
+		tmp.x = ceil(ray->x);
+	else if ((dir >= 3*M_PI/4 && dir <= M_PI) || (dir <= -3 * M_PI/4 && dir <= -M_PI))
+		tmp.x = floor(ray->x);
+	else if (dir >= M_PI/4 && dir <= 3 * M_PI/4)
+		tmp.y = ceil(ray->y);
+	else if (dir >= -3 * M_PI/4 && dir <= -M_PI/4)
+		tmp.y = floor(ray->y);
+	else
+		ft_error("no quarter fit this angle", ERR_WTF);
+	if (fabs(cos(dir)) >= fabs(sin(dir)))
+		tmp.y = slope * tmp.x + offset;
+	else
+		tmp.x = (tmp.y - offset) / slope;
+	
+	*ray = tmp;
+}
