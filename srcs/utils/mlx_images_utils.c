@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/16 19:44:48 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:34:00 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h)
 //		img = mlx_png_file_to_image(mlx, file, img_w, img_h);
 	else
 		ft_error(ft_strjoin(file, MSG_IMG_FORMAT), ERR_IMG_OPEN);
-
 	if (!img)
 		ft_error(ft_strjoin(file, MSG_IMG_OPEN), ERR_IMG_OPEN);
 	return (img);
@@ -47,7 +46,7 @@ t_img	*create_image(int width, int height, t_mlx *mlx)
 	if (!new->img_ptr)
 		return (ret_free(new));
 	new->data = (int *)mlx_get_data_addr(new->img_ptr, &new->bpp, &new->size_l,
-		&new->endian);
+			&new->endian);
 	new->width = width;
 	new->height = height;
 	return (new);
@@ -62,6 +61,7 @@ t_img	*create_image(int width, int height, t_mlx *mlx)
 char	*img_get_pixel(t_img *img, int x, int y)
 {
 	char	*pixel;
+
 	if (x > img->width || y > img->height || img->data)
 		return (NULL);
 	pixel = (char *)img->data;

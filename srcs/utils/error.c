@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/05 21:08:16 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:35:44 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ void	err_mapfile(int line, char *content, char *msg, int code)
 //	system("leaks cub3d");//DEBUG
 	exit(code);
 }
+
 //function used by err_map_form to put the map on screen
 static void	print_map_char(char c)
 {
-
-			if (c == '1')
-				printf("\033[0;7m%c\033[0m", c);
-			else if (c == '0')
-				printf("\033[0;7;90m%c\033[0m", c);
-			else if (char_in_set(c, "NSWE"))
-				printf("\033[0;7;34m%c\033[0m", c);
-			else if (ft_isspace(c))
-				printf("\033[0m%c\033[0m", c);
-			else
-				printf("\033[0;7;31m%c\033[0m", c);
+	if (c == '1')
+		printf("\033[0;7m%c\033[0m", c);
+	else if (c == '0')
+		printf("\033[0;7;90m%c\033[0m", c);
+	else if (char_in_set(c, "NSWE"))
+		printf("\033[0;7;34m%c\033[0m", c);
+	else if (ft_isspace(c))
+		printf("\033[0m%c\033[0m", c);
+	else
+		printf("\033[0;7;31m%c\033[0m", c);
 }
 
 /* used to give detailled error message when map is incorectly formated.

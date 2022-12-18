@@ -25,6 +25,7 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
  */
 int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	data->distance = sqrt(pow(player->pos_x - ray.x, 2) +
 		pow(player->pos_y - ray.y, 2));
 	//little modif to avoid infinit height wall :
@@ -78,3 +79,45 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 	}
 	*ray = tmp;
 }
+/* function that get the next entire x or y on the direction line */
+/*
+void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
+{
+	double		step_x;
+	double		step_y;
+	//	y = slope * x + offset;
+	//	from 180 include to 360 non include
+	printf("fct:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray->x, ray->y, dir, slope, offset);
+	step_x = fabs(ray->x - ceil(ray->x));
+	if (step_x == 0.0)
+		step_x = 1.0;
+	// if dir = 0 for x
+	if (fabs(dir - 0.0) <= EPS || fabs(dir - 2 * M_PI) <= EPS)
+		ray->x = round(ray->x + step_x);
+	// if dir = 180 for x
+	else if (fabs(dir - M_PI) <= EPS)
+		ray->x = round(ray->x - step_x);
+	step_y = fabs(ray->y - ceil(ray->y));
+	if (step_y == 0.0)
+		step_y = 1.0;
+	// if dir  = 90 for y
+	if (fabs(dir - (M_PI / 2)) <= EPS)
+		ray->y = round(ray->y - step_y);
+	// if dir = 270 for y
+	else if (fabs(dir - (3 * M_PI / 2)) <= EPS)
+		ray->y = round(ray->y + step_y);
+//	printf("fct:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f, step_x: %f, step_y: %f\n", ray->x, ray->y, dir, slope, offset, step_x, step_y);
+	if (step_y >= step_x && fabs(dir - 0.0) >= EPS && fabs(dir - 2 * M_PI) <= EPS && fabs(dir - M_PI) <= EPS && fabs(dir - (M_PI / 2)) <= EPS && fabs(dir - (3 * M_PI / 2)) <= EPS) 
+	{
+		printf("here 2\n");
+		ray->x += step_x;
+		ray->y = slope * round(ray->x) + offset;
+	}
+	else if (step_x > step_y && fabs(dir - 0.0) >= EPS && fabs(dir - 2 * M_PI) <= EPS && fabs(dir - M_PI) <= EPS && fabs(dir - (M_PI / 2)) <= EPS && fabs(dir - (3 * M_PI / 2)) <= EPS)
+	{	
+		printf("here 3\n");
+		ray->y += step_y;
+		ray->x = round(ray->y) - offset / slope;
+	}
+}
+*/

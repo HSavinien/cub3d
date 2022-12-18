@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/17 22:04:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:04:44 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 		return (wall_info(data, ray, NORTH_FACE, player));
 	return (0);
 }
-//*/
+*/
 
 /* function that check if the ray coordinate are against a wall.
  * if it is against a wall, it fill the data structure and return 1.

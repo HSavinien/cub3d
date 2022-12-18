@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/29 01:08:51 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:57:42 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define ERR_WRONG_ID_MSG "unknown ID token. Valid ID are : [NO|SO|WE|EA|F|C]"
 #define ERR_PATERN_MSG "that just don't make any sens!"
 #define MSG_DUPLI "two map found in file. each file sould contain only one map"
-#define	MSG_MAP_LAST "no data can follow the map. Blame the subject, not me"
+#define MSG_MAP_LAST "no data can follow the map. Blame the subject, not me"
 
 int	is_line_empty(char *str)
 {
@@ -57,8 +57,8 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb)
 
 	tokenised_line = get_tokenised_line(line);
 	//expected format : {"ID", "DATA", NULL}
-	if (!tokenised_line || !tokenised_line[0] || !tokenised_line[1] ||
-		tokenised_line[2])
+	if (!tokenised_line || !tokenised_line[0] || !tokenised_line[1]
+		|| tokenised_line[2])
 		err_mapfile(line_nb, line, ERR_NB_TOKEN_MSG, ERR_FILE_NB_TOKEN);
 	check_duplicate(tokenised_line[0], line, line_nb, map_struct);
 	if (!strcmp(tokenised_line[0], "NO"))
@@ -114,7 +114,7 @@ void	read_cub_file(int fd, t_map *map_struct)
 
 	line = (char *) 1;
 	line_num = 0;
-	while (line && !map_struct->raw_map)//second part to refuse data after map
+	while (line && !map_struct->raw_map) //second part to refuse data after map
 	{
 		line = get_next_filed_line(fd, &line_num);
 		line_num ++;

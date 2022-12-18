@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:59:52 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/05 21:04:32 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:36:52 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 char	**get_tokenised_line(char *line)
 {
 	int		i;
-	int 	start;
+	int		start;
 	char	**array;
 
 	i = 0;

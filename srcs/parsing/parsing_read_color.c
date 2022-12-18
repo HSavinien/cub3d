@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/14 22:30:19 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 14:00:22 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	all_char_in_set(char *search, char *set)
 
 void	check_valid_rgb(char *code, int line_nb, char *full_line)
 {
-	int i;
+	int	i;
 
 	if (code[0] == ',')
-			err_mapfile(line_nb, full_line, MSG_RGB_COMMA, ERR_COLORCODE);
+		err_mapfile(line_nb, full_line, MSG_RGB_COMMA, ERR_COLORCODE);
 	i = -1;
 	while (code[++ i])
 	{

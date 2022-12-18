@@ -6,13 +6,13 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 04:22:52 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/15 21:41:16 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/18 13:30:18 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONFIG_H
 # define CONFIG_H
-#include "cub3d.h"
+# include "cub3d.h"
 
 /*
  * used to store default values that the user might want to customize,
@@ -25,7 +25,8 @@
 
 # define WIN_W 1080	//window width. if program is too laggy, try lowering it
 # define WIN_H 720	//window height.
-# define DEG_FOV 60	//the angle of the field of view, in degree. try negative values for maximum lol
+//the angle of the field of view, in degree. try negative values for maximum lol
+# define DEG_FOV 60 
 # define WALL_H	1	//the height of the wall. the bigger the higher
 # define DEPTH	1	//how fast the wall will shrink when they are far
 

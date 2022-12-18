@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chloutils.h                                        :+:      :+:    :+:   */
+/*   movement.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/07 13:56:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/18 14:52:43 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHLOUTILS_H
-# define CHLOUTILS_H
-#include "cub3d.h"
-#include <stdbool.h>
+#ifndef MOVEMENT_H
+# define MOVEMENT_H
 
-# define TO_COORDMM(X,Y) ((int)floor(Y) * IMG_WIDTH + (int)floor(X))
-# define TO_COORD(X,Y) ((int)floor(Y) * WIN_WIDTH + (int)floor(X))
+# include <cub3d.h>
+# include <stdbool.h>
 
 # define TSIZE 32
 # define TILE_SMM 8
-# define WIN_WIDTH 15 * TSIZE
-# define WIN_HEIGHT 11 * TSIZE
-# define IMG_WIDTH 31 * TILE_SMM
-# define IMG_HEIGHT 11.0 * TILE_SMM
+# define WIN_WIDTH 480
+# define WIN_HEIGHT 352
+# define IMG_WIDTH 248
+# define IMG_HEIGHT 88
 
 /* structures */
 typedef struct s_point
@@ -40,19 +38,27 @@ typedef struct s_vector
 }	t_vector;
 
 /* draw_minimap.c */
-void	draw_minimap(t_mlx *mlx);
-void	draw_filledcircle(t_img *map, double x, double y);
+void		draw_minimap(t_mlx *mlx);
+void		draw_filledcircle(t_img *map, double x, double y);
+
+/* minimap_utils.c */
+void		init_minimap(t_mlx *mlx);
+void		do_tile_conv(t_point *pt);
 
 /* loop.c */
-int		loop(t_mlx *mlx);
+int			loop(t_mlx *mlx);
 
 /* init_images.c */
-void	init_window_images(t_mlx *mlx);
-void	init_background(t_mlx *mlx);
-void	init_minimap(t_mlx *mlx);
+void		init_window_images(t_mlx *mlx);
+void		init_background(t_mlx *mlx);
+void		init_minimap(t_mlx *mlx);
 
 /* hook.c */
-int		close_win(t_mlx *mlx);
-int		event_hook(int key, t_mlx *mlx);
+int			close_win(t_mlx *mlx);
+int			event_hook(int key, t_mlx *mlx);
+
+/* hook_utils */
+t_vector	init_data_dir(t_mlx *mlx);
+double		rad_to_degree(double rad);
 
 #endif

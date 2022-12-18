@@ -1,13 +1,17 @@
-#include <cub3d.h>
-#include <chloutils.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
+/*   Updated: 2022/12/18 15:14:05 by cmaroude         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	init_minimap(t_mlx *mlx)
-{
-	/* image */
-	mlx->minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
-	mlx->minimap.data = (int *)mlx_get_data_addr(mlx->minimap.img_ptr,
-		&mlx->minimap.bpp, &mlx->minimap.size_l, &mlx->minimap.endian);
-}
+#include <cub3d.h>
+#include <movement.h>
 
 void	draw_square(t_img *map, int x, int y, int color)
 {
@@ -22,7 +26,7 @@ void	draw_square(t_img *map, int x, int y, int color)
 		j = 0;
 		while (j < (TILE_SMM))
 		{
-			map->data[TO_COORDMM((j + y), (i + x))]  = color;
+			map->data[((int)(x) + i) * IMG_WIDTH + (int)(j + y)] = color;
 			j++;
 		}
 		i++;
@@ -31,36 +35,30 @@ void	draw_square(t_img *map, int x, int y, int color)
 
 void	draw_filledcircle(t_img *map, double x, double y)
 {
-	int	i;
-	int r2;
-	int rr;
-	double tx;
-	double ty;
-	
-	r2 = pow((TILE_SMM / 2) , 2);
+	int		i;
+	int		r2;
+	int		rr;
+	double	tx;
+	double	ty;
+
+	r2 = pow((TILE_SMM / 2), 2);
 	rr = (TILE_SMM / 2) << 1;
 	i = 0;
 	while (i < (r2 << 2))
 	{
 		tx = (i % rr) - (TILE_SMM / 2);
-    	ty = (i / rr) - (TILE_SMM / 2);
+		ty = (i / rr) - (TILE_SMM / 2);
 		if (tx * tx + ty * ty <= (rr + rr))
 		{	
 			if ((int)(x * TILE_SMM) < IMG_WIDTH &&
 				(int)(y * TILE_SMM) < IMG_HEIGHT)
-				{
-					map->data[TO_COORDMM((tx + (x * TILE_SMM)),
-						(ty + (y * TILE_SMM)))] = 0xFF0000;
-				}
+			{
+				map->data[(int)(ty + (y * TILE_SMM))*IMG_WIDTH
+					+ (int)(tx + (x * TILE_SMM))] = 0xFF0000;
+			}
 		}
 		i++ ;
 	}
-}
-
-void	do_tile_conv(t_point *pt)
-{
-	pt->x *= TILE_SMM;
-	pt->y *= TILE_SMM;	
 }
 
 void	draw_line(t_mlx *mlx, t_point player, t_point dir)
@@ -77,13 +75,12 @@ void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 	delta.x = delta.x / step;
 	delta.y = delta.y / step;
 	while ((player.x < IMG_WIDTH && player.y < IMG_HEIGHT
-		&& player.x> 0.0 && player.y > 0.0))
+			&& player.x > 0.0 && player.y > 0.0))
 	{
 		if (mlx->map_s->raw_map[(int)player.y / TILE_SMM]
 			[(int)player.x / TILE_SMM] == '1')
 			break ;
-		mlx->minimap.data[TO_COORDMM(player.x, player.y)] = 0xFF00FF;
-		// -526344 goes from white to black
+		mlx->minimap.data[(int)player.y * IMG_WIDTH + (int)player.x] = 0xFF00FF;
 		player.x += delta.x;
 		player.y += delta.y;
 	}
@@ -92,7 +89,7 @@ void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 void	draw_figures(t_mlx *mlx, int i, int j)
 {
 	t_point	dir_pt;
-	t_point player;
+	t_point	player;
 
 	dir_pt.x = (cos(mlx->player.direction)) + mlx->player.pos_x;
 	dir_pt.y = (sin(mlx->player.direction)) + mlx->player.pos_y;
