@@ -25,7 +25,7 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
  */
 int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+//	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	data->distance = sqrt(pow(player->pos_x - ray.x, 2) +
 		pow(player->pos_y - ray.y, 2));
 	//little modif to avoid infinit height wall :
@@ -42,13 +42,29 @@ void	advance_parallel_ray(t_coord *ray, double dir)
 {
 	//dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (cos(dir) == 1)
+	{
+		if (ray->x == floor(ray->x))
+			ray->x += 1;
 		ray->x = ceil(ray->x);
+	}
 	else if (cos(dir) == -1)
+	{
+		if (ray->x == floor(ray->x))
+			ray->x -= 1;
 		ray->x = floor(ray->x);
+	}
 	else if (sin(dir) == 1)
+	{
+		if (ray->y == floor(ray->y))
+			ray->y -= 1;
 		ray->y = ceil(ray->y);
+	}
 	else if (sin(dir) == -1)
-		ray->y = floor(ray->y);
+	{
+		if (ray->y == floor(ray->y))
+			ray->y += 1;
+		ray->y = ceil(ray->y);
+	}
 }
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
