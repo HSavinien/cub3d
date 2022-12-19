@@ -39,6 +39,7 @@ int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
  */
 void	advance_parallel_ray(t_coord *ray, double dir)
 {
+	dprintf(2, "\033[2;33mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (cos(dir) == 1)
 		ray->x = ceil(ray->x) + 1;
 	else if (cos(dir) == -1)
@@ -51,6 +52,8 @@ void	advance_parallel_ray(t_coord *ray, double dir)
 
 void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 {
+	dprintf(2, "\033[1mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
+	dprintf(2, "base ray at [%f;%f], dir = %f, slope=%f, offset = %f\n", ray->x,ray->y, dir, slope, offset);//DEBUG
 	int x_dir;
 	int	y_dir;
 	t_coord	next_x;
@@ -59,6 +62,7 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 	//check case where ray is parallel to x or y axis
 	if (cos(dir) == 0 || sin(dir) == 0)
 		return (advance_parallel_ray(ray, dir));
+	dprintf(2, "ray was not parallel to grid\n");//DEBUG
 	//calculate next entire x
 	x_dir = sign(cos(dir));
 	if (x_dir > 0)
@@ -68,6 +72,7 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 	if (next_x.x == ray->x)
 		next_x.x += x_dir;
 	next_x.y = slope * next_x.x + offset;
+	dprintf(2, "next x is [%f;%f] (dir = %d)\n", next_x.x, next_x.y, x_dir);//DEBUG
 	//calculate next entire y
 	y_dir = sign(sin(dir));
 		if (y_dir > 0)
@@ -77,36 +82,13 @@ void    get_next_pos(t_coord *ray, double dir, double slope, double offset)
 		if (next_y.y == ray->y)
 			next_y.y += y_dir;
 		next_y.x = (next_y.y - offset) / slope;
+	dprintf(2, "next y is [%f;%f] (dir = %d)\n", next_y.x, next_y.y, y_dir);//DEBUG
 	//compare len (from ray)
-	if (get_point_dist(*ray, next_x) < get_point_dist(*ray, next_y))
+	dprintf(2, "distance is %f for next x, %f for next y\n", get_point_dist(*ray, next_x), get_point_dist(*ray, next_y));//DEBUG
+	if (get_point_dist(*ray, next_x) < get_point_dist(*ray, next_y)) {
 		*ray = next_x;
-	else
+		dprintf(2, "\033[43mchoose X\033[0m\n");}//DEBUG
+	else {
 		*ray = next_y;
-}
-
-void    get_first_pos(t_coord *ray, double dir, double slope, double offset)
-{
-	t_coord	tmp;
-
-	//secu : simplificate dir it's now between -pi and pi;
-	dir = simplificate_angle(dir);
-	//exception : if x or y is entire
-		//special case
-	//determine sector, set corresponding var :
-	if (dir >= -M_PI/4 && dir <= M_PI/4)
-		tmp.x = ceil(ray->x);
-	else if ((dir >= 3*M_PI/4 && dir <= M_PI) || (dir <= -3 * M_PI/4 && dir <= -M_PI))
-		tmp.x = floor(ray->x);
-	else if (dir >= M_PI/4 && dir <= 3 * M_PI/4)
-		tmp.y = ceil(ray->y);
-	else if (dir >= -3 * M_PI/4 && dir <= -M_PI/4)
-		tmp.y = floor(ray->y);
-	else
-		ft_error("no quarter fit this angle", ERR_WTF);
-	if (fabs(cos(dir)) >= fabs(sin(dir)))
-		tmp.y = slope * tmp.x + offset;
-	else
-		tmp.x = (tmp.y - offset) / slope;
-	
-	*ray = tmp;
+		dprintf(2, "\033[44mchoose Y\033[0m\n");}//DEBUG
 }

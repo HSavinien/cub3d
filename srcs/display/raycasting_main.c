@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 22:53:15 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:11:30 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
  */
 int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 {
+	dprintf(2, "\033[1mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	if (ray.x - floor(ray.x) <= EPSILON) //case left and right to check
 	{
 		if (ray.x >= 1 && map->parsed_map[abs((int)ray.y)][(int)ray.x-1] == WALL)
@@ -44,6 +45,7 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 
 void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 {
+	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_coord	ray;
 	double	slope;
 	double	offset;
@@ -54,16 +56,15 @@ void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 	//init ray position;
 	ray.x = player->pos_x;
 	ray.y = player->pos_y;
-	//do first jump
-	get_first_pos(&ray, player->direction, slope, offset);
 	//while no wall found and didn't left map area
 	while (!check_wall(ray, map, data, player)) {
 		get_next_pos(&ray, player->direction, slope, offset);
 	}
 }
 
-void	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
+t_wall_data	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 {
+	dprintf(2, "\033[33mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_wall_data	wall_s;
 
 	//find next wall
@@ -74,11 +75,14 @@ void	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 	wall_s.height = WALL_H / (wall_s.distance * DEPTH);
 	//if jump is implemented, it goes there--------------------------------------JUMP
 	//fill image with pixel column;
-	draw_wall(ray_num, wall_s, screen);
+//	draw_wall(ray_num, wall_s, screen);
+	return(wall_s);
+	(void) screen ; (void) ray_num;
 }
 
 void	raycasting_start(t_mlx *mlx, t_img *screen)
 {
+	dprintf(2, "\033[32mentering %s (%s:%d)\033[0m\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	int		i;
 	double	ray_angles[WIN_W];	//list the angle of each ray, in rad
 

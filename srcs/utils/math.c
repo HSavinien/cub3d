@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:24:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 23:05:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:11:46 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ double get_point_dist(t_coord a, t_coord b)
 
 double simplificate_angle(double angle)
 {
-	angle = fmod(angle, 2*M_PI);
-	if (angle < 0)
+	while (angle < 0)
 		angle += 2 * M_PI;
-	if (angle > 2 * M_PI)
+	while (angle >= 2 * M_PI)
 		angle -= 2 * M_PI;
 	return (angle);
 }
