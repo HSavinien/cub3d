@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 14:52:43 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:11:38 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@
 
 # define TSIZE 32
 # define TILE_SMM 8
-# define WIN_WIDTH 480
-# define WIN_HEIGHT 352
-# define IMG_WIDTH 248
-# define IMG_HEIGHT 88
 
 /* structures */
 typedef struct s_point
@@ -39,7 +35,7 @@ typedef struct s_vector
 
 /* draw_minimap.c */
 void		draw_minimap(t_mlx *mlx);
-void		draw_filledcircle(t_img *map, double x, double y);
+void		draw_filledcircle(t_mlx *mlx, double x, double y);
 
 /* minimap_utils.c */
 void		init_minimap(t_mlx *mlx);

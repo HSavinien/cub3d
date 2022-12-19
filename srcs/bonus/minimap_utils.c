@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:21:40 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 14:25:52 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:46:30 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* image */
 void	init_minimap(t_mlx *mlx)
 {
-	mlx->minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
+	mlx->minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->map_s->nb_column * TILE_SMM,  mlx->map_s->nb_line * TILE_SMM);
 	mlx->minimap.data = (int *)mlx_get_data_addr(mlx->minimap.img_ptr,
 			&mlx->minimap.bpp, &mlx->minimap.size_l, &mlx->minimap.endian);
 }
