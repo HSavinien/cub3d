@@ -6,14 +6,14 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 21:55:43 by tmongell         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:09:59 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <movement.h>
 
-void	draw_square(t_img *map, int x, int y, int color)
+void	draw_square(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -26,14 +26,15 @@ void	draw_square(t_img *map, int x, int y, int color)
 		j = 0;
 		while (j < (TILE_SMM))
 		{
-			map->data[((int)(x) + i) * IMG_WIDTH + (int)(j + y)] = color;
+			mlx->minimap.data[((int)(x) + i) * mlx->map_s->nb_column * TILE_SMM
+			   + (int)(j + y)] = color;
 			j++;
 		}
 		i++;
 	}
 }
 
-void	draw_filledcircle(t_img *map, double x, double y)
+void	draw_filledcircle(t_mlx *mlx, double x, double y)
 {
 	int		i;
 	int		r2;
@@ -50,11 +51,11 @@ void	draw_filledcircle(t_img *map, double x, double y)
 		ty = (i / rr) - (TILE_SMM / 2);
 		if (tx * tx + ty * ty <= (rr + rr))
 		{	
-			if ((int)(x * TILE_SMM) < IMG_WIDTH &&
-				(int)(y * TILE_SMM) < IMG_HEIGHT)
+			if ((int)(x * TILE_SMM) < mlx->map_s->nb_column * TILE_SMM &&
+				(int)(y * TILE_SMM) < mlx->map_s->nb_line * TILE_SMM)
 			{
-				map->data[(int)(ty + (y * TILE_SMM))*IMG_WIDTH
-					+ (int)(tx + (x * TILE_SMM))] = 0xFF0000;
+				mlx->minimap.data[(int)(ty + (y * TILE_SMM))*(mlx->map_s->nb_column 
+						* TILE_SMM) + (int)(tx + (x * TILE_SMM))] = 0xFF0000;
 			}
 		}
 		i++ ;
@@ -64,8 +65,10 @@ void	draw_filledcircle(t_img *map, double x, double y)
 void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 {
 	t_point	delta;
+	int	img_width;
 	double	step;
 
+	img_width = mlx->map_s->nb_column * TILE_SMM;
 	delta.x = dir.x - player.x;
 	delta.y = dir.y - player.y;
 	if (fabs(delta.x) > fabs(delta.y))
@@ -74,13 +77,13 @@ void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 		step = fabs(delta.y);
 	delta.x = delta.x / step;
 	delta.y = delta.y / step;
-	while ((player.x < IMG_WIDTH && player.y < IMG_HEIGHT
-			&& player.x > 0.0 && player.y > 0.0))
+	while ((player.x < img_width && player.y < mlx->map_s->nb_line * TILE_SMM
+		&& player.x > 0.0 && player.y > 0.0))
 	{
 		if (mlx->map_s->raw_map[(int)player.y / TILE_SMM]
 			[(int)player.x / TILE_SMM] == '1')
 			break ;
-		mlx->minimap.data[(int)player.y * IMG_WIDTH + (int)player.x] = 0xFF00FF;
+		mlx->minimap.data[(int)player.y * img_width + (int)player.x] = 0xFF00FF;
 		player.x += delta.x;
 		player.y += delta.y;
 	}
@@ -95,10 +98,10 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 	dir_pt.y = (sin(mlx->player.direction)) + mlx->player.pos_y;
 	player = (t_point){mlx->player.pos_x, mlx->player.pos_y};
 	if (mlx->map_s->raw_map[i][j] == '1')
-		draw_square(&mlx->minimap, i, j, 0xFFFFFF);
+		draw_square(mlx, i, j, 0xFFFFFF);
 	else if (mlx->map_s->raw_map[i][j] == '0')
-		draw_square(&mlx->minimap, i, j, 0);
-	draw_filledcircle(&mlx->minimap, player.x, player.y);
+		draw_square(mlx, i, j, 0);
+	draw_filledcircle(mlx, player.x, player.y);
 	do_tile_conv(&dir_pt);
 	do_tile_conv(&player);
 	draw_line(mlx, player, dir_pt);
@@ -111,13 +114,13 @@ void	draw_minimap(t_mlx *mlx)
 	bool	end;
 
 	i = 0;
-	while (i < (IMG_HEIGHT / (TILE_SMM)))
+	while (i < mlx->map_s->nb_line)
 	{
 		j = 0;
 		end = false;
-		while (j < (IMG_WIDTH / (TILE_SMM)))
+		while (j < mlx->map_s->nb_column)
 		{
-			draw_square(&mlx->minimap, i, j, 0x80000000);
+			draw_square(mlx, i, j, 0x80000000);
 			if (end == false && mlx->map_s->raw_map[i][j] != '\0')
 				draw_figures(mlx, i, j);
 			else
@@ -127,5 +130,5 @@ void	draw_minimap(t_mlx *mlx)
 		i++;
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->minimap.img_ptr,
-		0, ((WIN_H - IMG_HEIGHT)));
+		0, ((WIN_H - (mlx->map_s->nb_line * TILE_SMM))));
 }
