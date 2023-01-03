@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 13:34:00 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:47:30 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h)
 	void	*img;
 
 	img = NULL;
-	if (!ft_strcmp(ft_strrchr(file, '.'), ".xpm"))
+//	if (!ft_strcmp(ft_strrchr(file, '.'), ".xpm"))
 		img = mlx_xpm_file_to_image(mlx, file, img_w, img_h);
 //	else if (!ft_strcmp(ft_strrchr(file, '.'), ".png"))
 //		img = mlx_png_file_to_image(mlx, file, img_w, img_h);
-	else
-		ft_error(ft_strjoin(file, MSG_IMG_FORMAT), ERR_IMG_OPEN);
+//	else
+//		ft_error(ft_strjoin(file, MSG_IMG_FORMAT), ERR_IMG_OPEN);
 	if (!img)
 		ft_error(ft_strjoin(file, MSG_IMG_OPEN), ERR_IMG_OPEN);
 	return (img);
