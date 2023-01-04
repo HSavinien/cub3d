@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 21:56:48 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 22:08:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:09:59 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	draw_wall(int ray_num, t_wall_data wall, t_img *screen)
 	line = WIN_H / 2;
 	//get number of pixel based on height so that a wall is square when WALL_H=1
 	pixel_height = wall.height * WIN_H; //ce n'est probablement pas cela
+	if (pixel_height >= WIN_H)
+		pixel_height = WIN_H;
 	line -= pixel_height/2;
 	i = 0;
-	while (i ++ < pixel_height && line < WIN_H)
+	while (i ++ < pixel_height)
 	{
 		if (line >= 0 && line < WIN_H)
 			img_set_pixel(screen, ray_num, line++, color_side[wall.side - 1]);
