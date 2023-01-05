@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 22:57:39 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/05 22:50:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_map {
 	char	*west_path;
 	long	floor_color;
 	long	roof_color;
+	//optionals sprites
+	char	*crosshair;
 	//the map itself
 	char	**raw_map;
 	t_uchar	**parsed_map;
@@ -98,28 +100,23 @@ typedef struct s_entity {
 
 }	t_entity;
 
-typedef struct s_wall_img {
-	void	*north_img;
-	int		north_width;
-	int		north_height;
-	void	*south_img;
-	int		south_width;
-	int		south_height;
-	void	*east_img;
-	int		east_width;
-	int		east_height;
-	void	*west_img;
-	int		west_width;
-	int		west_height;
-}	t_wall_img;
+typedef struct s_utils_img {
+	//walls
+	t_img	north_wall;
+	t_img	south_wall;
+	t_img	east_wall;
+	t_img	west_wall;
+	//hud
+	t_img	crosshair;
+}	t_utils_img;
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_wall_img	*wall;
+	t_utils_img	*sprites;
 	t_img		minimap;
 	t_map		*map_s;
-	t_img		main_img;
+//	t_img		main_img;
 	t_entity	player;
 }	t_mlx;
 
@@ -165,7 +162,7 @@ double	get_point_dist(t_coord a, t_coord b);
 
 //mlx utils
 t_img	*create_image(int width, int height, t_mlx *mlx);
-void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
+t_img	read_img_file(char *file, void *mlx);
 char	*img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 void	draw_figures(t_mlx *mlx, int i, int j);

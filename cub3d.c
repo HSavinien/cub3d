@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 14:40:25 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/05 22:55:07 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,8 @@
 #define SOUTH_ANGLE (-M_PI_2)
 #define EAST_ANGLE 0
 #define WEST_ANGLE (M_PI)
-/*
-#define NORTH_ANGLE (1)
-#define SOUTH_ANGLE (2)
-#define EAST_ANGLE 3
-#define WEST_ANGLE (4)
-*/
+
+#define DEFAULT_CROSSHAIR "./sprites/default_crosshair.xpm"
 
 void	set_player_position(t_map *map, t_mlx *mlx_s)
 {
@@ -44,23 +40,24 @@ void	set_player_position(t_map *map, t_mlx *mlx_s)
 t_mlx	do_init(t_map *map)
 {
 	t_mlx		mlx_s;
-	t_wall_img	*img;
 
 	//init mlx
 	mlx_s.mlx_ptr = mlx_init();
 	mlx_s.map_s = map;
 	//create img struct
-	img = ft_calloc(1, sizeof(t_wall_img));
-	//open textures
-	img->north_img = read_img_file(map->north_path, mlx_s.mlx_ptr,
-			&img->north_width, &img->north_height);
-	img->south_img = read_img_file(map->south_path, mlx_s.mlx_ptr,
-			&img->south_width, &img->south_height);
-	img->east_img = read_img_file(map->east_path, mlx_s.mlx_ptr,
-			&img->east_width, &img->east_height);
-	img->west_img = read_img_file(map->west_path, mlx_s.mlx_ptr,
-			&img->west_width, &img->west_height);
-	mlx_s.wall = img;
+	mlx_s.sprites = ft_calloc(1, sizeof(t_utils_img));
+	if (!mlx_s.sprites)
+		ft_error(MSG_MALLOC, ERR_MALLOC);
+	//open wall textures
+	mlx_s.sprites->north_wall = read_img_file(map->north_path, mlx_s.mlx_ptr);
+	mlx_s.sprites->south_wall = read_img_file(map->south_path, mlx_s.mlx_ptr);
+	mlx_s.sprites->east_wall = read_img_file(map->east_path, mlx_s.mlx_ptr);
+	mlx_s.sprites->west_wall = read_img_file(map->west_path, mlx_s.mlx_ptr);
+	//open other sprites
+	if (map->crosshair)
+		mlx_s.sprites->crosshair = read_img_file(map->crosshair, mlx_s.mlx_ptr);
+	else
+		mlx_s.sprites->crosshair = read_img_file(DEFAULT_CROSSHAIR, mlx_s.mlx_ptr);
 	//init player
 	set_player_position(map, &mlx_s);
 	return (mlx_s);
@@ -85,32 +82,3 @@ int	main(int ac, char **av)
 	mlx_loop(mlx_s.mlx_ptr);
 }
 
-/*
-int main (void)
-{
-	t_coord ray;
-	double dir, slope, offset;
-
-	ray.x = 24.0;
-	ray.y = 3.5;
-
-	// 30 = 0.523599 ; 90 = 1.5708 : 150 = 2.61799 ; 180 = 3.14159 ; 210 = 3.66519 ; 330 = 5.75959;
-	slope = 0.577350;
-	offset = -10.645082;
-	
-	dir = 0;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 0:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-	
-	dir = 1.5708;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 90:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-	
-	dir = 3.14159;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 180:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-	
-	dir = 6.28319;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 360:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-}*/

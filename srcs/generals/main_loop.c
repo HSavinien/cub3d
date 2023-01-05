@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 15:14:38 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/05 22:58:52 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ void	draw_background(t_mlx *mlx, t_img *img)
 	(void) mlx;
 }
 
+void	draw_crosshair(t_mlx *mlx)
+{
+	t_img	cross;
+	cross = mlx->sprites->crosshair;
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, cross.img_ptr,
+			WIN_W/2 - cross.width/2, WIN_H/2 - cross.height/2);
+}
+
 /* the function called by mlx_loop_hook.
  * it will call everything that must be done in this loop
  */
@@ -60,6 +68,7 @@ int	main_loop(t_mlx *mlx)
 	//add minimap
 	init_minimap(mlx);
 	draw_minimap(mlx);
+	draw_crosshair(mlx);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->minimap.img_ptr);
 	mlx->minimap.img_ptr = NULL;
 	return (0);
