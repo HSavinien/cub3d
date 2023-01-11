@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/05 23:50:52 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:40:44 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 	}
 }
 
+
 t_wall_data	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 {
 	t_wall_data	wall_s;
@@ -67,10 +68,9 @@ t_wall_data	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 	//find next wall
 	find_wall(angle, &wall_s, &mlx->player, mlx->map_s);
 	//use trigo/pythagore to calculate 'straight' distance (anti fish eye)
-	wall_s.distance *= cos(angle - mlx->player.direction);
+	wall_s.distance *= fabs(cos(angle - mlx->player.direction));
 	//calculate wall height
-	wall_s.height = (DEPTH/wall_s.distance)*WALL_H;
-	//if jump is implemented, it goes there--------------------------------------JUMP
+	wall_s.height = (DEPTH / wall_s.distance) * WALL_H;
 	//fill image with pixel column;
 	draw_wall(ray_num, wall_s, screen);
 	return(wall_s);
