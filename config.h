@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 04:22:52 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/11 20:42:30 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:27:12 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_W 1900	//window width. if program is too laggy, try lowering it
 # define WIN_H 950	//window height.
 //the angle of the field of view, in degree. try negative values for maximum lol
-# define DEG_FOV 120
+# define DEG_FOV 60
 # define WALL_H	1	//the height of the wall. the bigger the higher
 # define DEPTH	1	//how fast the wall will shrink when they are far
 

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/10 20:04:24 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:28:05 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@
 //window values
 # define WIN_TITLE "placeholder title"
 # define FOV (DEG_FOV*M_PI/180)	//for more user-friendliness
+
+//wall data values
+#define NORTH_FACE 1
+#define SOUTH_FACE 2
+#define EAST_FACE 3
+#define WEST_FACE 4
 
 //constantes
 # define EPSILON 0.00001
@@ -145,6 +151,7 @@ t_uint	read_color(char *color_code, char *full_line, int line_nb);
 void	raycasting_start(t_mlx *mlx, t_img *screen);
 int		main_loop(t_mlx *mlx);
 void	draw_wall(int ray_num, t_wall_data wall, t_img *screen);
+void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx);
 int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
 void	get_ray_angle(t_mlx *mlx, double *angles);
 //void    get_first_pos(t_coord *ray, double dir, double slope, double offset);
@@ -166,7 +173,7 @@ double	get_point_dist(t_coord a, t_coord b);
 //mlx utils
 t_img	*create_image(int width, int height, t_mlx *mlx);
 t_img	read_img_file(char *file, void *mlx);
-char	*img_get_pixel(t_img *img, int x, int y);
+int		img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 void	draw_figures(t_mlx *mlx, int i, int j);
 void	draw_minimap(t_mlx *mlx);

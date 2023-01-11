@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/05 13:46:48 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/12 00:26:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,15 @@ t_img	*create_image(int width, int height, t_mlx *mlx)
 	return (new);
 }
 
-/* function that get a pointer, as a char*, to the pixel (x,y) in the image img.
- * the returned value is the first char of the pixel, aka the alpha chanel
- * a NULL pointer is returned if the pixel would be out of the image.
- * the last tree lines (get to the line y, get to column x of line, return)
- * could have been compresed in one. it wasn't for readability purpose.
- */
-char	*img_get_pixel(t_img *img, int x, int y)
+int	img_get_pixel(t_img *img, int x, int y)
 {
-	char	*pixel;
+	int	pixel;
 
-	if (x > img->width || y > img->height || img->data)
-		return (NULL);
-	pixel = (char *)img->data;
-	pixel += y * img->width * 4;
-	pixel += x * 4;
+	if (x > img->width || y > img->height || img->data == NULL)
+		return (-1);
+	pixel = y * img->size_l + x * (img->bpp / 8);
 	return (pixel);
+	
 }
 
 /* function that give the specified to the specified pixel in img.

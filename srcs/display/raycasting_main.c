@@ -6,16 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/11 21:53:33 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:29:43 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-#define NORTH_FACE 1
-#define SOUTH_FACE 2
-#define EAST_FACE 3
-#define WEST_FACE 4
 
 /* function that check if the ray coordinate are against a wall.
  * if it is against a wall, it fill the data structure and return 1.
@@ -72,7 +67,7 @@ t_wall_data	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 	//calculate wall height
 	wall_s.height = (DEPTH / wall_s.distance);
 	//fill image with pixel column;
-	draw_wall(ray_num, wall_s, screen);
+	draw_wall_img(ray_num, wall_s, screen, mlx);
 	return(wall_s);
 }
 
