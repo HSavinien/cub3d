@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 13:57:42 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:01:47 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,13 @@
 #define MSG_DUPLI "two map found in file. each file sould contain only one map"
 #define MSG_MAP_LAST "no data can follow the map. Blame the subject, not me"
 
-int	is_line_empty(char *str)
+int	read_format_line_optional(char **tokenised_line, t_map *map_struct)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (1);
-	while (str[i])
-	{
-		if (!ft_isspace(str[i ++]))
-			return (0);
-	}
+	if (!strcmp(tokenised_line[0], "CR"))
+		map_struct->crosshair = ft_strdup(tokenised_line[1]);
+	else
+		return (0);
 	return (1);
-}
-
-char	*get_next_filed_line(int fd, int *line_num)
-{
-	char	*line;
-	int		nb_line;
-
-	line = get_next_line(fd);
-	nb_line = 1;
-	while (line && is_line_empty(line))
-	{
-		free(line);
-		line = get_next_line(fd);
-		nb_line ++;
-	}
-	if (line_num)
-		line_num += nb_line;
-	return (line);
 }
 
 void	read_format_line(char *line, t_map *map_struct, int line_nb)
@@ -73,7 +49,7 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb)
 		map_struct->floor_color = read_color(tokenised_line[1], line, line_nb);
 	else if (!strcmp(tokenised_line[0], "C"))
 		map_struct->roof_color = read_color(tokenised_line[1], line, line_nb);
-	else
+	else if (!read_format_line_optional(tokenised_line, map_struct))
 		err_mapfile(line_nb, line, ERR_WRONG_ID_MSG, ERR_FILE_WRONG_ID);
 	destroy_array(tokenised_line);
 	free (line);

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/13 17:32:49 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:02:33 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ double	correct_fisheye(t_wall_data wall_s, double ray_angle, double player_dir);
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
 char	**get_tokenised_line(char *line);
+int		is_line_empty(char *str);
 
 //general utils
 void	*destroy_array(char **array);
