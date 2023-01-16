@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 21:56:48 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/16 18:30:20 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:39:11 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,16 @@ void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx)
 	double	modf_buff;
 	
 	//get number of pixel based on height so that a wall is square when WALL_H=1
-	pixel_height = (wall.height * WIN_W/FOV);
-	pos_y = ft_max(0, WIN_H/2 - pixel_height/2);
-	get_wall_img(&wall, mlx);
 	wall.texture = get_wall_img(&wall, mlx);
 	if (wall.side == NORTH_FACE || wall.side == SOUTH_FACE)
 		wall.texture_column = modf(wall.pos.x, &modf_buff) * wall.texture->width;
 	else
 		wall.texture_column = modf(wall.pos.y, &modf_buff) * wall.texture->width;
-	i = ft_max(0, -pos_y);
+	pixel_height = (wall.height * WIN_W/FOV);
+	pos_y = ft_max(0, WIN_H/2 - pixel_height/2);
+	i = -ft_min(0, WIN_H/2 - pixel_height/2);
 	while (i ++ < pixel_height && pos_y < WIN_H)
 	{
-//		dprintf(2, "loop %d\n",i);//DEBUG
 		if (pos_y > 0 && pos_y < WIN_H)
 			img_set_pixel(screen, ray_num, pos_y, get_pixel_color(
 			i - 1, pixel_height, &wall));
