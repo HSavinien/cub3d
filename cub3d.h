@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/11 23:28:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:32:49 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ typedef struct s_wall_data {
 	int		side;
 	double	height;
 	t_coord	pos;
+	t_img	*texture;
+	int		texture_column;
 }	t_wall_data;
 
 /*prototypes--------------------------------------------------------prototypes*/

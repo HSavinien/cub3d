@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/12 00:26:21 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:53:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ t_img	read_img_file(char *file, void *mlx)
 {
 	t_img	img;
 
-	img.img_ptr = NULL;
-		img.img_ptr = mlx_xpm_file_to_image(mlx, file, &img.width, &img.height);
+	img.img_ptr = mlx_xpm_file_to_image(mlx, file, &img.width, &img.height);
 	if (!img.img_ptr)
 		ft_error(ft_strjoin(file, MSG_IMG_OPEN), ERR_IMG_OPEN);
 	img.data = (int *)mlx_get_data_addr(img.img_ptr, &img.bpp, &img.size_l,
@@ -48,15 +47,18 @@ t_img	*create_image(int width, int height, t_mlx *mlx)
 	return (new);
 }
 
+/* function that return the pixel [x][y] from the image img
+ * it is expected that the image is fully initalised.
+ * else, the function might crash
+ */
 int	img_get_pixel(t_img *img, int x, int y)
 {
 	int	pixel;
 
-	if (x > img->width || y > img->height || img->data == NULL)
+	if (x > img->width || y > img->height)
 		return (-1);
-	pixel = y * img->size_l + x * (img->bpp / 8);
+	pixel = img->data[y * (img->size_l/4) + x];
 	return (pixel);
-	
 }
 
 /* function that give the specified to the specified pixel in img.

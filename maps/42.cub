@@ -1,8 +1,8 @@
 #wall address :
-SO	./sprites/wall/42_south.xpm
-NO	./sprites/wall/42_north.xpm
-WE	./sprites/wall/42_west.xpm
-EA	./sprites/wall/42_east.xpm
+SO	./sprites/tmongell.xpm
+NO	./sprites/gphilipp.xpm
+WE	./sprites/cmaroude.xpm
+EA	./sprites/achansel.xpm
 
 #ceiling in blue, floor in white 
 C	233,239,240
