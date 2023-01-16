@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 21:56:48 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/11 23:30:31 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:30:20 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,16 @@ void	draw_wall(int ray_num, t_wall_data wall, t_img *screen)
 }
 
 //need to know : ray_impact coordinate, img, pos_y, pixel height
-int	get_pixel_color(int line, int height, t_img *ref_img, t_wall_data *wall)
+int	get_pixel_color(int draw_line, int draw_height, t_wall_data *wall)
 {
-	double	wall_column;
-	int	img_column;
 	int	img_line;
+	int	color;
 
-	//find where we are on wall
-	if (wall->side == NORTH_FACE || wall->side == SOUTH_FACE)
-		wall_column = wall->pos.x - floor(wall->pos.x);
-	else
-		wall_column = wall->pos.y - floor(wall->pos.y);
-	//get column num in img
-	img_column = ref_img->width * wall_column;
 	//get line num in img
-	img_line = ref_img->height * (line/height);
-	//extract pixel data from image
-	return (img_get_pixel(ref_img, img_column, img_line));
+	img_line = 1.0*draw_line/draw_height * wall->texture->height;
+	//extract draw data from image
+	color = img_get_pixel(wall->texture, wall->texture_column, img_line);
+		return (color & 0x00FFFFFF);
 }
 
 /*function that find which texture to use for the wall*/
@@ -89,18 +82,30 @@ void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx)
 	int		pos_y;
 	int		pixel_height;
 	int 	i;
+	double	modf_buff;
 	
-	pos_y = WIN_H / 2;
 	//get number of pixel based on height so that a wall is square when WALL_H=1
 	pixel_height = (wall.height * WIN_W/FOV);
-	pos_y -= pixel_height/2;
+	pos_y = ft_max(0, WIN_H/2 - pixel_height/2);
+	get_wall_img(&wall, mlx);
+	wall.texture = get_wall_img(&wall, mlx);
+	if (wall.side == NORTH_FACE || wall.side == SOUTH_FACE)
+		wall.texture_column = modf(wall.pos.x, &modf_buff) * wall.texture->width;
+	else
+		wall.texture_column = modf(wall.pos.y, &modf_buff) * wall.texture->width;
 	i = ft_max(0, -pos_y);
-	pos_y = ft_max(0, pos_y);
 	while (i ++ < pixel_height && pos_y < WIN_H)
 	{
+//		dprintf(2, "loop %d\n",i);//DEBUG
 		if (pos_y > 0 && pos_y < WIN_H)
 			img_set_pixel(screen, ray_num, pos_y, get_pixel_color(
-			pos_y, pixel_height, get_wall_img(&wall, mlx), &wall));
+			i - 1, pixel_height, &wall));
 		pos_y ++;
 	}
 }
+
+/* psychedelic lines : 
+ 
+ * img_set_pixel(screen, ray_num, pos_y, (pos_y*ray_num) << (wall.side-1) | (i*ray_num <<16));
+ 
+ */
