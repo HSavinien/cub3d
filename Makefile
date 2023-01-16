@@ -65,6 +65,10 @@ fclean:		clean
 
 re:		fclean all
 
+conf:
+	@rm -f ${OBJS} ${BOBJS} ${NAME}
+	@make
+
 #library rules
 library:	mlx libft
 

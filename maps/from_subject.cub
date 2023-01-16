@@ -1,7 +1,7 @@
-NO sprites/basic.xpm
-SO sprites/basic.xpm
-WE sprites/basic.xpm
-EA sprites/basic.xpm
+NO sprites/helian_door_background.xpm
+SO sprites/door.xpm
+WE sprites/helian_floor.xpm
+EA sprites/helian_floor_no_motif.xpm
 F 220,100,0
 C 225,30,0
         1111111111111111111111111
