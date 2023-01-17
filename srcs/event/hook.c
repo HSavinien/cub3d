@@ -6,28 +6,22 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/18 16:07:24 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 08:22:39 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "movement.h"
 
-int	close_win(t_mlx *mlx)
+double	dir_move(t_mlx *mlx)
 {
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	exit (0);
-}
-
-double	dir_move(int key)
-{
-	if ((key == MOVE_BACKWARD) || (key == MOVE_LEFT))
+	if ((mlx->key.backwd == 1) || (mlx->key.left == 1))
 		return (-1.0);
 	else
 		return (1.0);
 }
 
-int	do_move(int key, t_mlx *mlx)
+int	do_move(t_mlx *mlx)
 {
 	t_vector	vdir;
 	t_point		pos_tmp;
@@ -35,14 +29,17 @@ int	do_move(int key, t_mlx *mlx)
 	double		dir;
 
 	vdir = init_data_dir(mlx);
-	dir = dir_move(key);
-	if ((key == MOVE_LEFT) || (key == MOVE_RIGHT))
+	dir = dir_move(mlx);
+	if ((mlx->key.left == 1) || (mlx->key.right == 1))
 	{
 		vdir.dir.x = (cos(mlx->player.direction + M_PI_2) * SPEED + vdir.pos.x);
 		vdir.dir.y = (sin(mlx->player.direction + M_PI_2) * SPEED + vdir.pos.y);
 	}
-	vect = (t_point){(vdir.dir.x - vdir.pos.x) * dir,
-		(vdir.dir.y - vdir.pos.y) * dir};
+	else
+	{
+		vect = (t_point){(vdir.dir.x - vdir.pos.x) * dir,
+			(vdir.dir.y - vdir.pos.y) * dir};
+	}
 	pos_tmp.x = (vect.x * SPEED) + vdir.pos.x;
 	pos_tmp.y = (vect.y * SPEED) + vdir.pos.y;
 	if (mlx->map_s->parsed_map[(int)pos_tmp.y][(int)pos_tmp.x] == 1)
@@ -52,19 +49,17 @@ int	do_move(int key, t_mlx *mlx)
 	return (0);
 }
 
-int	event_hook(int key, t_mlx *mlx)
+int	event_hook(t_mlx *mlx)
 {
 	double	dir_deg;
 
 	dir_deg = rad_to_degree(mlx->player.direction);
-	if (key == KEY_ESC)
-		close_win(mlx);
-	if ((key == MOVE_FORWARD) || (key == MOVE_BACKWARD) || (key == MOVE_LEFT)
-		|| (key == MOVE_RIGHT))
-		do_move(key, mlx);
-	if (key == TURN_RIGHT)
+	if (mlx->key.forwd == 1 || mlx->key.backwd == 1 || mlx->key.left == 1
+		|| mlx->key.right == 1)
+		do_move(mlx);
+	if (mlx->key.rot_right == 1)
 		dir_deg = (dir_deg + 1.0);
-	if (key == TURN_LEFT)
+	if (mlx->key.rot_left == 1)
 		dir_deg = (dir_deg - 1.0);
 	mlx->player.direction = dir_deg * (M_PI / 180.0);
 	return (0);

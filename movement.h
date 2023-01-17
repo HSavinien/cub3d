@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/19 17:11:38 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 08:17:00 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_vector
 /* draw_minimap.c */
 void		draw_minimap(t_mlx *mlx);
 void		draw_filledcircle(t_mlx *mlx, double x, double y);
+void		draw_line(t_mlx *mlx, t_point player, t_point dir);
 
 /* minimap_utils.c */
 void		init_minimap(t_mlx *mlx);
@@ -50,8 +51,7 @@ void		init_background(t_mlx *mlx);
 void		init_minimap(t_mlx *mlx);
 
 /* hook.c */
-int			close_win(t_mlx *mlx);
-int			event_hook(int key, t_mlx *mlx);
+int			event_hook(t_mlx *mlx);
 
 /* hook_utils */
 t_vector	init_data_dir(t_mlx *mlx);

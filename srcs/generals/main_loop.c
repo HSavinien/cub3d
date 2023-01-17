@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 15:14:38 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 08:22:43 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main_loop(t_mlx *mlx)
 		return (0);
 	//init this image with ground and ceiling color
 	draw_background(mlx, main_disp_img);
+	event_hook(mlx);
 	//call raycasting function
 	raycasting_start(mlx, main_disp_img);
 	//display image

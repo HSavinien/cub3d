@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 14:40:25 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 08:15:30 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ t_mlx	do_init(t_map *map)
 	return (mlx_s);
 }
 
+void	init_move(t_mlx *mlx)
+{
+		mlx->key.forwd = 0;
+		mlx->key.backwd = 0;
+		mlx->key.left = 0;
+		mlx->key.right = 0;
+		mlx->key.rot_left = 0;
+		mlx->key.rot_right = 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_map	map;
@@ -75,42 +85,14 @@ int	main(int ac, char **av)
 		return (printf("error args\nusage : <%s> <file.cub>\n", av[0]));
 	map = parsing(av[1]);
 	mlx_s = do_init(&map);
+	init_move(&mlx_s);
 	//open window
 	mlx_s.win_ptr = mlx_new_window(mlx_s.mlx_ptr, WIN_W, WIN_H, WIN_TITLE);
 	//event hook
-	mlx_hook(mlx_s.win_ptr, EVENT_KEY_PRESS, 0, event_hook, &mlx_s);
 	mlx_hook(mlx_s.win_ptr, EVENT_WIN_CLOSE, 0, close_win, &mlx_s);
+	mlx_hook(mlx_s.win_ptr, EVENT_KEY_PRESS, 0, keypress, &mlx_s);
 	mlx_loop_hook(mlx_s.mlx_ptr, main_loop, (void *)(&mlx_s));
+	mlx_hook(mlx_s.win_ptr, EVENT_KEY_RELEASE, 0, key_release, &mlx_s);
 	//mlx loop
 	mlx_loop(mlx_s.mlx_ptr);
 }
-
-/*
-int main (void)
-{
-	t_coord ray;
-	double dir, slope, offset;
-
-	ray.x = 24.0;
-	ray.y = 3.5;
-
-	// 30 = 0.523599 ; 90 = 1.5708 : 150 = 2.61799 ; 180 = 3.14159 ; 210 = 3.66519 ; 330 = 5.75959;
-	slope = 0.577350;
-	offset = -10.645082;
-	
-	dir = 0;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 0:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-	
-	dir = 1.5708;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 90:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-	
-	dir = 3.14159;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 180:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-	
-	dir = 6.28319;
-	get_next_pos(&ray, dir, slope, offset);
-	printf("main 360:\nx: %f, y: %f, dir: %f, slope: %f, offset: %f\n", ray.x, ray.y, dir, slope, offset);
-}*/

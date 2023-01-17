@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2022/12/19 17:09:59 by cmaroude         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:22:29 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_square(t_mlx *mlx, int x, int y, int color)
 		while (j < (TILE_SMM))
 		{
 			mlx->minimap.data[((int)(x) + i) * mlx->map_s->nb_column * TILE_SMM
-			   + (int)(j + y)] = color;
+				+ (int)(j + y)] = color;
 			j++;
 		}
 		i++;
@@ -54,8 +54,9 @@ void	draw_filledcircle(t_mlx *mlx, double x, double y)
 			if ((int)(x * TILE_SMM) < mlx->map_s->nb_column * TILE_SMM &&
 				(int)(y * TILE_SMM) < mlx->map_s->nb_line * TILE_SMM)
 			{
-				mlx->minimap.data[(int)(ty + (y * TILE_SMM))*(mlx->map_s->nb_column 
-						* TILE_SMM) + (int)(tx + (x * TILE_SMM))] = 0xFF0000;
+				mlx->minimap.data[(int)(ty + (y * TILE_SMM))
+					*(mlx->map_s->nb_column * TILE_SMM)
+					+ (int)(tx + (x * TILE_SMM))] = 0xFF0000;
 			}
 		}
 		i++ ;
@@ -65,7 +66,7 @@ void	draw_filledcircle(t_mlx *mlx, double x, double y)
 void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 {
 	t_point	delta;
-	int	img_width;
+	int		img_width;
 	double	step;
 
 	img_width = mlx->map_s->nb_column * TILE_SMM;
@@ -78,11 +79,12 @@ void	draw_line(t_mlx *mlx, t_point player, t_point dir)
 	delta.x = delta.x / step;
 	delta.y = delta.y / step;
 	while ((player.x < img_width && player.y < mlx->map_s->nb_line * TILE_SMM
-		&& player.x > 0.0 && player.y > 0.0))
+			&& player.x > 0.0 && player.y > 0.0))
 	{
 		if (mlx->map_s->raw_map[(int)player.y / TILE_SMM]
 			[(int)player.x / TILE_SMM] == '1')
-			break ;
+		{	//printf("in line x: %f, y: %f\n", player.x / TILE_SMM, player.y / TILE_SMM);
+			break ;}
 		mlx->minimap.data[(int)player.y * img_width + (int)player.x] = 0xFF00FF;
 		player.x += delta.x;
 		player.y += delta.y;
@@ -99,12 +101,12 @@ void	draw_figures(t_mlx *mlx, int i, int j)
 	player = (t_point){mlx->player.pos_x, mlx->player.pos_y};
 	if (mlx->map_s->raw_map[i][j] == '1')
 		draw_square(mlx, i, j, 0xFFFFFF);
-	else if (mlx->map_s->raw_map[i][j] == '0')
-		draw_square(mlx, i, j, 0);
+//	else if (mlx->map_s->raw_map[i][j] == '0')
+//		draw_square(mlx, i, j, 0);
 	draw_filledcircle(mlx, player.x, player.y);
 	do_tile_conv(&dir_pt);
 	do_tile_conv(&player);
-	draw_line(mlx, player, dir_pt);
+//	draw_line(mlx, player, dir_pt);
 }
 
 void	draw_minimap(t_mlx *mlx)
@@ -120,7 +122,7 @@ void	draw_minimap(t_mlx *mlx)
 		end = false;
 		while (j < mlx->map_s->nb_column)
 		{
-			draw_square(mlx, i, j, 0x80000000);
+			//draw_square(mlx, i, j, 0x80000000);
 			if (end == false && mlx->map_s->raw_map[i][j] != '\0')
 				draw_figures(mlx, i, j);
 			else

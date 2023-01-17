@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 22:57:39 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 08:21:04 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@
 
 typedef unsigned char	t_uchar;
 typedef unsigned int	t_uint;
+
+typedef struct s_key_data
+{
+	int	forwd;
+	int backwd;
+	int	left;
+	int right;
+	int rot_left;
+	int rot_right;
+}	t_key_data;
 
 typedef struct s_img
 {
@@ -121,6 +131,7 @@ typedef struct s_mlx {
 	t_map		*map_s;
 	t_img		main_img;
 	t_entity	player;
+	t_key_data	key;
 }	t_mlx;
 
 typedef struct s_coord {
@@ -175,7 +186,9 @@ void	init_background(t_mlx *mlx);
 void	init_minimap(t_mlx *mlx);
 int		loop(t_mlx *mlx);
 int		close_win(t_mlx *mlx);
-int		event_hook(int key, t_mlx *mlx);
+int		event_hook(t_mlx *mlx);
+int		keypress(int key, t_mlx *mlx);
+int		key_release(int key, t_mlx *mlx);
 
 //error
 void	*ft_error(char *msg, int ret);

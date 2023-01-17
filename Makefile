@@ -11,6 +11,7 @@ SRCS	=	cub3d.c \
 			srcs/generals/main_loop.c \
 			srcs/event/hook.c \
 			srcs/event/hook_utils.c \
+			srcs/event/key_event.c \
 			srcs/bonus/draw_minimap.c \
 			srcs/bonus/minimap_utils.c \
 			srcs/display/raycasting_main.c \
