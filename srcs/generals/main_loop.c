@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 08:22:43 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 08:55:43 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	draw_background(t_mlx *mlx, t_img *img)
 void	draw_crosshair(t_mlx *mlx)
 {
 	t_img	cross;
+
 	cross = mlx->sprites->crosshair;
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, cross.img_ptr,
-			WIN_W/2 - cross.width/2, WIN_H/2 - cross.height/2);
+		WIN_W / 2 - cross.width / 2, WIN_H / 2 - cross.height / 2);
 }
 
 /* the function called by mlx_loop_hook.
