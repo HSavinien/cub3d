@@ -6,16 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 22:53:15 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:29:43 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-#define NORTH_FACE 1
-#define SOUTH_FACE 2
-#define EAST_FACE 3
-#define WEST_FACE 4
 
 /* function that check if the ray coordinate are against a wall.
  * if it is against a wall, it fill the data structure and return 1.
@@ -54,27 +49,26 @@ void	find_wall(double angle, t_wall_data *data, t_entity *player, t_map *map)
 	//init ray position;
 	ray.x = player->pos_x;
 	ray.y = player->pos_y;
-	//do first jump
-	get_first_pos(&ray, player->direction, slope, offset);
 	//while no wall found and didn't left map area
 	while (!check_wall(ray, map, data, player)) {
-		get_next_pos(&ray, player->direction, slope, offset);
+		get_next_pos(&ray, angle, slope, offset);
 	}
 }
 
-void	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
+
+t_wall_data	cast_ray(double angle, int ray_num, t_img *screen, t_mlx *mlx)
 {
 	t_wall_data	wall_s;
 
 	//find next wall
 	find_wall(angle, &wall_s, &mlx->player, mlx->map_s);
 	//use trigo/pythagore to calculate 'straight' distance (anti fish eye)
-	wall_s.distance *= cos(angle - mlx->player.direction);
+	wall_s.distance *= fabs(cos(angle - mlx->player.direction));
 	//calculate wall height
-	wall_s.height = WALL_H / (wall_s.distance * DEPTH);
-	//if jump is implemented, it goes there--------------------------------------JUMP
+	wall_s.height = (DEPTH / wall_s.distance);
 	//fill image with pixel column;
-	draw_wall(ray_num, wall_s, screen);
+	draw_wall_img(ray_num, wall_s, screen, mlx);
+	return(wall_s);
 }
 
 void	raycasting_start(t_mlx *mlx, t_img *screen)

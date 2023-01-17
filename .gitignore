@@ -2,6 +2,7 @@
 .vs_code
 *.o
 *.a
+*.d
 .*.sw*
 *.dSYM
 *.tar.gz

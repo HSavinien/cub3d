@@ -6,28 +6,23 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 13:34:00 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:53:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-#define MSG_IMG_FORMAT " is not a xpm or png file. please correct that"
 #define MSG_IMG_OPEN " could not be oppened as a XPM, check name/right/content"
 
-void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h)
+t_img	read_img_file(char *file, void *mlx)
 {
-	void	*img;
+	t_img	img;
 
-	img = NULL;
-	if (!ft_strcmp(ft_strrchr(file, '.'), ".xpm"))
-		img = mlx_xpm_file_to_image(mlx, file, img_w, img_h);
-//	else if (!ft_strcmp(ft_strrchr(file, '.'), ".png"))
-//		img = mlx_png_file_to_image(mlx, file, img_w, img_h);
-	else
-		ft_error(ft_strjoin(file, MSG_IMG_FORMAT), ERR_IMG_OPEN);
-	if (!img)
+	img.img_ptr = mlx_xpm_file_to_image(mlx, file, &img.width, &img.height);
+	if (!img.img_ptr)
 		ft_error(ft_strjoin(file, MSG_IMG_OPEN), ERR_IMG_OPEN);
+	img.data = (int *)mlx_get_data_addr(img.img_ptr, &img.bpp, &img.size_l,
+			&img.endian);
 	return (img);
 }
 
@@ -52,21 +47,17 @@ t_img	*create_image(int width, int height, t_mlx *mlx)
 	return (new);
 }
 
-/* function that get a pointer, as a char*, to the pixel (x,y) in the image img.
- * the returned value is the first char of the pixel, aka the alpha chanel
- * a NULL pointer is returned if the pixel would be out of the image.
- * the last tree lines (get to the line y, get to column x of line, return)
- * could have been compresed in one. it wasn't for readability purpose.
+/* function that return the pixel [x][y] from the image img
+ * it is expected that the image is fully initalised.
+ * else, the function might crash
  */
-char	*img_get_pixel(t_img *img, int x, int y)
+int	img_get_pixel(t_img *img, int x, int y)
 {
-	char	*pixel;
+	int	pixel;
 
-	if (x > img->width || y > img->height || img->data)
-		return (NULL);
-	pixel = (char *)img->data;
-	pixel += y * img->width * 4;
-	pixel += x * 4;
+	if (x > img->width || y > img->height)
+		return (-1);
+	pixel = img->data[y * (img->size_l/4) + x];
 	return (pixel);
 }
 

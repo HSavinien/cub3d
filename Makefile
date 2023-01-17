@@ -15,6 +15,7 @@ SRCS	=	cub3d.c \
 			srcs/bonus/draw_minimap.c \
 			srcs/bonus/minimap_utils.c \
 			srcs/display/raycasting_main.c \
+			srcs/display/get_next_pos.c \
 			srcs/display/draw_wall.c \
 			srcs/display/ray_utils.c \
 			tmp/debug.c \
@@ -64,6 +65,10 @@ fclean:		clean
 	@echo "\033[1;33mdebug file removed\033[0m"
 
 re:		fclean all
+
+conf:
+	@rm -f ${OBJS} ${BOBJS} ${NAME}
+	@make
 
 #library rules
 library:	mlx libft

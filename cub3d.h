@@ -51,6 +51,12 @@
 # define WIN_TITLE "placeholder title"
 # define FOV (DEG_FOV*M_PI/180)	//for more user-friendliness
 
+//wall data values
+#define NORTH_FACE 1
+#define SOUTH_FACE 2
+#define EAST_FACE 3
+#define WEST_FACE 4
+
 //constantes
 # define EPSILON 0.00001
 
@@ -89,6 +95,8 @@ typedef struct s_map {
 	char	*west_path;
 	long	floor_color;
 	long	roof_color;
+	//optionals sprites
+	char	*crosshair;
 	//the map itself
 	char	**raw_map;
 	t_uchar	**parsed_map;
@@ -108,28 +116,23 @@ typedef struct s_entity {
 
 }	t_entity;
 
-typedef struct s_wall_img {
-	void	*north_img;
-	int		north_width;
-	int		north_height;
-	void	*south_img;
-	int		south_width;
-	int		south_height;
-	void	*east_img;
-	int		east_width;
-	int		east_height;
-	void	*west_img;
-	int		west_width;
-	int		west_height;
-}	t_wall_img;
+typedef struct s_utils_img {
+	//walls
+	t_img	north_wall;
+	t_img	south_wall;
+	t_img	east_wall;
+	t_img	west_wall;
+	//hud
+	t_img	crosshair;
+}	t_utils_img;
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_wall_img	*wall;
+	t_utils_img	*sprites;
 	t_img		minimap;
 	t_map		*map_s;
-	t_img		main_img;
+//	t_img		main_img;
 	t_entity	player;
 	t_key_data	key;
 }	t_mlx;
@@ -145,6 +148,8 @@ typedef struct s_wall_data {
 	int		side;
 	double	height;
 	t_coord	pos;
+	t_img	*texture;
+	int		texture_column;
 }	t_wall_data;
 
 /*prototypes--------------------------------------------------------prototypes*/
@@ -159,25 +164,30 @@ t_uint	read_color(char *color_code, char *full_line, int line_nb);
 void	raycasting_start(t_mlx *mlx, t_img *screen);
 int		main_loop(t_mlx *mlx);
 void	draw_wall(int ray_num, t_wall_data wall, t_img *screen);
+void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx);
 int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
 void	get_ray_angle(t_mlx *mlx, double *angles);
-void    get_first_pos(t_coord *ray, double dir, double slope, double offset);
+//void    get_first_pos(t_coord *ray, double dir, double slope, double offset);
 void	get_next_pos(t_coord *ray, double dir, double slope, double offset);
+double	correct_fisheye(t_wall_data wall_s, double ray_angle, double player_dir);
 
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
 char	**get_tokenised_line(char *line);
+int		is_line_empty(char *str);
 
 //general utils
 void	*destroy_array(char **array);
 int		sign(double nb);
-double	simplificate_angle(double angle);
+double	simplify_angle_full(double angle);
+double	simplify_angle_half(double angle);
+double	get_line_angle(double side1, double side2);
 double	get_point_dist(t_coord a, t_coord b);
 
 //mlx utils
 t_img	*create_image(int width, int height, t_mlx *mlx);
-void	*read_img_file(char *file, void *mlx, int *img_w, int *img_h);
-char	*img_get_pixel(t_img *img, int x, int y);
+t_img	read_img_file(char *file, void *mlx);
+int		img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 void	draw_figures(t_mlx *mlx, int i, int j);
 void	draw_minimap(t_mlx *mlx);
