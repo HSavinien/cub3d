@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 13:35:44 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:13:01 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 void	*ft_error(char *msg, int ret)
 {
 	printf("Error %d :\n%s\n", ret, msg);
-//	system("leaks cub3d");//DEBUG
 	exit(ret);
 }
 
@@ -32,7 +31,6 @@ void	err_mapfile(int line, char *content, char *msg, int code)
 {
 	printf("Error %d : unrecognized patern in file :\n\t%s\n\n", code, msg);
 	printf("on line (%d) : \033[4;91m%s\033[0m\n", line, content);
-//	system("leaks cub3d");//DEBUG
 	exit(code);
 }
 
@@ -76,7 +74,6 @@ void	err_map_form(int pos[2], char **map, char *msg, int code)
 		printf("\n");
 		i ++;
 	}
-//	system("leaks cub3d");//DEBUG
 	exit(code);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:24:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/10 20:11:59 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:16:06 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	sign(double nb)
 		return (1);
 }
 
-double get_point_dist(t_coord a, t_coord b)
+double	get_point_dist(t_coord a, t_coord b)
 {
 	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
 }
@@ -29,7 +29,7 @@ double get_point_dist(t_coord a, t_coord b)
  * of any angle, positive or negative.
  */
 
-double simplify_angle_full(double angle)
+double	simplify_angle_full(double angle)
 {
 	while (angle < 0)
 		angle += 2 * M_PI;
@@ -38,8 +38,7 @@ double simplify_angle_full(double angle)
 	return (angle);
 }
 
-
-double simplify_angle_half(double angle)
+double	simplify_angle_half(double angle)
 {
 	while (angle < -M_PI)
 		angle += 2 * M_PI;
@@ -53,10 +52,10 @@ double simplify_angle_half(double angle)
  */
 double	get_line_angle(double side1, double side2)
 {
-	double diff;
+	double	diff;
 
 	side1 = simplify_angle_half(side1);
 	side2 = simplify_angle_half(side2);
 	diff = fabs(side1 - side2);
-    return (fmin(diff, 2*M_PI - diff));
+	return (fmin(diff, 2 * M_PI - diff));
 }

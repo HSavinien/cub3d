@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/16 16:53:51 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:16:29 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	img_get_pixel(t_img *img, int x, int y)
 
 	if (x > img->width || y > img->height)
 		return (-1);
-	pixel = img->data[y * (img->size_l/4) + x];
+	pixel = img->data[y * (img->size_l / 4) + x];
 	return (pixel);
 }
 
