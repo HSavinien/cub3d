@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/17 14:31:33 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:06:12 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ double	dir_move(t_mlx *mlx, int l)
 		return (-1.0);
 	else
 		return (1.0);
+}
+
+int	verif_col(double x, double y, t_mlx *mlx)
+{
+	int	tmp_x;
+	int	tmp_y;
+
+	tmp_y = y - 0.2;
+	tmp_x = x - 0.2;
+	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
+		return (1);
+	tmp_x = x + 0.2;
+	tmp_y = y + 0.2;
+	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
+		return (1);
+	return (0);
 }
 
 int	do_move(t_mlx *mlx, int l)
@@ -43,7 +59,7 @@ int	do_move(t_mlx *mlx, int l)
 		(vdir.dir.y - vdir.pos.y) * dir};
 	pos_tmp.x = (vect.x * SPEED) + vdir.pos.x;
 	pos_tmp.y = (vect.y * SPEED) + vdir.pos.y;
-	if (mlx->map_s->parsed_map[(int)pos_tmp.y][(int)pos_tmp.x] == 1)
+	if (verif_col(pos_tmp.x, pos_tmp.y, mlx))
 		return (1);
 	mlx->player.pos_x = pos_tmp.x;
 	mlx->player.pos_y = pos_tmp.y;
@@ -52,9 +68,6 @@ int	do_move(t_mlx *mlx, int l)
 
 int	event_hook(t_mlx *mlx)
 {
-	double	dir_deg;
-
-	dir_deg = rad_to_degree(mlx->player.direction);
 	if ((mlx->key.forwd || mlx->key.backwd)
 		&& !(mlx->key.forwd && mlx->key.backwd))
 		do_move(mlx, 0);
@@ -63,10 +76,9 @@ int	event_hook(t_mlx *mlx)
 	if (!(mlx->key.rot_left && mlx->key.rot_right))
 	{
 		if (mlx->key.rot_right)
-			dir_deg = (dir_deg + 2);
+			mlx->player.direction += 0.025;
 		if (mlx->key.rot_left)
-			dir_deg = (dir_deg - 2);
+			mlx->player.direction -= 0.025;
 	}
-	mlx->player.direction = dir_deg * (M_PI / 180.0);
 	return (0);
 }
