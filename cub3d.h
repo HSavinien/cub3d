@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 08:21:04 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:43:49 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ typedef struct s_wall_data {
 	double	height;
 	t_coord	pos;
 	t_img	*texture;
-	int		texture_column;
+	int		texture_col;
 }	t_wall_data;
 
 /*prototypes--------------------------------------------------------prototypes*/
@@ -163,11 +163,9 @@ t_uint	read_color(char *color_code, char *full_line, int line_nb);
 //display
 void	raycasting_start(t_mlx *mlx, t_img *screen);
 int		main_loop(t_mlx *mlx);
-void	draw_wall(int ray_num, t_wall_data wall, t_img *screen);
 void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx);
 int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
 void	get_ray_angle(t_mlx *mlx, double *angles);
-//void    get_first_pos(t_coord *ray, double dir, double slope, double offset);
 void	get_next_pos(t_coord *ray, double dir, double slope, double offset);
 double	correct_fisheye(t_wall_data wall_s, double ray_angle, double player_dir);
 
