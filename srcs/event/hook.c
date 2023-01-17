@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/17 17:06:12 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:25:21 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	event_hook(t_mlx *mlx)
 	if (!(mlx->key.rot_left && mlx->key.rot_right))
 	{
 		if (mlx->key.rot_right)
-			mlx->player.direction += 0.025;
+			mlx->player.direction += 0.020;
 		if (mlx->key.rot_left)
-			mlx->player.direction -= 0.025;
+			mlx->player.direction -= 0.020;
 	}
 	return (0);
 }

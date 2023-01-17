@@ -142,6 +142,12 @@ typedef struct s_coord {
 	double	y;
 }	t_coord;
 
+typedef struct s_point_map
+{
+	int	i;
+	int	j;
+}	t_point_map;
+
 //used by raycasting function, store both the wall distance and orientation.
 typedef struct s_wall_data {
 	double	distance;
@@ -187,7 +193,7 @@ t_img	*create_image(int width, int height, t_mlx *mlx);
 t_img	read_img_file(char *file, void *mlx);
 int		img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
-void	draw_figures(t_mlx *mlx, int i, int j);
+void	draw_figures(t_mlx *mlx, t_point_map i, t_point_map j);
 void	draw_minimap(t_mlx *mlx);
 void	init_window_images(t_mlx *mlx);
 void	init_background(t_mlx *mlx);
@@ -207,7 +213,7 @@ void	*ret_free(void *ptr);
 //debug
 void	show_struct(t_map *map_s);
 void	show_map(char **map);//use a for loop, bad for the nor==============NORM
-void	draw_figures(t_mlx *mlx, int i, int j);
+void	draw_figures(t_mlx *mlx, t_point_map i, t_point_map j);
 void	init_window_images(t_mlx *mlx);
 void	init_background(t_mlx *mlx);
 int		loop(t_mlx *mlx);

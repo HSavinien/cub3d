@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/17 08:17:00 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:36:07 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define TSIZE 32
 # define TILE_SMM 8
+# define MM_W 20
+# define MM_H 20
 
 /* structures */
 typedef struct s_point
