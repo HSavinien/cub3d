@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 14:00:22 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:38:46 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 	while (++ i < 3)
 	{
 		rgb_values[i] = ft_atoi(rgb_array[i]);
-		if (rgb_values[i] < 0 || rgb_values[i] > 255)
+		if (rgb_values[i] < 0 || rgb_values[i] > 255
+			|| ft_strlen(rgb_array[i]) > 3)
 			err_mapfile(line_nb, full_line, MSG_COLORCODE, ERR_COLORCODE);
 	}
 	destroy_array(rgb_array);
-	return (rgb_values[2] + rgb_values[1] * 256 + rgb_values[0] * 256 * 256);
+	return (rgb_values[2] | rgb_values[1] << 8 | rgb_values[0] << 16);
 }
 
 unsigned int	read_color(char *color_code, char *full_line, int line_nb)

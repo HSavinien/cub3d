@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/16 20:01:47 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:39:46 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	read_format_line(char *line, t_map *map_struct, int line_nb)
 	char	**tokenised_line;
 
 	tokenised_line = get_tokenised_line(line);
-	//expected format : {"ID", "DATA", NULL}
 	if (!tokenised_line || !tokenised_line[0] || !tokenised_line[1]
 		|| tokenised_line[2])
 		err_mapfile(line_nb, line, ERR_NB_TOKEN_MSG, ERR_FILE_NB_TOKEN);
@@ -90,7 +89,7 @@ void	read_cub_file(int fd, t_map *map_struct)
 
 	line = (char *) 1;
 	line_num = 0;
-	while (line && !map_struct->raw_map) //second part to refuse data after map
+	while (line && !map_struct->raw_map)
 	{
 		line = get_next_filed_line(fd, &line_num);
 		line_num ++;
@@ -106,7 +105,6 @@ void	read_cub_file(int fd, t_map *map_struct)
 		else
 			err_mapfile(line_num, line, ERR_PATERN_MSG, ERR_FILE_PATERN);
 	}
-	//to refuse any data comming after the map.
 	line = get_next_filed_line(fd, &line_num);
 	if (line)
 		ft_error(MSG_MAP_LAST, ERR_MAP_LAST);

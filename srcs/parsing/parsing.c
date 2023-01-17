@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/18 13:59:57 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:35:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,18 @@ unsigned char	chkbrdr(int ln, int col, int nbln, char **map)
 	pos[0] = ln;
 	pos[1] = col;
 	nbln --;
-//check if char is on the border
 	if (ln <= 0 || ln >= nbln || col <= 0 || col >= (int)ft_strlen(map[ln]) - 1)
 		err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
-//check special case for outside char
 	if (col > ft_min(ft_strlen(map[ln - 1]), ft_strlen(map[ln + 1])))
 		err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
-//check top char
 	else if (ln <= 0 || char_in_set(map[ln - 1][col], " \t\n"))
 		pos[0] = ft_max(ln -1, 0);
-//check botom
 	else if (ln >= nbln || char_in_set(map[ln + 1][col], " \t\n"))
 		pos[0] = ft_min(ln +1, nbln);
-//check left
 	else if (col <= 0 || (char_in_set(map[ln][col - 1], " \t\n")))
 		pos[1] = ft_max(col -1, 0);
-//check right
 	else if (col >= len || char_in_set(map[ln][col + 1], " \t\n"))
 		pos[1] = ft_min(col +1, len);
-//if no error was found
 	else
 		return (FLOOR);
 	err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);

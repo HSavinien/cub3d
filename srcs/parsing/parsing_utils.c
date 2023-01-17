@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:59:52 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/16 20:01:05 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:41:59 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ char	**get_tokenised_line(char *line)
 	array = ft_calloc(3, sizeof(char *));
 	if (!array)
 		return (ft_error(MSG_MALLOC, ERR_MALLOC));
-	//skip spaces
 	while (ft_isspace(line[i]))
 		i ++;
 	start = i;
-	//skip not space
 	while (!ft_isspace(line[i]))
 		i ++;
-	//dup first token into array[0]
 	array[0] = ft_substr(line, start, i - start);
-	//send the result of a ft_strtrim on the second part to array[2]
 	array[1] = ft_strtrim(line + i, " \t\n\v\f\r");
 	return (array);
 }
