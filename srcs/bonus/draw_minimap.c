@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 20:46:54 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:11:16 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	draw_line(t_mlx *mlx, t_point dir, t_point player)
 {
 	t_point	delta;
 	t_point	player_org;
+	bool		end;
 	int		img_width;
 
 	player_org = (t_point){mlx->player.pos_x, mlx->player.pos_y};
@@ -75,7 +76,13 @@ void	draw_line(t_mlx *mlx, t_point dir, t_point player)
 	while ((player.x < img_width && player.y < MM_H * TILE_SMM
 			&& player.x > 0.0 && player.y > 0.0))
 	{
-		if (mlx->map_s->raw_map[(int)player_org.y / TILE_SMM]
+		end = false;
+		if ( end == false && mlx->map_s->raw_map[(int)player_org.y / TILE_SMM]
+			[(int)player_org.x / TILE_SMM] != '\0')
+			;
+		else
+			end = true;
+		if (end == true ||  mlx->map_s->raw_map[(int)player_org.y / TILE_SMM]
 			[(int)player_org.x / TILE_SMM] == '1')
 			break ;
 		mlx->minimap.data[(int)player.y * img_width + (int)player.x] = 0xFF00FF;
