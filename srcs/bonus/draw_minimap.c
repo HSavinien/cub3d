@@ -6,14 +6,14 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 19:52:25 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:46:54 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <movement.h>
 
-void	draw_square(t_mlx *mlx, int x, int y, int color)
+void	draw_square(t_mlx *mlx, int y, int x, int color)
 {
 	int	i;
 	int	j;
@@ -26,8 +26,10 @@ void	draw_square(t_mlx *mlx, int x, int y, int color)
 		j = 0;
 		while (j < TILE_SMM)
 		{
-			mlx->minimap.data[((int)(x) + i) * MM_W * TILE_SMM
-				+ (int)(j + y)] = color;
+			if ((int)(x) + j < (MM_W * TILE_SMM) &&
+				(int)(y) + i < (MM_H * TILE_SMM))
+			{	mlx->minimap.data[((int)(y) + i) * MM_W * TILE_SMM
+					+ (int)(x + j)] = color;}
 			j++;
 		}
 		i++;
@@ -115,9 +117,9 @@ void	draw_minimap(t_mlx *mlx)
 	mini_m.i += tmp_i - 1;
 	while (mini_m.i < MM_H)
 	{
-		mini_m.j = 0;
+		mini_m.j = -1;
 		end = false;
-		while (mini_m.j++ < MM_W)
+		while (++mini_m.j < MM_W)
 			end = map_line(mlx, &raw_p, &mini_m, end);
 		mini_m.i++;
 	}

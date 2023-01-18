@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 17:33:53 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:33:04 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	verif_col(double x, double y, t_mlx *mlx)
 	buf = 0.1;
 	if (verif_pos(x, y, mlx, buf) == 1)
 		return (1);
-	buf = 0.1;
+	buf = -0.1;
 	if (verif_pos(x, y, mlx, buf) == 1)
 		return (1);
 	return (0);

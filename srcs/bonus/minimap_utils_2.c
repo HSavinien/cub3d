@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:29:03 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 19:52:27 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:31:24 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	map_line(t_mlx *mlx, t_pt_map *raw_p, t_pt_map *mini_m, bool end)
 
 	draw_p.i = mini_m->i + raw_p->i;
 	draw_p.j = mini_m->j + raw_p->j;
+	draw_square(mlx, mini_m->i, mini_m->j, 0x80000000);
 	if ((draw_p.i) < mlx->map_s->nb_line && (draw_p.j) < mlx->map_s->nb_column
 		&& end == false && mlx->map_s->raw_map[draw_p.i][draw_p.j] != '\0')
 		draw_figures(mlx, *mini_m, draw_p);
