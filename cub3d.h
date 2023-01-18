@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 22:39:47 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 17:42:45 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ typedef struct s_point_map
 {
 	int	i;
 	int	j;
-}	t_point_map;
+}	t_pt_map;
 
 //used by raycasting function, store both the wall distance and orientation.
 typedef struct s_wall_data {
@@ -176,7 +176,6 @@ void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx);
 int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
 void	get_ray_angle(t_mlx *mlx, double *angles);
 void	get_next_pos(t_coord *ray, double dir, double slope, double offset);
-double	correct_fisheye(t_wall_data wall_s, double ray_angle, double player_dir);
 
 //parsing utils
 char	*get_next_filed_line(int fd, int *line);
@@ -196,7 +195,7 @@ t_img	*create_image(int width, int height, t_mlx *mlx);
 t_img	read_img_file(char *file, void *mlx);
 int		img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
-void	draw_figures(t_mlx *mlx, t_point_map i, t_point_map j);
+void	draw_figures(t_mlx *mlx, t_pt_map i, t_pt_map j);
 void	draw_minimap(t_mlx *mlx);
 void	init_window_images(t_mlx *mlx);
 void	init_background(t_mlx *mlx);
@@ -216,7 +215,7 @@ void	*ret_free(void *ptr);
 //debug
 void	show_struct(t_map *map_s);
 void	show_map(char **map);//use a for loop, bad for the nor==============NORM
-void	draw_figures(t_mlx *mlx, t_point_map i, t_point_map j);
+void	draw_figures(t_mlx *mlx, t_pt_map i, t_pt_map j);
 void	init_window_images(t_mlx *mlx);
 void	init_background(t_mlx *mlx);
 int		loop(t_mlx *mlx);

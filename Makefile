@@ -14,6 +14,7 @@ SRCS	=	cub3d.c \
 			srcs/event/key_event.c \
 			srcs/bonus/draw_minimap.c \
 			srcs/bonus/minimap_utils.c \
+			srcs/bonus/minimap_utils_2.c \
 			srcs/display/raycasting_main.c \
 			srcs/display/get_next_pos.c \
 			srcs/display/draw_wall.c \
