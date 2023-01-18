@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/17 19:06:53 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 17:33:53 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,32 @@ double	dir_move(t_mlx *mlx, int l)
 		return (1.0);
 }
 
-int	verif_col(double x, double y, t_mlx *mlx)
+int	verif_pos(double x, double y, t_mlx *mlx, double buf)
 {
-	int	tmp_x;
-	int	tmp_y;
+	int		tmp_x;
+	int		tmp_y;
 
-	tmp_y = y - 0.1;
-	tmp_x = x - 0.1;
+	tmp_x = x + buf;
+	tmp_y = y + buf;
+	if (mlx->map_s->parsed_map[(int)y][tmp_x] == 1)
+		return (1);
+	if (mlx->map_s->parsed_map[tmp_y][(int)x] == 1)
+		return (1);
 	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
 		return (1);
-	tmp_x = x + 0.1;
-	tmp_y = y + 0.1;
-	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
+	else
+		return (0);
+}
+
+int	verif_col(double x, double y, t_mlx *mlx)
+{
+	double	buf;
+
+	buf = 0.1;
+	if (verif_pos(x, y, mlx, buf) == 1)
+		return (1);
+	buf = 0.1;
+	if (verif_pos(x, y, mlx, buf) == 1)
 		return (1);
 	return (0);
 }
