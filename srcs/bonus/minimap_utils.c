@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:21:40 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 17:37:31 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/18 18:25:01 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	add_delta(t_point *player, t_point *player_org, t_point delta)
 	player_org->y += delta.y;
 }
 
-int	init_offset(t_mlx *mlx, t_pt_map *raw_p, t_pt_map *mini_m)
+int	get_offset(t_mlx *mlx, t_pt_map *raw_p, t_pt_map *mini_m)
 {
 	int			tmp;
 	t_pt_map	mini;
