@@ -1,0 +1,25 @@
+NO  sprites/helian_floor.xpm
+SO  sprites/zouindowsXP.xpm
+EA  sprites/door.xpm
+WE  sprites/helian_floor_no_motif.xpm
+
+CR	sprites/crosshair_ME1.xpm
+
+DC	sprites/door.xpm
+DO	sprites/crosshair_ME1.xpm
+
+F  #c930cf
+C  julia
+
+
+1111111111111
+10000S0000001
+ 10000000001
+  100000001
+   1000001
+    11011
+   1000001
+  100000001
+ 10000000001
+1000000000001
+1111111111111
