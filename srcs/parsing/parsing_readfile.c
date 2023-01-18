@@ -6,17 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:39:46 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:30:54 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define ERR_NB_TOKEN_MSG "wrong token number : exactly two token required"
-#define ERR_WRONG_ID_MSG "unknown ID token. Valid ID are : [NO|SO|WE|EA|F|C]"
-#define ERR_PATERN_MSG "that just don't make any sens!"
-#define MSG_DUPLI "two map found in file. each file sould contain only one map"
-#define MSG_MAP_LAST "no data can follow the map. Blame the subject, not me"
 
 int	read_format_line_optional(char **tokenised_line, t_map *map_struct)
 {

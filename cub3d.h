@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 13:43:49 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:39:47 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@
 //constantes
 # define EPSILON 0.00001
 
+//easter_egg : fractal ground/roof
+#define MANDELBROT 1
+#define JULIA 2
 /*structure---------------------------------------------------------structures*/
 
 typedef unsigned char	t_uchar;

@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/17 17:25:21 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:06:53 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	verif_col(double x, double y, t_mlx *mlx)
 	int	tmp_x;
 	int	tmp_y;
 
-	tmp_y = y - 0.2;
-	tmp_x = x - 0.2;
+	tmp_y = y - 0.1;
+	tmp_x = x - 0.1;
 	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
 		return (1);
-	tmp_x = x + 0.2;
-	tmp_y = y + 0.2;
+	tmp_x = x + 0.1;
+	tmp_y = y + 0.1;
 	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
 		return (1);
 	return (0);

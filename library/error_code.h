@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/06 17:27:28 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:32:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,25 @@
 /*messages------------------------------------------------------------messages*/
 
 # define MSG_MALLOC "a malloc call failed to allocate memory."
+
+//parsing.c
+#define MSG_FILE_OPEN " could not be oppened. Check the file name and rights."
+#define MSG_LINE "the line don't match any known patern."
+#define MSG_OMAP "the map is open. Please close the map."
+#define MSG_MLTPLR "multiple player spawn detected."
+#define MSG_MAP_CHAR "ilegal character found in map token."
+#define MSG_FILE_DIR "map should be a file, not a directory. change your file."
+//parsing_readfile.c
+#define ERR_NB_TOKEN_MSG "wrong token number : exactly two token required"
+#define ERR_WRONG_ID_MSG "unknown ID token. Valid ID are : [NO|SO|WE|EA|F|C]"
+#define ERR_PATERN_MSG "that just don't make any sens!"
+#define MSG_DUPLI "two map found in file. each file sould contain only one map"
+#define MSG_MAP_LAST "no data can follow the map. Blame the subject, not me"
+//parsing_read_color.c
+#define MSG_COLORCODE "unrecognized color code. try hexa or RGB instead"
+#define MSG_RGB_COMMA "misplaced comma in rgb code"
+#define HEX_BASE "0123456789ABCDEF"
+
+
 
 #endif

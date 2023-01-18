@@ -6,17 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:35:10 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:21:41 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define MSG_FILE_OPEN " could not be oppened. Check the file name and rights."
-#define MSG_LINE "the line don't match any known patern."
-#define MSG_OMAP "the map is open. Please close the map."
-#define MSG_MLTPLR "multiple player spawn detected."
-#define MSG_MAP_CHAR "ilegal character found in map token."
-#define MSG_FILE_DIR "map should be a file, not a directory. change your file."
 
 void	check_file_name(char *name)
 {

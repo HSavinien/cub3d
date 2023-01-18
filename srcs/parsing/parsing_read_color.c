@@ -6,15 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:38:46 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:56:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define MSG_COLORCODE "unrecognized color code. try hexa or RGB instead"
-#define MSG_RGB_COMMA "misplaced comma in rgb code"
-#define HEX_BASE "0123456789ABCDEF"
 
 int	all_char_in_set(char *search, char *set)
 {
@@ -68,6 +64,9 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 	return (rgb_values[2] | rgb_values[1] << 8 | rgb_values[0] << 16);
 }
 
+//julia
+//mandelbrot
+
 unsigned int	read_color(char *color_code, char *full_line, int line_nb)
 {
 	int	i;
@@ -75,6 +74,10 @@ unsigned int	read_color(char *color_code, char *full_line, int line_nb)
 	i = -1;
 	while (color_code[++ i])
 		color_code[i] = ft_toupper(color_code[i]);
+	if (!strcmp(color_code, "MANDELBROT"))
+		return (MANDELBROT << 24);
+	if (!strcmp(color_code, "JULIA"))
+		return (JULIA << 24);
 	if (char_in_set(',', color_code))
 		return (read_rgb_color(color_code, full_line, line_nb));
 	if (color_code[0] == '#')
