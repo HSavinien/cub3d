@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:23:32 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 22:30:54 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 19:25:39 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	read_format_line_optional(char **tokenised_line, t_map *map_struct)
 {
 	if (!strcmp(tokenised_line[0], "CR"))
 		map_struct->crosshair = ft_strdup(tokenised_line[1]);
+	else if (!strcmp(tokenised_line[0], "DC"))
+		map_struct->door_closed = ft_strdup(tokenised_line[1]);
+	else if (!strcmp(tokenised_line[0], "DO"))
+		map_struct->door_opened = ft_strdup(tokenised_line[1]);
 	else
 		return (0);
 	return (1);

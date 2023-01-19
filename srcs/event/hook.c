@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 20:33:04 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:01:09 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	verif_pos(double x, double y, t_mlx *mlx, double buf)
 
 	tmp_x = x + buf;
 	tmp_y = y + buf;
-	if (mlx->map_s->parsed_map[(int)y][tmp_x] == 1)
+	if (mlx->map_s->parsed_map[(int)y][tmp_x] & (WALL | DOOR_CL))
 		return (1);
-	if (mlx->map_s->parsed_map[tmp_y][(int)x] == 1)
+	if (mlx->map_s->parsed_map[tmp_y][(int)x] & (WALL | DOOR_CL))
 		return (1);
-	if (mlx->map_s->parsed_map[tmp_y][tmp_x] == 1)
+	if (mlx->map_s->parsed_map[tmp_y][tmp_x] & (WALL | DOOR_CL))
 		return (1);
 	else
 		return (0);

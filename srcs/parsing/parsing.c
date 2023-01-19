@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:05:22 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 22:21:41 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:08:02 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ unsigned char	chkbrdr(int ln, int col, int nbln, char **map)
 	else if (col >= len || char_in_set(map[ln][col + 1], " \t\n"))
 		pos[1] = ft_min(col +1, len);
 	else
+	{
+		if (map[ln][col] == 'D')
+			return (DOOR_CL);
 		return (FLOOR);
+	}
 	err_map_form(pos, map, MSG_OMAP, ERR_OPEN_MAP);
 	return (0);
 }
@@ -73,6 +77,8 @@ void	check_map_char(char **raw_map, int i, int j, t_map *map_s)
 	}
 	else if (char_in_set(raw_map[i][j], "1 \n"))
 		map_s->parsed_map[i][j] = (t_uchar) WALL;
+	else if (raw_map[i][j] == 'D')
+		map_s->parsed_map[i][j] = chkbrdr(i, j, map_s->nb_line, map_s->raw_map);
 	else if (raw_map[i][j] == '0')
 		map_s->parsed_map[i][j] = chkbrdr(i, j, map_s->nb_line, map_s->raw_map);
 	else

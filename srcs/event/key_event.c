@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 07:22:40 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/17 13:20:29 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:35:31 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	keypress(int key, t_mlx *mlx)
 		mlx->key.rot_left = 1;
 	if (key == TURN_RIGHT)
 		mlx->key.rot_right = 1;
+	if (key == ACT_KEY)
+		toogle_door(mlx);
 	return (0);
 }
 

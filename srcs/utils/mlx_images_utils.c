@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:16:29 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 18:11:50 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	img_get_pixel(t_img *img, int x, int y)
 */
 int	img_set_pixel(t_img *img, int x, int y, unsigned int color)
 {
-	img->data[y * img->width + x] = color;
+	if (color >> 24 < 128)
+		img->data[y * img->width + x] = color;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:09:29 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 23:50:02 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,24 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 			return (wall_info(data, ray, EAST_FACE, player));
 		else if (map->parsed_map[abs((int)ray.y)][(int)ray.x] == WALL)
 			return (wall_info(data, ray, WEST_FACE, player));
+		else if ((ray.x >= 1 && map->parsed_map[abs((int)ray.y)][(int)ray.x - 1]
+				== DOOR_CL) || (map->parsed_map[abs((int)ray.y)][(int)ray.x]
+				== DOOR_CL))
+			return (wall_info(data, ray, DOOR_CL_FACE, player));
+
 	}
-	if (ray.y - floor(ray.y) <= EPSILON)
+	else if (ray.y - floor(ray.y) <= EPSILON)
 	{
 		if (ray.y >= 1 && map->parsed_map[abs((int)ray.y - 1)][(int)ray.x]
 				== WALL)
 			return (wall_info(data, ray, NORTH_FACE, player));
 		else if (map->parsed_map[abs((int)ray.y)][(int)ray.x] == WALL)
 			return (wall_info(data, ray, SOUTH_FACE, player));
+		else if ((ray.y >= 1 && map->parsed_map[abs((int)ray.y - 1)][(int)ray.x]
+				== DOOR_CL) || ((map->parsed_map[abs((int)ray.y)][(int)ray.x]
+				== DOOR_CL)))
+			return (wall_info(data, ray, DOOR_CL_FACE, player));
+
 	}
 	return (0);
 }
