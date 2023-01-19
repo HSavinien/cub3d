@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/19 00:57:33 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:41:21 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ void	init_move(t_mlx *mlx)
 		mlx->key.right = 0;
 		mlx->key.rot_left = 0;
 		mlx->key.rot_right = 0;
+		mlx->key.pos_x = 0;
+		mlx->key.turn = 0;
+		mlx->key.dist = 0;
 }
 
 int	main(int ac, char **av)
@@ -110,6 +113,8 @@ int	main(int ac, char **av)
 	//event hook
 	mlx_hook(mlx_s.win_ptr, EVENT_WIN_CLOSE, 0, close_win, &mlx_s);
 	mlx_hook(mlx_s.win_ptr, EVENT_KEY_PRESS, 0, keypress, &mlx_s);
+	//mlx_hook(mlx_s.win_ptr, EVENT_BUTTON_PRESS, 0, mouse_press, &mlx_s);
+	mlx_hook(mlx_s.win_ptr, EVENT_MOTION, 0, mouse_move, &mlx_s);
 	mlx_loop_hook(mlx_s.mlx_ptr, main_loop, (void *)(&mlx_s));
 	mlx_hook(mlx_s.win_ptr, EVENT_KEY_RELEASE, 0, key_release, &mlx_s);
 	//mlx loop

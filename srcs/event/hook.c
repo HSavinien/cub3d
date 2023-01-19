@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/19 10:11:17 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:59:55 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ int	do_move(t_mlx *mlx, int l)
 	return (0);
 }
 
+void	do_rotate(t_mlx *mlx, int mouse)
+{
+	if (mlx->key.rot_right || (mlx->key.turn && mouse == 1))
+			mlx->player.direction += 0.020 * 0.5;
+	if (mlx->key.rot_left || (mlx->key.turn && mouse == -1))
+		mlx->player.direction -= 0.020 * 0.5;
+}
+
 int	event_hook(t_mlx *mlx)
 {
 	if ((mlx->key.forwd || mlx->key.backwd)
@@ -58,11 +66,10 @@ int	event_hook(t_mlx *mlx)
 	if ((mlx->key.left || mlx->key.right) && !(mlx->key.left && mlx->key.right))
 		do_move(mlx, 1);
 	if (!(mlx->key.rot_left && mlx->key.rot_right))
-	{
-		if (mlx->key.rot_right)
-			mlx->player.direction += 0.020;
-		if (mlx->key.rot_left)
-			mlx->player.direction -= 0.020;
-	}
+		do_rotate(mlx, 0);
+	if (mlx->key.turn && mlx->key.dist > 0)
+		do_rotate(mlx, 1);
+	if (mlx->key.turn && mlx->key.dist < 0)
+		do_rotate(mlx, -1);
 	return (0);
 }

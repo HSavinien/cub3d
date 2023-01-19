@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:30:16 by tmongell          #+#    #+#             */
-/*   Updated: 2022/03/26 14:24:37 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:55:36 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,12 @@
 
 //mouse
 
-# define MOUSE_LMB
-# define MOUSE_RMB
-# define MOUSE_MMB
+# define MOUSE_LMB 1
+# define MOUSE_RMB 2
+# define MOUSE_MMB 3
 # define MOUSE_MB4
 # define MOUSE_MB5
-# define MOUSE_SCRL_UP
-# define MOUSE_SCRL_DWN
+# define MOUSE_SCRL_UP 4
+# define MOUSE_SCRL_DWN 5
 
 #endif

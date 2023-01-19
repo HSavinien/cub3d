@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/19 09:54:29 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:59:57 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ typedef struct s_key_data
 	int right;
 	int rot_left;
 	int rot_right;
+	int	pos_x;
+	int	dist;
+	int turn;
 }	t_key_data;
 
 typedef struct s_img
@@ -136,10 +139,19 @@ typedef struct s_utils_img {
 	t_img	crosshair;
 }	t_utils_img;
 
+typedef struct s_shoot_img {
+	t_img	disarmed;
+	t_img	armed_1;
+	t_img	armed_2;
+	t_img	armed_3;
+	t_img	armed_4;
+}	t_shoot_img;
+
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_utils_img	*sprites;
+	t_shoot_img	weapon;
 	t_img		minimap;
 	t_map		*map_s;
 //	t_img		main_img;
@@ -211,6 +223,8 @@ int		loop(t_mlx *mlx);
 int		close_win(t_mlx *mlx);
 int		event_hook(t_mlx *mlx);
 int		keypress(int key, t_mlx *mlx);
+int		mouse_press(int key, t_mlx *mlx);
+int		mouse_move(int mouse_x, int mouse_y, t_mlx *mlx);
 int		key_release(int key, t_mlx *mlx);
 
 //actions

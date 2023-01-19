@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 23:41:54 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:21:53 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	draw_fractal(t_mlx *mlx, t_img *img, char is_floor, int type)
 		x = 0;
 		while (x < WIN_W)
 		{
-			img_set_pixel(
-					img, x , y, (x  + y) % 255
-					| (x * y) << 16
-					| (x & y) << (type + 8) );
+			img_set_pixel(img, x, y, (x + y) % 255 | (x * y) << 16
+				| (x & y) << (type + 8));
 			x ++;
 		}
 		y ++;
