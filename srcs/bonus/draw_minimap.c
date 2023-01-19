@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/19 00:52:21 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:08:40 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	draw_line(t_mlx *mlx, t_point dir, t_point player)
 			;
 		else
 			end = true;
-		if (end == true || mlx->map_s->raw_map[(int)player_org.y / TILE_SMM]
-			[(int)player_org.x / TILE_SMM] == '1')
+		if (end == true || verif_col(player_org.x / TILE_SMM,
+			player_org.y / TILE_SMM, mlx))
 			break ;
 		mlx->minimap.data[(int)player.y * img_width + (int)player.x] = 0xFF00FF;
 		add_delta(&player, &player_org, delta);

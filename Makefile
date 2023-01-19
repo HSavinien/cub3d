@@ -9,6 +9,7 @@ SRCS	=	cub3d.c \
 			srcs/parsing/parsing_readfile.c \
 			srcs/parsing/parsing_utils.c \
 			srcs/generals/main_loop.c \
+			srcs/generals/collision.c \
 			srcs/event/hook.c \
 			srcs/event/hook_utils.c \
 			srcs/event/key_event.c \

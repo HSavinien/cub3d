@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/19 00:01:09 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:11:17 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,6 @@ double	dir_move(t_mlx *mlx, int l)
 		return (-1.0);
 	else
 		return (1.0);
-}
-
-int	verif_pos(double x, double y, t_mlx *mlx, double buf)
-{
-	int		tmp_x;
-	int		tmp_y;
-
-	tmp_x = x + buf;
-	tmp_y = y + buf;
-	if (mlx->map_s->parsed_map[(int)y][tmp_x] & (WALL | DOOR_CL))
-		return (1);
-	if (mlx->map_s->parsed_map[tmp_y][(int)x] & (WALL | DOOR_CL))
-		return (1);
-	if (mlx->map_s->parsed_map[tmp_y][tmp_x] & (WALL | DOOR_CL))
-		return (1);
-	else
-		return (0);
-}
-
-int	verif_col(double x, double y, t_mlx *mlx)
-{
-	double	buf;
-
-	buf = 0.1;
-	if (verif_pos(x, y, mlx, buf) == 1)
-		return (1);
-	buf = -0.1;
-	if (verif_pos(x, y, mlx, buf) == 1)
-		return (1);
-	return (0);
 }
 
 int	do_move(t_mlx *mlx, int l)

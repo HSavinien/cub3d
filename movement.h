@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:17:42 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 19:48:09 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:12:32 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int			loop(t_mlx *mlx);
 void		init_window_images(t_mlx *mlx);
 void		init_background(t_mlx *mlx);
 void		init_minimap(t_mlx *mlx);
+
+/* collision.c */
+int			verif_pos(double x, double y, t_mlx *mlx, double buf);
+int			verif_col(double x, double y, t_mlx *mlx);
 
 /* hook.c */
 int			event_hook(t_mlx *mlx);
