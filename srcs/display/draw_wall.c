@@ -6,23 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 21:56:48 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 13:46:20 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/19 02:06:30 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-/*the two function draw_wall_plain and draw_wall_img are independente.
- * the first one put given colors on each walls, while the seconde put a texture
- * they should not be used at the same time, as they will write over each_other
- */
-
-//the folowing are debug macros, meant to assignate a color to each wall.
-//the color were sugested by chatgpt.
-#define NORTH_C 0xFF0000 //red
-#define SOUTH_C 0xFF //blue
-#define EAST_C 0xFFFF00 //yellow
-#define WEST_C 0xFF00 //green
 
 //need to know : ray_impact coordinate, img, pos_y, pixel height
 int	get_pixel_color(int draw_line, int draw_height, t_wall_data *wall)
@@ -49,6 +37,10 @@ t_img	*get_wall_img(t_wall_data *wall, t_mlx *mlx)
 		return (&mlx->sprites->east_wall);
 	else if (side == WEST_FACE)
 		return (&mlx->sprites->west_wall);
+	else if (side == DOOR_CL_FACE)
+		return (&mlx->sprites->door_closed);
+	else if (side == DOOR_OP_FACE)
+		return (&mlx->sprites->door_opened);
 	else
 		ft_error("error when fetching img for wall", ERR_WTF);
 	return (NULL);
@@ -62,10 +54,8 @@ void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx)
 	double	modf_buff;
 
 	wall.texture = get_wall_img(&wall, mlx);
-	if (wall.side == NORTH_FACE || wall.side == SOUTH_FACE)
-		wall.texture_col = modf(wall.pos.x, &modf_buff) * wall.texture->width;
-	else
-		wall.texture_col = modf(wall.pos.y, &modf_buff) * wall.texture->width;
+	wall.texture_col = fmax(modf(wall.pos.x, &modf_buff),
+			modf(wall.pos.y, &modf_buff)) * wall.texture->width;
 	pixel_height = (wall.height * WIN_W / FOV);
 	pos_y = ft_max(0, WIN_H / 2 - pixel_height / 2);
 	i = -ft_min(0, WIN_H / 2 - pixel_height / 2);

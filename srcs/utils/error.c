@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:13:01 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:18:37 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	print_map_char(char c)
 		printf("\033[0;7;34m%c\033[0m", c);
 	else if (ft_isspace(c))
 		printf("\033[0m%c\033[0m", c);
+	else if (c == 'D')
+		printf("\033[0;97;100m%c\033[0m", c);
 	else
 		printf("\033[0;7;31m%c\033[0m", c);
 }

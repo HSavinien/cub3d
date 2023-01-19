@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 08:15:30 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:57:33 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include "movement.h"
 
 //angles are in radiant. respectively 90, -90, 0, and 180 degrees.
-#define NORTH_ANGLE (M_PI_2)
-#define SOUTH_ANGLE (-M_PI_2)
-#define EAST_ANGLE 0
-#define WEST_ANGLE (M_PI)
+#define NORTH_ANGLE (-M_PI_2)
+#define SOUTH_ANGLE (M_PI_2)
+#define EAST_ANGLE (M_PI)
+#define WEST_ANGLE 0
 
 #define DEFAULT_CROSSHAIR "./sprites/default_crosshair.xpm"
+#define DEFAULT_DOOR_CL "./sprites/default_door_closed.xpm"
+#define DEFAULT_DOOR_OP "./sprites/default_door_opened.xpm"
 
 void	set_player_position(t_map *map, t_mlx *mlx_s)
 {
@@ -35,6 +37,29 @@ void	set_player_position(t_map *map, t_mlx *mlx_s)
 		mlx_s->player.direction = WEST_ANGLE;
 	else
 		ft_error("entered redondant protection on player direction", ERR_WTF);
+}
+
+void	do_init_bonus(t_mlx *mlx_s, t_map *map)
+{
+	if (map->crosshair)
+		mlx_s->sprites->crosshair =
+			read_img_file(map->crosshair, mlx_s->mlx_ptr);
+	else
+		mlx_s->sprites->crosshair =
+			read_img_file(DEFAULT_CROSSHAIR, mlx_s->mlx_ptr);
+	if (map->door_closed)
+		mlx_s->sprites->door_closed =
+			read_img_file(map->door_closed, mlx_s->mlx_ptr);
+	else
+		mlx_s->sprites->door_closed =
+			read_img_file(DEFAULT_DOOR_CL, mlx_s->mlx_ptr);
+	if (map->door_opened)
+		mlx_s->sprites->door_opened =
+			read_img_file(map->door_opened, mlx_s->mlx_ptr);
+	else
+		mlx_s->sprites->door_opened =
+			read_img_file(DEFAULT_DOOR_OP, mlx_s->mlx_ptr);
+
 }
 
 t_mlx	do_init(t_map *map)
@@ -54,10 +79,7 @@ t_mlx	do_init(t_map *map)
 	mlx_s.sprites->east_wall = read_img_file(map->east_path, mlx_s.mlx_ptr);
 	mlx_s.sprites->west_wall = read_img_file(map->west_path, mlx_s.mlx_ptr);
 	//open other sprites
-	if (map->crosshair)
-		mlx_s.sprites->crosshair = read_img_file(map->crosshair, mlx_s.mlx_ptr);
-	else
-		mlx_s.sprites->crosshair = read_img_file(DEFAULT_CROSSHAIR, mlx_s.mlx_ptr);
+	do_init_bonus(&mlx_s, map);
 	//init player
 	set_player_position(map, &mlx_s);
 	return (mlx_s);

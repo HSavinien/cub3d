@@ -6,14 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:26:03 by tmongell          #+#    #+#             */
-/*   Updated: 2022/12/01 18:00:55 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/18 19:51:10 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define NMAP "your map file is missing some usefull data, like THE F**KING MAP!"
-#define MSG_DUP "data redefinition. the same entry can't appear twice"
 
 void	check_display_info(t_map *map)
 {
@@ -42,7 +39,7 @@ void	check_missing_data(t_map *map)
 {
 	check_display_info(map);
 	if (!map->raw_map)
-		ft_error(NMAP, ERR_MISSING_DATA);
+		ft_error(MSG_MAP, ERR_MISSING_DATA);
 	check_player_info(map);
 }
 
@@ -60,4 +57,10 @@ void	check_duplicate(char *id, char *line, int line_num, t_map *map_s)
 		err_mapfile(line_num, line, "duplicate ceiling color", ERR_DUPLICATE);
 	if (!ft_strcmp(id, "F") && map_s->floor_color >= 0)
 		err_mapfile(line_num, line, "duplicate floor color", ERR_DUPLICATE);
+	if (!ft_strcmp(id, "CR") && map_s->crosshair)
+		err_mapfile(line_num, line, "duplicate crosshair image", ERR_DUPLICATE);
+	if (!ft_strcmp(id, "DC") && map_s->door_closed)
+		err_mapfile(line_num, line, "duplicate closed door", ERR_DUPLICATE);
+	if (!ft_strcmp(id, "DO") && map_s->door_opened)
+		err_mapfile(line_num, line, "duplicate opened door", ERR_DUPLICATE);
 }

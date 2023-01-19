@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/18 18:20:15 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:35:04 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@
 
 /*macros----------------------------------------------------------------macros*/
 
-# define MAP_CHAR_OK "10NSEW \n" //char allowed to define the map
+# define MAP_CHAR_OK "10NSEWD \n" //char allowed to define the map
 
 //value for map :
 # define WALL 1
 # define FLOOR 2
-# define H_DOOR 4
-# define V_DOOR 8
+# define DOOR_CL 4
+# define DOOR_OP 8
 # define OUTSIDE 255
 
 //window values
@@ -56,6 +56,8 @@
 #define SOUTH_FACE 2
 #define EAST_FACE 3
 #define WEST_FACE 4
+#define DOOR_CL_FACE 5
+#define DOOR_OP_FACE 5
 
 //constantes
 # define EPSILON 0.00001
@@ -100,6 +102,8 @@ typedef struct s_map {
 	long	roof_color;
 	//optionals sprites
 	char	*crosshair;
+	char	*door_closed;
+	char	*door_opened;
 	//the map itself
 	char	**raw_map;
 	t_uchar	**parsed_map;
@@ -125,6 +129,9 @@ typedef struct s_utils_img {
 	t_img	south_wall;
 	t_img	east_wall;
 	t_img	west_wall;
+	//doors
+	t_img	door_closed;
+	t_img	door_opened;
 	//hud
 	t_img	crosshair;
 }	t_utils_img;
@@ -205,6 +212,9 @@ int		close_win(t_mlx *mlx);
 int		event_hook(t_mlx *mlx);
 int		keypress(int key, t_mlx *mlx);
 int		key_release(int key, t_mlx *mlx);
+
+//actions
+void	toogle_door(t_mlx *mlx_s);
 
 //error
 void	*ft_error(char *msg, int ret);

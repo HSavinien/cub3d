@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 21:11:16 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:52:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ void	draw_figures(t_mlx *mlx, t_pt_map mini_p, t_pt_map raw)
 		draw_square(mlx, mini_p.i, mini_p.j, 0xFFFFFF);
 	else if (mlx->map_s->raw_map[raw.i][raw.j] == '0')
 		draw_square(mlx, mini_p.i, mini_p.j, 0x80000000);
+	else if (mlx->map_s->parsed_map[raw.i][raw.j] == DOOR_CL)
+		draw_square(mlx, mini_p.i, mini_p.j, 0xFF);
+	else if (mlx->map_s->parsed_map[raw.i][raw.j] == DOOR_OP)
+		draw_square(mlx, mini_p.i, mini_p.j, 0x800000FF);
 	do_tile_conv(&player);
 	draw_filledcircle(mlx, player, (TILE_SMM / 2));
 	do_tile_conv(&dir_pt);
