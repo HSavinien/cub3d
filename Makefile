@@ -22,7 +22,6 @@ SRCS	=	cub3d.c \
 			srcs/display/get_next_pos.c \
 			srcs/display/draw_wall.c \
 			srcs/display/ray_utils.c \
-			tmp/debug.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 
