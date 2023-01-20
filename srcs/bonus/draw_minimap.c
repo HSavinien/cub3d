@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/20 15:31:04 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:24:13 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,16 @@ void	draw_minimap(t_mlx *mlx)
 	t_pt_map	mini_m;
 	t_pt_map	raw_p;
 	bool		end;
-	int			tmp_i;
+	t_pt_map	tmp;
 
 	c = (t_coord){((MM_W / 2) * TILE_SMM), ((MM_H / 2) * TILE_SMM)};
 	mini_m = (t_pt_map){0, 0};
 	raw_p = (t_pt_map){0, 0};
-	tmp_i = get_offset(mlx, &raw_p, &mini_m);
-	mini_m.i += tmp_i - 1;
+	tmp = get_offset(mlx, &raw_p, &mini_m);
+	mini_m.i += tmp.i - 1;
 	while (mini_m.i < MM_H)
 	{
-		mini_m.j = -1;
+		mini_m.j = -tmp.j - 1;
 		end = false;
 		while (++mini_m.j < MM_W)
 			end = map_line(mlx, &raw_p, &mini_m, end);
