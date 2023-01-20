@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:47:12 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:00:57 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:32:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ void	get_ray_angle(t_mlx *mlx, double *angles)
 	}
 }
 
+int	get_type(t_map *map, int x, int y, int wall_side)
+{
+	if (map->parsed_map[y][x] == DOOR_CL)
+		return (DOOR_CL_FACE);
+	else if (map->parsed_map[y][x] == DOOR_OP)
+		return (DOOR_OP_FACE);
+	else
+		return (wall_side);
+}
+
 /* function that, once a wall is found, fill the wall data structure
  * the struct is passed by reference, so there is no return value.
  * it ignore height parameter for now, as it will be filled later
@@ -65,7 +75,7 @@ int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 			+ pow(player->pos_y - ray.y, 2));
 	if (data->distance < 0.1)
 		data->distance = 0.1;
-	data->side = face;
 	data->pos = ray;
+	data->side = face;
 	return (1);
 }

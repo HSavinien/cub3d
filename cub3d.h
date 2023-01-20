@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 17:50:10 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:57:29 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 # define EAST_FACE 3
 # define WEST_FACE 4
 # define DOOR_CL_FACE 5
-# define DOOR_OP_FACE 5
+# define DOOR_OP_FACE 6
 
 /*constantes*/
 # define EPSILON 0.00001
@@ -151,6 +151,11 @@ typedef struct s_coord {
 	double	y;
 }	t_coord;
 
+typedef struct s_recast_data {
+	double	angle;
+	int		ray_num;
+}	t_cast_data;
+
 typedef struct s_point_map
 {
 	int	i;
@@ -159,10 +164,10 @@ typedef struct s_point_map
 
 /*used by raycasting function, store both the wall distance and orientation.*/
 typedef struct s_wall_data {
-	double	distance;
-	int		side;
-	double	height;
 	t_coord	pos;
+	double	distance;
+	double	height;
+	int		side;
 	t_img	*texture;
 	int		texture_col;
 }	t_wall_data;
@@ -186,6 +191,7 @@ t_uint	read_color(char *color_code, char *full_line, int line_nb);
 void	raycasting_start(t_mlx *mlx, t_img *screen);
 void	draw_wall_img(int ray_num, t_wall_data wall, t_img *screen, t_mlx *mlx);
 int		wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player);
+int		get_type(t_map *map, int x, int y, int wall_side);
 void	get_ray_angle(t_mlx *mlx, double *angles);
 void	get_next_pos(t_coord *ray, double dir, double slope, double offset);
 
