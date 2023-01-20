@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 16:57:29 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:02:13 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@
 /*constantes*/
 # define EPSILON 0.00001
 
+/*hand annimation values*/
+# define MAX_FRAME	20
+
 /*easter_egg : fractal ground/roof*/
 # define MANDELBROT 1
 # define JULIA 2
@@ -78,6 +81,7 @@ typedef struct s_key_data
 	int	right;
 	int	rot_left;
 	int	rot_right;
+	int	shooting;
 }	t_key_data;
 
 typedef struct s_img
@@ -125,22 +129,16 @@ typedef struct s_utils_img {
 	t_img	door_closed;
 	t_img	door_opened;
 	t_img	crosshair;
+	t_img	idle_hand[MAX_FRAME];
+	t_img	shooting_hand[MAX_FRAME];
 }	t_utils_img;
-
-typedef struct s_shoot_img {
-	t_img	disarmed;
-	t_img	armed_1;
-	t_img	armed_2;
-	t_img	armed_3;
-	t_img	armed_4;
-}	t_shoot_img;
 
 typedef struct s_mlx {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_utils_img	*sprites;
-	t_shoot_img	weapon;
 	t_img		minimap;
+	t_img		main_disp_img;
 	t_map		*map_s;
 	t_entity	player;
 	t_key_data	key;

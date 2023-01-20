@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 16:29:32 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:05:24 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 
 //mlx
 # define ERR_IMG_OPEN 15	//a sprite file cannot be opened.
+# define ERR_IMG_CREATE 16	//an image creation failed.
 
 //other
 # define ERR_WTF -1		//entered a protection that should have been redundant
