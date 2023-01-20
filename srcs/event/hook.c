@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/19 13:59:55 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:44:14 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ int	do_move(t_mlx *mlx, int l)
 
 void	do_rotate(t_mlx *mlx, int mouse)
 {
-	if (mlx->key.rot_right || (mlx->key.turn && mouse == 1))
-			mlx->player.direction += 0.020 * 0.5;
-	if (mlx->key.rot_left || (mlx->key.turn && mouse == -1))
-		mlx->player.direction -= 0.020 * 0.5;
+	if (mlx->key.rot_right && mouse == 0)
+			mlx->player.direction += 0.020;
+	if (mlx->key.rot_left &&  mouse == 0)
+		mlx->player.direction -= 0.020;
+	if (mouse != 0)
+		mlx->player.direction += 0.020 * mouse;
 }
 
 int	event_hook(t_mlx *mlx)
@@ -67,9 +69,5 @@ int	event_hook(t_mlx *mlx)
 		do_move(mlx, 1);
 	if (!(mlx->key.rot_left && mlx->key.rot_right))
 		do_rotate(mlx, 0);
-	if (mlx->key.turn && mlx->key.dist > 0)
-		do_rotate(mlx, 1);
-	if (mlx->key.turn && mlx->key.dist < 0)
-		do_rotate(mlx, -1);
 	return (0);
 }

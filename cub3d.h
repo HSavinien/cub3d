@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/19 13:59:57 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:46:53 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ typedef struct s_key_data
 	int right;
 	int rot_left;
 	int rot_right;
-	int	pos_x;
-	int	dist;
-	int turn;
 }	t_key_data;
 
 typedef struct s_img
@@ -221,6 +218,7 @@ void	init_background(t_mlx *mlx);
 void	init_minimap(t_mlx *mlx);
 int		loop(t_mlx *mlx);
 int		close_win(t_mlx *mlx);
+void	do_rotate(t_mlx *mlx, int mouse);
 int		event_hook(t_mlx *mlx);
 int		keypress(int key, t_mlx *mlx);
 int		mouse_press(int key, t_mlx *mlx);

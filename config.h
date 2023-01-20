@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 04:22:52 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/19 00:06:46 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:31:32 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@
 # define ROT_SPEED 1
 
 #define	ACT_KEY	KEY_SPACE
+#define MOUSE_TGLE KEY_TILD
 
 #endif
