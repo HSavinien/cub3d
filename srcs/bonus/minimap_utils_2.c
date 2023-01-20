@@ -6,12 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:29:03 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 20:31:24 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:29:51 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <movement.h>
+#include <minimap.h>
 
 int	map_line(t_mlx *mlx, t_pt_map *raw_p, t_pt_map *mini_m, bool end)
 {
@@ -30,7 +29,7 @@ int	map_line(t_mlx *mlx, t_pt_map *raw_p, t_pt_map *mini_m, bool end)
 	return (end);
 }
 
-bool	is_inside(double cx, double cy, t_point check, int r)
+bool	is_inside(double cx, double cy, t_coord check, int r)
 {
 	if ((check.x - cx) * (check.x - cx) + (check.y - cy)
 		* (check.y - cy) <= r * r)
@@ -41,9 +40,9 @@ bool	is_inside(double cx, double cy, t_point check, int r)
 
 void	draw_rev_circle(t_mlx *mlx, double cx, double cy, int r)
 {
-	t_point	check;
+	t_coord	check;
 
-	check = (t_point){0, 0};
+	check = (t_coord){0, 0};
 	while (check.y < MM_W * TILE_SMM)
 	{
 		check.x = 0;

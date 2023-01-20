@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 04:22:52 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 13:31:32 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:29:25 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@
 # define TURN_LEFT KEY_ARROW_LEFT
 # define TURN_RIGHT KEY_ARROW_RIGHT
 
-
 # define SPEED 0.1
 # define ROT_SPEED 1
 
-#define	ACT_KEY	KEY_SPACE
-#define MOUSE_TGLE KEY_TILD
+# define ACT_KEY KEY_SPACE
+# define MOUSE_TGLE KEY_TILD
 
 #endif

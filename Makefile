@@ -13,7 +13,8 @@ SRCS	=	cub3d.c \
 			srcs/event/hook.c \
 			srcs/event/hook_utils.c \
 			srcs/event/key_event.c \
-			srcs/event/door_toogle.c \
+			srcs/bonus/draw_bonus.c \
+			srcs/bonus/toogle_bonus.c \
 			srcs/bonus/draw_minimap.c \
 			srcs/bonus/minimap_utils.c \
 			srcs/bonus/minimap_utils_2.c \

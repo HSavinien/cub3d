@@ -6,31 +6,21 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:21:40 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/18 20:28:42 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:11:59 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <movement.h>
+#include <minimap.h>
 
-/* image */
-void	init_minimap(t_mlx *mlx)
-{
-	mlx->minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, MM_W * TILE_SMM,
-			MM_H * TILE_SMM);
-	mlx->minimap.data = (int *)mlx_get_data_addr(mlx->minimap.img_ptr,
-			&mlx->minimap.bpp, &mlx->minimap.size_l, &mlx->minimap.endian);
-}
-
-void	do_tile_conv(t_point *pt)
+void	do_tile_conv(t_coord *pt)
 {
 	pt->x *= TILE_SMM;
 	pt->y *= TILE_SMM;
 }
 
-t_point	init_delta(t_point player, t_point dir)
+t_coord	init_delta(t_coord player, t_coord dir)
 {
-	t_point	delta;
+	t_coord	delta;
 	double	step;
 
 	delta.x = dir.x - player.x;
@@ -44,7 +34,7 @@ t_point	init_delta(t_point player, t_point dir)
 	return (delta);
 }
 
-void	add_delta(t_point *player, t_point *player_org, t_point delta)
+void	add_delta(t_coord *player, t_coord *player_org, t_coord delta)
 {
 	player->x += delta.x;
 	player->y += delta.y;
