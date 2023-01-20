@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 00:12:24 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 15:44:57 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:58:07 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	toogle_door(t_mlx *mlx_s)
 	double		dir;
 
 	pos = (t_coord){mlx_s->player.pos_x, mlx_s->player.pos_y};
-	if (is_door(mlx_s->map_s->parsed_map[(int)pos.x][(int)pos.y]))
-		return (activate_door(pos.x, pos.y, mlx_s->map_s));
 	dir = simplify_angle_half(mlx_s->player.direction);
 	if (dir >= 0)
 	{

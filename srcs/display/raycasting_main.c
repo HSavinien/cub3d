@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 16:52:16 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:45:11 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,28 @@
  */
 int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 {
+	int	ret_val;
+
+	ret_val = 0;
 	if (ray.x - floor(ray.x) <= EPSILON)
 	{
 		if (ray.x >= 1 && map->parsed_map[(int)ray.y][(int)ray.x - 1] != FLOOR)
-			return (wall_info(data, ray, get_type(
-				map, ray.x - 1, ray.y, EAST_FACE), player));
-		else if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
-			return (wall_info(data, ray, get_type(
-				map, ray.x, ray.y, WEST_FACE), player));
+			ret_val =  wall_info(data, ray, get_type(
+				map, ray.x - 1, ray.y, EAST_FACE), player);
+		if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
+			ret_val = wall_info(data, ray, get_type(
+				map, ray.x, ray.y, WEST_FACE), player);
 	}
 	if (ray.y - floor(ray.y) <= EPSILON)
 	{
 		if (ray.y >= 1 && map->parsed_map[(int)ray.y - 1][(int)ray.x] != FLOOR)
-			return (wall_info(data, ray, get_type(
-				map, ray.x, ray.y - 1, NORTH_FACE), player));
-		else if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
-			return (wall_info(data, ray, get_type(
-				map, ray.x, ray.y, SOUTH_FACE), player));
+			ret_val = wall_info(data, ray, get_type(
+				map, ray.x, ray.y - 1, NORTH_FACE), player);
+		if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
+			ret_val = wall_info(data, ray, get_type(
+				map, ray.x, ray.y, SOUTH_FACE), player);
 	}
-	return (0);
+	return (ret_val);
 }
 
 t_wall_data	find_wall(double angle, t_coord start, t_entity *player, t_map *map)
@@ -46,6 +49,7 @@ t_wall_data	find_wall(double angle, t_coord start, t_entity *player, t_map *map)
 	double	slope;
 	double	offset;
 
+	ft_bzero(&wall_s, sizeof(t_wall_data));
 	slope = tan(angle);
 	offset = start.y - slope * start.x;
 	ray = start;
@@ -55,8 +59,6 @@ t_wall_data	find_wall(double angle, t_coord start, t_entity *player, t_map *map)
 		get_next_pos(&ray, angle, slope, offset);
 	return (wall_s);
 }
-
-//void	recast_ray(t_cast_data re_data, t_img *screen, t_mlx *mlx)
 
 void	cast_ray(t_cast_data data, t_coord start, t_img *screen, t_mlx *mlx)
 {

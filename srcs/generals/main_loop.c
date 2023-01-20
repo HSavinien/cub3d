@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 16:10:28 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:10:46 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,11 @@ void	draw_background(t_mlx *mlx, t_img *img)
  */
 int	main_loop(t_mlx *mlx)
 {
-	t_img	*main_disp_img;
-
-	main_disp_img = create_image(WIN_W, WIN_H, mlx);
-	if (!main_disp_img)
-		return (0);
-	draw_background(mlx, main_disp_img);
+	draw_background(mlx, &mlx->main_disp_img);
 	event_hook(mlx);
-	raycasting_start(mlx, main_disp_img);
-	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, main_disp_img->img_ptr,
-		0, 0);
-	mlx_destroy_image(mlx->mlx_ptr, main_disp_img->img_ptr);
-	free(main_disp_img);
+	raycasting_start(mlx, &mlx->main_disp_img);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, 
+		mlx->main_disp_img.img_ptr, 0, 0);
 	draw_bonus(mlx);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->minimap.img_ptr);
 	mlx->minimap.img_ptr = NULL;
