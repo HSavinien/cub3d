@@ -6,12 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:09:46 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/19 10:10:52 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:15:16 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "movement.h"
 
 int	verif_pos(double x, double y, t_mlx *mlx, double buf)
 {

@@ -6,12 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 14:20:50 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/19 11:21:31 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:31:04 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <movement.h>
+#include <minimap.h>
 
 void	draw_square(t_mlx *mlx, int y, int x, int color)
 {
@@ -38,19 +37,19 @@ void	draw_square(t_mlx *mlx, int y, int x, int color)
 	}
 }
 
-void	draw_filledcircle(t_mlx *mlx, t_point pl, int r)
+void	draw_filledcircle(t_mlx *mlx, t_coord pl, int r)
 {
 	int		i;
 	int		r2;
 	int		rr;
-	t_point	t;
+	t_coord	t;
 
 	r2 = pow(r, 2);
 	rr = r << 1;
 	i = 0;
 	while (i < (r2 << 2))
 	{
-		t = (t_point){(i % rr) - r, (i / rr) - r};
+		t = (t_coord){(i % rr) - r, (i / rr) - r};
 		if (t.x * t.x + t.y * t.y <= (rr + rr))
 		{	
 			if ((int)(pl.x) < (MM_W * TILE_SMM) &&
@@ -64,14 +63,14 @@ void	draw_filledcircle(t_mlx *mlx, t_point pl, int r)
 	}
 }
 
-void	draw_line(t_mlx *mlx, t_point dir, t_point player)
+void	draw_line(t_mlx *mlx, t_coord dir, t_coord player)
 {
-	t_point	delta;
-	t_point	player_org;
+	t_coord	delta;
+	t_coord	player_org;
 	bool	end;
 	int		img_width;
 
-	player_org = (t_point){mlx->player.pos_x, mlx->player.pos_y};
+	player_org = (t_coord){mlx->player.pos_x, mlx->player.pos_y};
 	do_tile_conv(&player_org);
 	img_width = MM_W * TILE_SMM;
 	delta = init_delta(player, dir);
@@ -85,7 +84,7 @@ void	draw_line(t_mlx *mlx, t_point dir, t_point player)
 		else
 			end = true;
 		if (end == true || verif_col(player_org.x / TILE_SMM,
-			player_org.y / TILE_SMM, mlx))
+				player_org.y / TILE_SMM, mlx))
 			break ;
 		mlx->minimap.data[(int)player.y * img_width + (int)player.x] = 0xFF00FF;
 		add_delta(&player, &player_org, delta);
@@ -94,8 +93,8 @@ void	draw_line(t_mlx *mlx, t_point dir, t_point player)
 
 void	draw_figures(t_mlx *mlx, t_pt_map mini_p, t_pt_map raw)
 {
-	t_point	dir_pt;
-	t_point	player;
+	t_coord	dir_pt;
+	t_coord	player;
 
 	player.x = mlx->player.pos_x - (raw.j - mini_p.j);
 	player.y = mlx->player.pos_y - (raw.i - mini_p.i);
@@ -117,13 +116,13 @@ void	draw_figures(t_mlx *mlx, t_pt_map mini_p, t_pt_map raw)
 
 void	draw_minimap(t_mlx *mlx)
 {
-	t_point		c;
+	t_coord		c;
 	t_pt_map	mini_m;
 	t_pt_map	raw_p;
 	bool		end;
 	int			tmp_i;
 
-	c = (t_point){((MM_W / 2) * TILE_SMM), ((MM_H / 2) * TILE_SMM)};
+	c = (t_coord){((MM_W / 2) * TILE_SMM), ((MM_H / 2) * TILE_SMM)};
 	mini_m = (t_pt_map){0, 0};
 	raw_p = (t_pt_map){0, 0};
 	tmp_i = get_offset(mlx, &raw_p, &mini_m);

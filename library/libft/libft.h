@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:38:12 by tmongell          #+#    #+#             */
-/*   Updated: 2022/11/10 17:02:47 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:27:03 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 //structs :
 
-typedef unsigned int t_uint;
+typedef unsigned int	t_uint;
 
 typedef struct s_list
 {

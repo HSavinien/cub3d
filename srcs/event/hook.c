@@ -6,12 +6,11 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:16 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/20 13:44:14 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:47:59 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "movement.h"
 
 double	dir_move(t_mlx *mlx, int l)
 {
@@ -25,11 +24,11 @@ double	dir_move(t_mlx *mlx, int l)
 
 int	do_move(t_mlx *mlx, int l)
 {
-	t_vector	vdir;
-	t_point		pos_tmp;
-	t_point		vect;
-	double		dir;
-	double		speed;
+	t_vec	vdir;
+	t_coord	pos_tmp;
+	t_coord	vect;
+	double	dir;
+	double	speed;
 
 	speed = SPEED * 5;
 	vdir = init_data_dir(mlx);
@@ -39,7 +38,7 @@ int	do_move(t_mlx *mlx, int l)
 		vdir.dir.x = (cos(mlx->player.direction + M_PI_2) * speed + vdir.pos.x);
 		vdir.dir.y = (sin(mlx->player.direction + M_PI_2) * speed + vdir.pos.y);
 	}
-	vect = (t_point){(vdir.dir.x - vdir.pos.x) * dir,
+	vect = (t_coord){(vdir.dir.x - vdir.pos.x) * dir,
 		(vdir.dir.y - vdir.pos.y) * dir};
 	pos_tmp.x = (vect.x * SPEED) + vdir.pos.x;
 	pos_tmp.y = (vect.y * SPEED) + vdir.pos.y;
@@ -54,7 +53,7 @@ void	do_rotate(t_mlx *mlx, int mouse)
 {
 	if (mlx->key.rot_right && mouse == 0)
 			mlx->player.direction += 0.020;
-	if (mlx->key.rot_left &&  mouse == 0)
+	if (mlx->key.rot_left && mouse == 0)
 		mlx->player.direction -= 0.020;
 	if (mouse != 0)
 		mlx->player.direction += 0.020 * mouse;
