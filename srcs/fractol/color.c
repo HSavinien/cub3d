@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:30:00 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/21 14:42:14 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:40:49 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	psychedelic(double phase, int count)
 
 int	couleur_pixel(double phase, int count)
 {
-
 	if (count < ITERATIONS)
 		return (psychedelic(phase, count));
 	else

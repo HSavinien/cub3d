@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:47:12 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 19:56:37 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:40:02 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	get_type(t_map *map, int x, int y, int wall_side)
  */
 int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 {
-
 	data->distance = sqrt(pow(player->pos_x - ray.x, 2)
 			+ pow(player->pos_y - ray.y, 2));
 	if (data->distance < 0.1)

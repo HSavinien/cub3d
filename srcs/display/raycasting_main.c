@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 20:45:11 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:39:42 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 	if (ray.x - floor(ray.x) <= EPSILON)
 	{
 		if (ray.x >= 1 && map->parsed_map[(int)ray.y][(int)ray.x - 1] != FLOOR)
-			ret_val =  wall_info(data, ray, get_type(
-				map, ray.x - 1, ray.y, EAST_FACE), player);
+			ret_val = wall_info(data, ray, get_type(
+						map, ray.x - 1, ray.y, EAST_FACE), player);
 		if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
 			ret_val = wall_info(data, ray, get_type(
-				map, ray.x, ray.y, WEST_FACE), player);
+						map, ray.x, ray.y, WEST_FACE), player);
 	}
 	if (ray.y - floor(ray.y) <= EPSILON)
 	{
 		if (ray.y >= 1 && map->parsed_map[(int)ray.y - 1][(int)ray.x] != FLOOR)
 			ret_val = wall_info(data, ray, get_type(
-				map, ray.x, ray.y - 1, NORTH_FACE), player);
+						map, ray.x, ray.y - 1, NORTH_FACE), player);
 		if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
 			ret_val = wall_info(data, ray, get_type(
-				map, ray.x, ray.y, SOUTH_FACE), player);
+						map, ray.x, ray.y, SOUTH_FACE), player);
 	}
 	return (ret_val);
 }
@@ -45,9 +45,9 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 t_wall_data	find_wall(double angle, t_coord start, t_entity *player, t_map *map)
 {
 	t_wall_data	wall_s;
-	t_coord	ray;
-	double	slope;
-	double	offset;
+	t_coord		ray;
+	double		slope;
+	double		offset;
 
 	ft_bzero(&wall_s, sizeof(t_wall_data));
 	slope = tan(angle);

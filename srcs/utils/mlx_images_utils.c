@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 00:47:10 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:44:41 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ t_img	read_img_file(char *file, void *mlx)
 
 t_img	read_img_file_soft(char *file, void *mlx)
 {
-	dprintf(2, "entering %s (%s:%d)\n", __FUNCTION__, __FILE__,__LINE__);//DEBUG
 	t_img	img;
 
 	img.img_ptr = mlx_xpm_file_to_image(mlx, file, &img.width, &img.height);
-	dprintf(2, "oppened image : %p\n", img.img_ptr);//DEBUG
 	return (img);
-
 }
 
 /*allocate an image struct, then create an image of specified size.

@@ -6,18 +6,17 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:58:27 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/21 15:17:39 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:41:22 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <cub3d.h>
+# include <cub3d.h>
 
 # define STEPS	0.03
 # define ITERATIONS	25
-
 
 typedef struct s_ncomp {
 	double	re;

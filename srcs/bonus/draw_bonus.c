@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:50:51 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/21 15:09:21 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:37:07 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	put_compass(t_mlx *mlx)
 	t_img	*compass;
 
 	compass = &mlx->sprites->compass;
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, compass->img_ptr, 
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, compass->img_ptr,
 		30, WIN_H - compass->height - 30);
 }
 

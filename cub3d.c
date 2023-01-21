@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 15:07:03 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:48:37 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define DEFAULT_CROSSHAIR "./sprites/default_crosshair.xpm"
 #define DEFAULT_DOOR_CL "./sprites/default_door_closed.xpm"
 #define DEFAULT_DOOR_OP "./sprites/default_door_opened.xpm"
-#define	COMPASS "./sprites/compass.xpm"
+#define COMPASS "./sprites/compass.xpm"
 
 void	set_player_position(t_map *map, t_mlx *mlx_s)
 {

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:02:03 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 11:42:14 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:43:21 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main_loop(t_mlx *mlx)
 	draw_background(mlx, &mlx->main_disp_img);
 	event_hook(mlx);
 	raycasting_start(mlx, &mlx->main_disp_img);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, 
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
 		mlx->main_disp_img.img_ptr, 0, 0);
 	draw_bonus(mlx);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->minimap.img_ptr);
