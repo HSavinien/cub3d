@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 06:30:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 12:33:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,6 @@ typedef struct s_utils_img {
 	t_img	door_opened;
 	t_img	crosshair;
 	t_img	compass;
-	t_img	*idle_hand;
-	t_img	*shoot_hand;
 }	t_utils_img;
 
 typedef struct s_mlx {
@@ -252,6 +250,9 @@ void	draw_minimap(t_mlx *mlx);
 /* toogle_bonus.c */
 void	toogle_door(t_mlx *mlx_s);
 void	toogle_mouse(t_mlx *mlx_s);
+
+/*fractol*/
+void	draw_fractal(t_mlx *mlx, t_img *img, int y, int type);
 
 /*-----------------------------------error------------------------------------*/
 void	*ft_error(char *msg, int ret);
