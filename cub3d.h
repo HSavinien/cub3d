@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 22:02:13 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 06:30:13 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define EPSILON 0.00001
 
 /*hand annimation values*/
-# define MAX_FRAME	20
+# define MAX_FRAME	10
 
 /*easter_egg : fractal ground/roof*/
 # define MANDELBROT 1
@@ -129,8 +129,9 @@ typedef struct s_utils_img {
 	t_img	door_closed;
 	t_img	door_opened;
 	t_img	crosshair;
-	t_img	idle_hand[MAX_FRAME];
-	t_img	shooting_hand[MAX_FRAME];
+	t_img	compass;
+	t_img	*idle_hand;
+	t_img	*shoot_hand;
 }	t_utils_img;
 
 typedef struct s_mlx {
@@ -217,6 +218,7 @@ double	get_point_dist(t_coord a, t_coord b);
 /*---------------------------------mlx utils----------------------------------*/
 t_img	*create_image(int width, int height, t_mlx *mlx);
 t_img	read_img_file(char *file, void *mlx);
+t_img	read_img_file_soft(char *file, void *mlx);
 int		img_get_pixel(t_img *img, int x, int y);
 int		img_set_pixel(t_img *img, int x, int y, unsigned int color);
 
@@ -241,6 +243,7 @@ double	rad_to_degree(double rad);
 /*draw_bonus.c*/
 void	init_minimap(t_mlx *mlx);
 void	draw_bonus(t_mlx *mlx);
+void	animate_hand(t_mlx *mlx);
 
 /*draw_minimap.c*/
 void	draw_figures(t_mlx *mlx, t_pt_map i, t_pt_map j);

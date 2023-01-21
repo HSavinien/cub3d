@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:50:51 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/20 16:18:59 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/21 06:48:08 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,20 @@ void	draw_crosshair(t_mlx *mlx)
 		WIN_W / 2 - cross.width / 2, WIN_H / 2 - cross.height / 2);
 }
 
+void	put_compass(t_mlx *mlx)
+{
+	t_img	*compass;
+
+	compass = &mlx->sprites->compass;
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, compass->img_ptr, 
+		30, WIN_H - compass->height - 30);
+}
+
 void	draw_bonus(t_mlx *mlx)
 {	
 	init_minimap(mlx);
+	animate_hand(mlx);
 	draw_minimap(mlx);
+	put_compass(mlx);
 	draw_crosshair(mlx);
 }
