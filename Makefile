@@ -90,7 +90,7 @@ mlx:
 	@echo "\033[1;33mminilibX compiled\033[0m"
 
 
-#dubug rules
+#debug rules
 debug:	library
 	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-debug -g
 
@@ -98,5 +98,7 @@ sanitize:	library
 	@${CC} ${CFLAGS} ${LIB} ${SRCS} -o ${NAME}-sanitize -g -fsanitize=address
 
 #others rules
+
+bonus: all
 
 .PHONY:		all clean fclean re debug sanitize bonus
