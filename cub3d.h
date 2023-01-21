@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 12:33:16 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:55:50 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 
 /*window values*/
 # define WIN_TITLE "placeholder title"
-# define FOV (DEG_FOV*M_PI/180)
-
+//# define FOV (DEG_FOV*M_PI/180)	//this macro's better, but norminette...
+# define FOV 1.04719755	//a 60 degree angle
 /*wall data values*/
 # define NORTH_FACE 1
 # define SOUTH_FACE 2
@@ -257,7 +257,7 @@ void	draw_fractal(t_mlx *mlx, t_img *img, int y, int type);
 /*-----------------------------------error------------------------------------*/
 void	*ft_error(char *msg, int ret);
 void	err_mapfile(int line, char *content, char *msg, int code);
-void	err_map_form(int pos[2], char **map, char *msg, int code);
+int		err_map_form(int pos[2], char **map, char *msg, int code);
 void	*ret_free(void *ptr);
 
 /*-----------------------------------debug------------------------------------*/

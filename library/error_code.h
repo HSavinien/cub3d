@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:31:38 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 07:06:47 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:53:23 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 # define MSG_RGB_COMMA "misplaced comma in rgb code"
 # define HEX_BASE "0123456789ABCDEF"
 //parsing_missing_data.c
-# define MSG_MAP "your map file is missing usefull data, namely THE F**KING MAP!"
+# define MSG_MAP "the map file is missing usefull data, namely THE F**KING MAP!"
 # define MSG_DUP "data redefinition. the same entry can't appear twice"
 
 #endif

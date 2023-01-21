@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:05:19 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/18 22:18:37 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:45:00 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	print_map_char(char c)
  * line is the line from the start of the line, not the start of the file;
  * column is the column where the problem take place
  */
-void	err_map_form(int pos[2], char **map, char *msg, int code)
+int	err_map_form(int pos[2], char **map, char *msg, int code)
 {
 	int	i;
 	int	j;
