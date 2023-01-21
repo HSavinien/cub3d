@@ -18,7 +18,6 @@ SRCS	=	cub3d.c \
 			srcs/bonus/draw_minimap.c \
 			srcs/bonus/minimap_utils.c \
 			srcs/bonus/minimap_utils_2.c \
-			srcs/bonus/player_hand.c \
 			srcs/fractol/new_fct.c \
 			srcs/fractol/fractol.c \
 			srcs/fractol/color.c \

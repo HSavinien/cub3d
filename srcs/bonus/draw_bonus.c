@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:50:51 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/21 06:48:08 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:09:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	put_compass(t_mlx *mlx)
 void	draw_bonus(t_mlx *mlx)
 {	
 	init_minimap(mlx);
-	animate_hand(mlx);
 	draw_minimap(mlx);
 	put_compass(mlx);
 	draw_crosshair(mlx);

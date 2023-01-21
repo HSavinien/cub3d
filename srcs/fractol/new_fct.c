@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 10:48:34 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 15:02:14 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:31:16 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	draw_fractal(t_mlx *mlx, t_img *img, int y, int type)
 	stop_line = y + WIN_H/2;
 	//init necessary data for fractol
 	data = init_fractol_data(mlx, type, y);
-	data.c = (t_ncomp){fmod(mlx->player.pos_x, 2) - 1, fmod(mlx->player.pos_y, 2) - 1};
+//	data.c = (t_ncomp){fmod(mlx->player.pos_x, 2.0) - 1.0, fmod(mlx->player.pos_y, 2.0) - 1.0};
+	data.c.re = fmod(mlx->player.pos_x * mlx->player.pos_y *0.01, 1);
+	data.c.im = fmod(mlx->player.pos_x * 0.7 - mlx->player.pos_y * 0.3, 2) - 1;
 	while (y < stop_line)
 	{
 		x = 0;

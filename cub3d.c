@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 06:48:59 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:07:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,6 @@ void	set_player_position(t_map *map, t_mlx *mlx_s)
 		ft_error("entered redondant protection on player direction", ERR_WTF);
 }
 
-void	open_anime_sprite(t_mlx *mlx)
-{
-	t_img	*idle;
-	t_img	*shoot;
-
-	idle = ft_calloc(sizeof(t_img), MAX_FRAME);
-	shoot = ft_calloc(sizeof(t_img), MAX_FRAME);
-	idle[0] = read_img_file_soft("sprites/hands/idle_0.xpm", mlx);
-	idle[1] = read_img_file_soft("sprites/hands/idle_1.xpm", mlx);
-	idle[2] = read_img_file_soft("sprites/hands/idle_2.xpm", mlx);
-	idle[3] = read_img_file_soft("sprites/hands/idle_3.xpm", mlx);
-	shoot[0] = read_img_file_soft("sprites/hands/shoot_0.xpm", mlx);
-	shoot[1] = read_img_file_soft("sprites/hands/shoot_1.xpm", mlx);
-	shoot[2] = read_img_file_soft("sprites/hands/shoot_2.xpm", mlx);
-	shoot[3] = read_img_file_soft("sprites/hands/shoot_3.xpm", mlx);
-	(void) mlx;
-	mlx->sprites->idle_hand = idle;
-	mlx->sprites->shoot_hand = shoot;
-}
-
 void	do_init_bonus(t_mlx *mlx_s, t_map *map)
 {
 	if (map->crosshair)
@@ -81,7 +61,6 @@ void	do_init_bonus(t_mlx *mlx_s, t_map *map)
 		mlx_s->sprites->door_opened
 			= read_img_file(DEFAULT_DOOR_OP, mlx_s->mlx_ptr);
 	mlx_s->sprites->compass = read_img_file(COMPASS, mlx_s->mlx_ptr);
-//	open_anime_sprite(mlx_s);
 }
 
 t_mlx	do_init(t_map *map)
