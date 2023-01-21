@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:58:27 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/21 12:11:46 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/21 14:51:25 by cmaroude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <cub3d.h>
 
 # define STEPS	0.03
-# define ITERATIONS	50
+# define ITERATIONS	25
 
 
 typedef struct s_ncomp {
