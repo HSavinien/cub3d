@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 15:48:37 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:50:51 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 //angles are in radiant. respectively 90, -90, 0, and 180 degrees.
 #define NORTH_ANGLE (-M_PI_2)
 #define SOUTH_ANGLE (M_PI_2)
-#define EAST_ANGLE (M_PI)
-#define WEST_ANGLE 0
+#define EAST_ANGLE 0
+#define WEST_ANGLE (M_PI)
 
 #define DEFAULT_CROSSHAIR "./sprites/default_crosshair.xpm"
 #define DEFAULT_DOOR_CL "./sprites/default_door_closed.xpm"

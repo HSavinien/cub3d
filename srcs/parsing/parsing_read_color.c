@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:20:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 22:56:21 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:50:29 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	check_valid_rgb(char *code, int line_nb, char *full_line)
 unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 {
 	char	**rgb_array;
+	char	*tmp_str;
 	int		rgb_values[3];
 	int		i;
 
@@ -56,9 +57,11 @@ unsigned int	read_rgb_color(char *str, char *full_line, int line_nb)
 	while (++ i < 3)
 	{
 		rgb_values[i] = ft_atoi(rgb_array[i]);
+		tmp_str = ft_strtrim(rgb_array[i], " \t\n");
 		if (rgb_values[i] < 0 || rgb_values[i] > 255
-			|| ft_strlen(rgb_array[i]) > 3)
+			|| ft_strlen(tmp_str) > 3)
 			err_mapfile(line_nb, full_line, MSG_COLORCODE, ERR_COLORCODE);
+		free(tmp_str);
 	}
 	destroy_array(rgb_array);
 	return (rgb_values[2] | rgb_values[1] << 8 | rgb_values[0] << 16);
