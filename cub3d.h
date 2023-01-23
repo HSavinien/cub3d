@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 16:55:50 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:16:37 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_mlx {
 	void		*win_ptr;
 	t_utils_img	*sprites;
 	t_img		minimap;
-	t_img		main_disp_img;
+	t_img		*main_disp_img;
 	t_map		*map_s;
 	t_entity	player;
 	t_key_data	key;

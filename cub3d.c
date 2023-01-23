@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:32:26 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/23 13:50:51 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:18:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ t_mlx	do_init(t_map *map)
 	mlx_s.sprites->west_wall = read_img_file(map->west_path, mlx_s.mlx_ptr);
 	do_init_bonus(&mlx_s, map);
 	set_player_position(map, &mlx_s);
-	mlx_s.main_disp_img = *create_image(WIN_W, WIN_H, &mlx_s);
-	if (!mlx_s.main_disp_img.img_ptr)
+	mlx_s.main_disp_img = create_image(WIN_W, WIN_H, &mlx_s);
+	if (!mlx_s.main_disp_img->img_ptr)
 		ft_error("failed to create main display image.", ERR_IMG_CREATE);
 	return (mlx_s);
 }
