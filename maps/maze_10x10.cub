@@ -2,10 +2,10 @@ F	#fcba03
 C	#ff87e3
 
 
-SO	./sprites/wall/42_south.xpm
-NO	./sprites/wall/42_north.xpm
-WE	./sprites/wall/42_west.xpm
-EA	./sprites/wall/42_east.xpm
+SO	./sprites/Hstrips_black_white_64x64.xpm
+NO	./sprites/Vstrips_black_white_64x64.xpm
+WE	./sprites/Hstrips_black_white_64x64.xpm
+EA	./sprites/Vstrips_black_white_64x64.xpm
 
 
 111111111111111111111
