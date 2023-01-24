@@ -39,7 +39,7 @@ CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP}
 LIB		=	-L./library/libft -lft ${MLX}
 
 
-NAME	=	cub3d
+NAME	=	cub3D
 
 #rules    -------------------------------------------------------------    rules
 
