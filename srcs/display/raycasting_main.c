@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 15:39:42 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:09:26 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	check_wall(t_coord ray, t_map *map, t_wall_data *data, t_entity *player)
 	{
 		if (ray.x >= 1 && map->parsed_map[(int)ray.y][(int)ray.x - 1] != FLOOR)
 			ret_val = wall_info(data, ray, get_type(
-						map, ray.x - 1, ray.y, EAST_FACE), player);
+						map, ray.x - 1, ray.y, WEST_FACE), player);
 		if (map->parsed_map[abs((int)ray.y)][(int)ray.x] != FLOOR)
 			ret_val = wall_info(data, ray, get_type(
-						map, ray.x, ray.y, WEST_FACE), player);
+						map, ray.x, ray.y, EAST_FACE), player);
 	}
 	if (ray.y - floor(ray.y) <= EPSILON)
 	{
