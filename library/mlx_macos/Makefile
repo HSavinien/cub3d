@@ -11,14 +11,17 @@ CFLAGS+=-O2 -w
 # add to match string put with X11 in size and position
 CFLAGS+= -DSTRINGPUTX11
 
+
 all: $(NOM)
 
 $(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+	@ar -r $(NOM) $(OBJ)
+	@ranlib $(NOM)
+	@echo $$'\033[33mmlx compiled successfully\033[0m'
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
+	@echo $$'\033[31mmlx files removed\033[0m'
 
 re: clean all

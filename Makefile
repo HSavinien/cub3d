@@ -28,6 +28,8 @@ SRCS	=	cub3d.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 
+NB_SRCS	=	$(words $(SRCS))
+
 CC		=	gcc
 
 MLXREP	=	library/mlx_macos
@@ -38,20 +40,36 @@ CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP}
 
 LIB		=	-L./library/libft -lft ${MLX}
 
-
 NAME	=	cub3D
 
 #rules    -------------------------------------------------------------    rules
 
 #standart rules
 
-all:		${NAME}
+all:	intro ${NAME}
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\033[1mcompiling\033[0m: $<                                 \n"
+	@cat .loading_bar
+	@printf '*\r'
+	@printf "\033[0m\033[A\r"
+	@printf '*' >> .loading_bar
+
+intro:
+	@printf $$'\033[1mcompiling\033[0m:\n\033[2m'
+	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
+	@printf $$'\033[0;1;33m|\033[0m✅\r'
+	@cat .loading_bar 2>/dev/null || printf $$'\033[1m' > .loading_bar
+	@printf $$'\033[A'
 
 ${NAME}: ${OBJS}
+	@echo "\n\n✅ \033[1;32mcompiled\033[0m ✅                                      "
 	@echo "\033[34mcompiling library :\033[0m"
 	@make library
 	@echo "\033[1;34mlinking files:\033[0m"
 	@${CC} ${CFLAGS} ${LIB} ${OBJS} -o ${NAME}
+	@rm -f .loading_bar
 	@echo "\033[1;32mcode compiled succesfully\033[0m"
 
 clean:
@@ -59,7 +77,7 @@ clean:
 	@echo "\033[1;31mlibft cleaned\033[0m"
 	@make -s -C ./library/mlx_macos clean
 	@echo "\033[1;31mmlx cleaned\033[0m"
-	@rm -rf ${OBJS} ${NAME}.dSYM ${BOBJS} test
+	@rm -rf ${OBJS} ${NAME}.dSYM ${BOBJS} test .loading_bar
 	@echo "\033[1;31mobject files removed\033[0m"
 
 fclean:		clean
@@ -77,12 +95,12 @@ conf:
 	@make
 
 #library rules
-library:	mlx libft
+library:	libft mlx
 
 libft:
 	@echo "\033[94mcompiling libft :\033[0m"
-	@make -C ./library/libft
-	@echo "\033[1;33mlibft compiled\033[0m"
+	@make -s -C ./library/libft
+	@echo "\033[1;33mlibft compiled\033[0m\n"
 
 mlx:
 	@echo "\033[94mcompiling mlx :\033[0m"

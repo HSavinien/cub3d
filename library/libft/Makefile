@@ -52,6 +52,8 @@ SRCS	=	ft_isdigit.c \
 			ft_strcmp.c \
 			ft_min_max.c \
 			ft_atoi_base.c \
+			
+NB_SRCS	=	$(words $(SRCS))
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -63,17 +65,36 @@ NAME	= libft.a
 
 #rules
 
-${NAME}:	${OBJS}
-		ar rcs ${NAME} ${OBJS}
-		@ranlib ${NAME}
+all:		intro ${NAME}
 
-all:		${NAME}
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\033[1mcompiling\033[0m: $<                                 \n"
+	@cat .loading_bar
+	printf '*\r'
+	@printf "\033[0m\033[A\r"
+	@printf '*' >> .loading_bar
+
+${NAME}:	${OBJS}
+		@echo "\n\n✅ \033[1;32mcompiled\033[0m ✅                              "
+		@ar rcs ${NAME} ${OBJS}
+		@ranlib ${NAME}
+		@echo $$'\033[33mlibft compiled successfully'
+
+intro:
+	@printf $$'\033[1mcompiling\033[0m:\n\033[2m'
+	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
+	@printf $$'\033[0;1;33m|\033[0m✅\r'
+	@cat .loading_bar 2>/dev/null || printf $$'\033[1m' > .loading_bar
+	@printf $$'\033[A  \r'
 
 clean:
-		rm -f ${OBJS}
+		@rm -f ${OBJS} .loading_bar
+		@echo $$'\033[31mremoving libft object files'
 
 fclean:		clean
-		rm -f ${NAME}
+		@rm -f ${NAME}
+		@echo $$'\033[31mremoving libft.a'
 
 re:			fclean all
 
