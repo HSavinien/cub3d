@@ -59,18 +59,21 @@ all:	intro ${NAME}
 intro:
 	@printf $$'\033[1mcompiling\033[0m:\n\033[2m'
 	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
-	@printf $$'\033[0;1;33m|\033[0m✅\r'
+	@printf $$'\033[0;1;33m|\033[0m⌛\r'
 	@cat .loading_bar 2>/dev/null || printf $$'\033[1m' > .loading_bar
 	@printf $$'\033[A'
 
 ${NAME}: ${OBJS}
-	@echo "\n\n✅ \033[1;32mcompiled\033[0m ✅                                      "
+	@echo ""
+	@cat .loading_bar
+	@printf "\033[C✅\n"
+	@echo "\033[1;32mcompiled\033[0m"
 	@echo "\033[34mcompiling library :\033[0m"
 	@make library
 	@echo "\033[1;34mlinking files:\033[0m"
 	@${CC} ${CFLAGS} ${LIB} ${OBJS} -o ${NAME}
 	@rm -f .loading_bar
-	@echo "\033[1;32mcode compiled succesfully\033[0m"
+	@echo "\033[1;32mcode compiled succesfully\033[0m ✅"
 
 clean:
 	@make -s -C ./library/libft clean
