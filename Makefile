@@ -46,22 +46,18 @@ NAME	=	cub3D
 
 #standart rules
 
-all:	intro ${NAME}
+all:	${NAME}
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\033[1mcompiling\033[0m: $<                                 \n"
-	@cat .loading_bar
+	@printf $$'\033[2m'
+	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
+	@printf $$'\033[0;1;33m|\033[0m⌛\r\033[0;1m'
+	@cat .loading_bar 2>/dev/null || printf "" > .loading_bar
 	@printf '*\r'
 	@printf "\033[0m\033[A\r"
 	@printf '*' >> .loading_bar
-
-intro:
-	@printf $$'\033[1mcompiling\033[0m:\n\033[2m'
-	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
-	@printf $$'\033[0;1;33m|\033[0m⌛\r'
-	@cat .loading_bar 2>/dev/null || printf $$'\033[1m' > .loading_bar
-	@printf $$'\033[A'
 
 ${NAME}: ${OBJS}
 	@echo ""
