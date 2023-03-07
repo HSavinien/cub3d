@@ -61,7 +61,7 @@ all:	${NAME}
 
 ${NAME}: ${OBJS}
 	@echo ""
-	@cat .loading_bar
+	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
 	@printf "\033[C✅\n"
 	@echo "\033[1;32mcompiled\033[0m"
 	@echo "\033[34mcompiling library :\033[0m"
@@ -69,7 +69,7 @@ ${NAME}: ${OBJS}
 	@echo "\033[1;34mlinking files:\033[0m"
 	@${CC} ${CFLAGS} ${LIB} ${OBJS} -o ${NAME}
 	@rm -f .loading_bar
-	@echo "\033[1;32mcode compiled succesfully\033[0m ✅"
+	@echo "✅ \033[1;32mcode compiled succesfully\033[0m ✅"
 
 clean:
 	@make -s -C ./library/libft clean
