@@ -36,7 +36,7 @@ MLXREP	=	library/mlx_macos
 
 MLX		=	-L./${MLXREP} -lmlx -framework OpenGL -framework AppKit -MMD
 
-CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP}
+CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP} -O3
 
 LIB		=	-L./library/libft -lft ${MLX}
 

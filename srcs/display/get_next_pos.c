@@ -6,25 +6,11 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:48:15 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/17 14:02:36 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/03/11 01:55:44 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-/*exception case of get_next_pos for when a ray is parrallel to an axis.
- */
-void	advance_parallel_ray(t_coord *ray, double dir)
-{
-	if (cos(dir) == 1)
-		ray->x = ceil(ray->x) + 1;
-	else if (cos(dir) == -1)
-		ray->x = floor(ray->x) - 1;
-	else if (sin(dir) == 1)
-		ray->y = ceil(ray->y) + 1;
-	else if (sin(dir) == -1)
-		ray->y = ceil(ray->y) - 1;
-}
 
 double	calculate_next_int(double start, double dir)
 {
@@ -48,8 +34,6 @@ void	get_next_pos(t_coord *ray, double dir, double slope, double offset)
 	t_coord	next_x;
 	t_coord	next_y;
 
-	if (cos(dir) == 0 || sin(dir) == 0)
-		return (advance_parallel_ray(ray, dir));
 	next_x.x = calculate_next_int(ray->x, cos(dir));
 	next_x.y = slope * next_x.x + offset;
 		next_y.y = calculate_next_int(ray->y, sin(dir));
