@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:47:12 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/21 15:40:02 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/06/28 22:52:37 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	wall_info(t_wall_data *data, t_coord ray, int face, t_entity *player)
 	if (data->distance < 0.1)
 		data->distance = 0.1;
 	data->pos = ray;
-	if (!data->side || face != DOOR_OP_FACE)
+	if (!data->side || (face != DOOR_OP_FACE && face != DOOR_CL_FACE))
 		data->side = face;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:57:27 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/23 14:18:41 by tmongell         ###   ########.fr       */
+/*   Updated: 2023/06/28 22:43:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,39 @@ int	img_get_pixel(t_img *img, int x, int y)
  * color is an unsigned int with the structure A|R|G|B,
  * with B being the least significant byte.
 */
+
+typedef struct s_color {
+	unsigned int	raw;
+	unsigned char	a;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+} t_color;
+
 int	img_set_pixel(t_img *img, int x, int y, unsigned int color)
 {
-	if (color >> 24 < 128)
-		img->data[y * img->width + x] = color;
+	t_color	old;
+	t_color	new;
+	t_color	blend;
+	float	alpha;
+	float	inv_alpha;
+
+	if (color >> 24 >= 0xFF)
+		return 1;
+	if (color >> 24) {
+		old.raw = img_get_pixel(img, x, y);
+		old = (t_color) { old.raw, (old.raw >> 24) & 0xFF,
+			(old.raw >> 16) & 0xFF, (old.raw >> 8) & 0xFF, old.raw & 0xFF};
+		new = (t_color) { color, (color >> 24) & 0xFF, (color >> 16) & 0xFF,
+			(color >> 8) & 0xFF, color & 0xFF};
+		alpha = new.a / 255.0;
+		inv_alpha = 1.0 - alpha;
+		blend.r = (unsigned char) (new.r * inv_alpha + old.r * alpha);
+		blend.g = (unsigned char) (new.g * inv_alpha + old.g * alpha);
+		blend.b = (unsigned char) (new.b * inv_alpha + old.b * alpha);
+		blend.a = (unsigned char) (new.a + old.a * alpha);
+		color = (blend.r << 16) | (blend.g << 8) | blend.b;
+	}
+	img->data[y * img->width + x] = color;
 	return (1);
 }
