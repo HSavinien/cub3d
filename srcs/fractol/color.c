@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:30:00 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/21 15:40:49 by cmaroude         ###   ########.fr       */
+/*   Updated: 2023/06/28 16:35:03 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	psychedelic(double phase, int count)
 	r = sin(0.08 * count + 2 + phase) * 128 + 127;
 	g = sin(0.08 * count + 0 + phase) * 128 + 127;
 	b = sin(0.08 * count + 4 + phase) * 128 + 127;
-	return (0 << 24 | r << 16 | g << 8 | b);
+	return (0 << 24 | r << 16 | g << 8 | b | BACKGROUND_TR << 24);
 }
 
 int	couleur_pixel(double phase, int count)
