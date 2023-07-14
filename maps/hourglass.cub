@@ -5,8 +5,8 @@ WE  sprites/helian_floor_no_motif.xpm
 
 CR	sprites/crosshair_ME1.xpm
 
-DC	sprites/door.xpm
-DO	sprites/crosshair_ME1.xpm
+DC	sprites/door_closed_retro.xpm
+DO	sprites/door_opened_retro.xpm
 
 C  julia
 F  #f23a0b
@@ -17,7 +17,7 @@ F  #f23a0b
  10000000001
   100000001
    1000001
-    11011
+    11D11
    1000001
   100000001
  10000000001
