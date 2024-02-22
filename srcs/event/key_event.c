@@ -6,7 +6,7 @@
 /*   By: cmaroude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 07:22:40 by cmaroude          #+#    #+#             */
-/*   Updated: 2023/01/20 15:46:58 by cmaroude         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:06:18 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	key_release(int key, t_mlx *mlx)
 int	mouse_press(int key, t_mlx *mlx)
 {
 	if (key == MOUSE_LMB)
+	{
 		;
+	}
 	(void) mlx;
 	return (0);
 }
@@ -73,6 +75,6 @@ int	mouse_move(int mouse_x, int mouse_y, t_mlx *mlx)
 		do_rotate(mlx, 1);
 	if (mouse_x < WIN_W / 2)
 		do_rotate(mlx, -1);
-	mlx_mouse_move(mlx->win_ptr, WIN_W / 2, WIN_H / 2);
+	mlx_mouse_move(mlx->mlx_ptr, mlx->win_ptr, WIN_W / 2, WIN_H / 2);
 	return (0);
 }

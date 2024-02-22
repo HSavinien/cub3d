@@ -28,15 +28,22 @@ SRCS	=	cub3d.c \
 
 OBJS	=	${SRCS:%.c=%.o}
 
+OS		=	$(shell uname)
+
 NB_SRCS	=	$(words $(SRCS))
 
 CC		=	gcc
 
+ifeq ($(OS), Linux)
+MLXREP	=	library/mlx_linux
+endif
+ifeq ($(OS), MacOS)
 MLXREP	=	library/mlx_macos
+endif
 
-MLX		=	-L./${MLXREP} -lmlx -framework OpenGL -framework AppKit -MMD
+MLX		=	-L./${MLXREP} -lmlx -L/usr/lib -I$(MLXREP) -lXext -lX11 -lm -lz
 
-CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP} -O3
+CFLAGS	=	-Wall -Wextra -Werror -Ilibrary -I./ -I./${MLXREP} -I/usr/include -O3
 
 LIB		=	-L./library/libft -lft ${MLX}
 
@@ -51,9 +58,9 @@ all:	${NAME}
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\033[1mcompiling\033[0m: $<                                 \n"
-	@printf $$'\033[2m'
+	@printf "\033[2m"
 	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
-	@printf $$'\033[0;1;33m|\033[0m⌛\r\033[0;1m'
+	@printf "\033[0;1;33m|\033[0m⌛\r\033[0;1m"
 	@cat .loading_bar 2>/dev/null || printf "" > .loading_bar
 	@printf '*\r'
 	@printf "\033[0m\033[A\r"
@@ -67,14 +74,14 @@ ${NAME}: ${OBJS}
 	@echo "\033[34mcompiling library :\033[0m"
 	@make library
 	@echo "\033[1;34mlinking files:\033[0m"
-	@${CC} ${CFLAGS} ${LIB} ${OBJS} -o ${NAME}
+	@${CC} ${CFLAGS} ${OBJS} ${LIB} -o ${NAME} 
 	@rm -f .loading_bar
 	@echo "✅ \033[1;32mcode compiled succesfully\033[0m ✅"
 
 clean:
 	@make -s -C ./library/libft clean
 	@echo "\033[1;31mlibft cleaned\033[0m"
-	@make -s -C ./library/mlx_macos clean
+	@make -s -C $(MLXREP) clean
 	@echo "\033[1;31mmlx cleaned\033[0m"
 	@rm -rf ${OBJS} ${NAME}.dSYM ${BOBJS} test .loading_bar
 	@echo "\033[1;31mobject files removed\033[0m"
@@ -103,7 +110,7 @@ libft:
 
 mlx:
 	@echo "\033[94mcompiling mlx :\033[0m"
-	@make -C ./library/mlx_macos
+	@make -C $(MLXREP)
 	@echo "\033[1;33mminilibX compiled\033[0m"
 
 

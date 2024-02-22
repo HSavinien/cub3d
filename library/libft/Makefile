@@ -70,9 +70,9 @@ all:		${NAME}
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\033[1mcompiling\033[0m: $<                                 \n"
-	@printf $$'\033[2m'
+	@printf "\033[2m"
 	@printf '%*s' $(NB_SRCS) '' | tr ' ' '*' #print one star per file in SRCS
-	@printf $$'\033[0;1;33m|\033[0m⌛\r\033[0;1m'
+	@printf "\033[0;1;33m|\033[0m⌛\r\033[0;1m"
 	@cat .loading_bar 2>/dev/null || printf "" > .loading_bar
 	@printf '*\r'
 	@printf "\033[0m\033[A\r"
@@ -85,15 +85,15 @@ ${NAME}:	${OBJS}
 		@echo "\033[1;32mcompiled\033[0m"
 		@ar rcs ${NAME} ${OBJS}
 		@ranlib ${NAME}
-		@echo $$'\033[33mlibft compiled successfully'
+		@echo "\033[33mlibft compiled successfully"
 
 clean:
 		@rm -f ${OBJS} .loading_bar
-		@echo $$'\033[31mremoving libft object files'
+		@echo "\033[31mremoving libft object files"
 
 fclean:		clean
 		@rm -f ${NAME}
-		@echo $$'\033[31mremoving libft.a'
+		@echo "\033[31mremoving libft.a"
 
 re:			fclean all
 

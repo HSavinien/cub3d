@@ -10,6 +10,6 @@
 *.png
 a.out
 
-cub3d
-cub3d-sanitize
+cub3D
+cub3D-sanitize
 .loading_bar

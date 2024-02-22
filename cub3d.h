@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:14:55 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/23 14:16:37 by tmongell         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:07:21 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 /*minilibX*/
 # include <mlx.h>
-# include "library/mlx_macos/mlx.h"
+# include "library/mlx_linux/mlx.h"
 # include <key_code.h>
 # include <mlx_event.h>
 

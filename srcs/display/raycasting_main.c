@@ -6,7 +6,7 @@
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:09:58 by tmongell          #+#    #+#             */
-/*   Updated: 2023/06/08 15:47:24 by tmongell         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:10:40 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,12 @@ t_wall_data	find_wall(double angle, t_coord start, t_entity *player, t_map *map)
 void	cast_ray(t_cast_data data, t_coord start, t_img *screen, t_mlx *mlx)
 {
 	t_wall_data	wall_s;
-	t_coord		restart;
 
 	wall_s = find_wall(data.angle, start, &mlx->player, mlx->map_s);
 	wall_s.distance *= fabs(cos(data.angle - mlx->player.direction));
 	wall_s.height = (DEPTH / wall_s.distance);
 	if (wall_s.side == DOOR_OP_FACE || wall_s.side == DOOR_CL_FACE)
-	{
-		restart = wall_s.pos;
 		cast_ray(data, wall_s.pos, screen, mlx);
-	}
 	draw_wall_img(data.ray_num, wall_s, screen, mlx);
 }
 

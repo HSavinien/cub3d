@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_toogle.c                                      :+:      :+:    :+:   */
+/*   toogle_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmongell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 00:12:24 by tmongell          #+#    #+#             */
-/*   Updated: 2023/01/20 17:58:07 by tmongell         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:09:02 by tmongell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	toogle_mouse(t_mlx *mlx_s)
 
 	if (mouse_active)
 	{
-		mlx_mouse_show();
+		mlx_mouse_show(mlx_s->mlx_ptr, mlx_s->win_ptr);
 		mlx_hook(mlx_s->win_ptr, EVENT_MOTION, 0, NULL, mlx_s);
 		mouse_active = 0;
 	}
 	else
 	{
-		mlx_mouse_hide();
+		mlx_mouse_hide(mlx_s->mlx_ptr, mlx_s->win_ptr);
 		mlx_hook(mlx_s->win_ptr, EVENT_MOTION, 0, mouse_move, mlx_s);
 		mouse_active = 1;
 	}
